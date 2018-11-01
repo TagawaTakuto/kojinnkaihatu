@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>ユーザ一覧</title>
+</head>
+<body>
+<h1 class="c">ユーザ一覧</h1>
+
+<table class="tab">
+
+<div class="c"> ログインID<input type="text" name="loginId"></div>
+<br>
+<div class="c">ユーザ名<input type="text" name="userName"></div>
+<br>
+<div class="c">生年月日<input type="Date" name="birthDateS">～<input type="Date" name="birthDateE"></div>
+<br>
+<div class="c"><input type="submit" value="検索"></div>
+<hr>
+	<tr class="tab">
+		<th>ログインID</th>
+		<th>ユーザ名</th>
+		<th>生年月日</th>
+		<th></th>
+	</tr>
+	<c:forEach>
+	<tr class="c">
+		<td>001</td>
+		<td>サンプル太郎</td>
+		<td>20XX年XX月XX日</td>
+		<td class="c"><input type="button" value="詳細"onClick="location.href='UserData.html'">
+			<input type="button" value="更新"onClick="location.href='UserUpdate.html'">
+			<input type="button" value="削除"onClick="location.href='UserDelete.html'">
+			</td>
+	</tr>
+	<tr class="c">
+		<td>002</td>
+		<td>サンプル太郎</td>
+		<td>20XX年XX月XX日</td>
+		<td class="c"><input type="button" value="詳細"onClick="location.href='UserData.html'">
+			<input type="button" value="更新"onClick="location.href='UserUpdate.html'">
+			<input type="button" value="削除"onClick="location.href='UserDelete.html'">
+			</td>
+	</tr>
+	<tr class="c">
+		<td>003</td>
+		<td>サンプル太郎</td>
+		<td>20XX年XX月XX日</td>
+		<td class="c"><input type="button" value="詳細"onClick="location.href='UserData.html'">
+			<input type="button" value="更新"onClick="location.href='UserUpdate.html'">
+			<input type="button" value="削除"onClick="location.href='UserDelete.html'">
+			</td>
+	</tr>
+	</c:forEach>
+</table>
+</body>
+</html>

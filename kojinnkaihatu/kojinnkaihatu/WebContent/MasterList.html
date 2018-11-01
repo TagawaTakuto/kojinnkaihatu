@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>マスター商品リスト</title>
+</head>
+<body>
+<h1 class="c">マスター商品リスト</h1>
+<div class="c">商品検索
+<br><input type="text" name="Keyword"></div>
+<br>
+<div class="c">発売日
+<br>
+<input type="Date">～<input type="Date">
+</div>
+
+<br>
+<div class="c">
+ハード:
+<br>
+<input type="checkbox" name="hard" value="1">PC
+<input type="checkbox" name="hard" value="2">PS4
+<input type="checkbox" name="hard" value="3">Swich
+<input type="checkbox" name="hard" value="4">Xbox
+<br>
+<br>
+ジャンル:
+<br>
+<input type="checkbox" name="janru" value="1">アクション
+<input type="checkbox" name="janru" value="2">RPG
+<input type="checkbox" name="janru" value="3">格闘
+<input type="checkbox" name="janru" value="4">シミュレーション
+<input type="checkbox" name="janru" value="5">シューティング
+<br>
+</div>
+<div class="c"><input type="button" value="検索" onClick="処理"></div>
+<hr>
+<c:forEach>
+<table class="tab">
+	<tr class="c">
+		<td colspan="1">価格:10000円</td>
+		<td colspan="3">商品名：タイトル１</td>
+	</tr>
+	<tr>
+		<td class="c" colspan="4">発売日:20XX年XX月XX日</td>
+	</tr>
+	<tr>
+		<td rowspan="2" width="150px" height="150px">商品画像１</td>
+		<td colspan="2">ハード:？？？</td>
+		<td class="c" rowspan="2" colspan="1">在庫:10個</td>
+	</tr>
+	<tr>
+		<td colspan="2">ジャンル:？？？　？？？</td>
+	</tr>
+	<tr>
+		<td colspan="4" height="200px">商品説明:
+		<br>ああああああああああああああああああああああああああああああああああああああああああああ
+		</td>
+	</tr>
+	<tr>
+		<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
+	<tr>
+		<td colspan="2" width="50%"><input class="full" type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
+		<td colspan="2" width="50%"><input class="full" type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
+	</tr>
+</table>
+<c:forEach>
+<br>
+<br>
+<table class="tab">
+	<tr class="c">
+		<td colspan="1">価格:2000円</td>
+		<td colspan="3">商品名：タイトル2</td>
+	</tr>
+	<tr>
+		<td class="c" colspan="4">発売日:20XX年XX月XX日</td>
+	</tr>
+	<tr>
+		<td rowspan="2" width="150px" height="150px">商品画像１</td>
+		<td colspan="2">ハード:？？？</td>
+		<td class="c" rowspan="2" colspan="1">在庫:10個</td>
+	</tr>
+	<tr>
+		<td colspan="2">ジャンル:？？？　？？？</td>
+	</tr>
+	<tr>
+		<td colspan="4" height="200px">商品説明:
+		<br>いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい
+		</td>
+	</tr>
+	<tr>
+		<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
+	<tr>
+		<td colspan="2" width="50%"><input class="full" type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
+		<td colspan="2" width="50%"><input class="full" type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
+	</tr>
+</table>
+<br>
+<br>
+<table class="tab">
+	<tr class="c">
+		<td colspan="1">価格:3000円</td>
+		<td colspan="3">商品名：タイトル3</td>
+	</tr>
+	<tr>
+		<td class="c" colspan="4">発売日:20XX年XX月XX日</td>
+	</tr>
+	<tr>
+		<td rowspan="2" width="150px" height="150px">商品画像１</td>
+		<td colspan="2">ハード:？？？</td>
+		<td class="c" rowspan="2" colspan="1">在庫:10個</td>
+	</tr>
+	<tr>
+		<td colspan="2">ジャンル:？？？　？？？</td>
+	</tr>
+	<tr>
+		<td colspan="4" height="200px">商品説明:
+		<br>ううううううううううううううううううううううううううううううううう
+		</td>
+	</tr>
+	<tr>
+		<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
+	<tr>
+		<td colspan="2" width="50%"><input class="full" type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
+		<td colspan="2" width="50%"><input class="full" type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
+	</tr>
+</table>
+</body>
+</html>
