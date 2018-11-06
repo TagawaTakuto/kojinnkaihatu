@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="layout/style.css">
 <meta charset="UTF-8">
 <title>マスター商品リスト</title>
 </head>
 <body>
+<div class="hedder R">
+	<a href="MasterList.html" class="Hsquare_btn" >マスターリスト</a>
+	<a href="cart.html" class="square_btn">カート</a>
+	<a href="UserData.html" class="square_btn">ユーザ情報</a>
+	<a href="Login.html" class="square_btn">ログインorログアウト</a>
+</div>
+
+
 <h1 class="c">マスター商品リスト</h1>
 <div class="c">商品検索
 <br><input type="text" name="Keyword"></div>
@@ -34,24 +42,25 @@
 <input type="checkbox" name="janru" value="5">シューティング
 <br>
 </div>
+<br>
 <div class="c"><input type="button" value="検索" onClick="処理"></div>
+<br>
 <hr>
 <c:forEach>
-<table class="tab">
+<br>
+<table class="tab" width=”50%”>
 	<tr class="c">
-		<td colspan="1">価格:10000円</td>
-		<td colspan="3">商品名：タイトル１</td>
-	</tr>
-	<tr>
-		<td class="c" colspan="4">発売日:20XX年XX月XX日</td>
+		<td class="c" colspan="2">発売日:20XX年XX月XX日</td>
+		<td colspan="2">商品名：タイトル１</td>
 	</tr>
 	<tr>
 		<td rowspan="2" width="150px" height="150px">商品画像１</td>
 		<td colspan="2">ハード:？？？</td>
-		<td class="c" rowspan="2" colspan="1">在庫:10個</td>
+		<td rowspan="1" colspam="1">価格：1111円
 	</tr>
 	<tr>
 		<td colspan="2">ジャンル:？？？　？？？</td>
+		<td class="c" rowspan="1" colspan="1">在庫:10個</td>
 	</tr>
 	<tr>
 		<td colspan="4" height="200px">商品説明:
@@ -68,25 +77,23 @@
 <c:forEach>
 <br>
 <br>
-<table class="tab">
+<table class="tab" width=”50%”>
 	<tr class="c">
-		<td colspan="1">価格:2000円</td>
-		<td colspan="3">商品名：タイトル2</td>
+		<td class="c" colspan="2">発売日:20XX年XX月XX日</td>
+		<td colspan="2">商品名：タイトル２</td>
 	</tr>
 	<tr>
-		<td class="c" colspan="4">発売日:20XX年XX月XX日</td>
-	</tr>
-	<tr>
-		<td rowspan="2" width="150px" height="150px">商品画像１</td>
+		<td rowspan="2" width="150px" height="150px">商品画像２</td>
 		<td colspan="2">ハード:？？？</td>
-		<td class="c" rowspan="2" colspan="1">在庫:10個</td>
+		<td rowspan="1" colspam="1">価格：2222円
 	</tr>
 	<tr>
 		<td colspan="2">ジャンル:？？？　？？？</td>
+		<td class="c" rowspan="1" colspan="1">在庫:20個</td>
 	</tr>
 	<tr>
 		<td colspan="4" height="200px">商品説明:
-		<br>いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい
+		<br>ああああああああああああああああああああああああああああああああああああああああああああ
 		</td>
 	</tr>
 	<tr>
@@ -98,25 +105,23 @@
 </table>
 <br>
 <br>
-<table class="tab">
+<table class="tab" width=”50%”>
 	<tr class="c">
-		<td colspan="1">価格:3000円</td>
-		<td colspan="3">商品名：タイトル3</td>
+		<td class="c" colspan="2">発売日:20XX年XX月XX日</td>
+		<td colspan="2">商品名：タイトル３</td>
 	</tr>
 	<tr>
-		<td class="c" colspan="4">発売日:20XX年XX月XX日</td>
-	</tr>
-	<tr>
-		<td rowspan="2" width="150px" height="150px">商品画像１</td>
+		<td rowspan="2" width="150px" height="150px">商品画像３</td>
 		<td colspan="2">ハード:？？？</td>
-		<td class="c" rowspan="2" colspan="1">在庫:10個</td>
+		<td rowspan="1" colspam="1">価格：3333円
 	</tr>
 	<tr>
 		<td colspan="2">ジャンル:？？？　？？？</td>
+		<td class="c" rowspan="1" colspan="1">在庫:30個</td>
 	</tr>
 	<tr>
 		<td colspan="4" height="200px">商品説明:
-		<br>ううううううううううううううううううううううううううううううううう
+		<br>ああああああああああああああああああああああああああああああああああああああああああああ
 		</td>
 	</tr>
 	<tr>
@@ -126,5 +131,18 @@
 		<td colspan="2" width="50%"><input class="full" type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
 	</tr>
 </table>
+<br>
+<div class="pager C">
+		<ul>
+			<li><a href="1.html">&laquo; 前</a></li>
+			<li><a href="1.html">1</a></li>
+			<li><span>2</span></li>
+			<li><a href="3.html">3</a></li>
+			<li><a href="4.html">4</a></li>
+			<li><a href="5.html">5</a></li>
+			<li><a href="6.html">6</a></li>
+			<li><a href="3.html">次 &raquo;</a></li>
+		</ul>
+	</div>
 </body>
 </html>

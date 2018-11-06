@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="layout/style.css">
 <meta charset="UTF-8">
 <title>マスター商品更新</title>
 </head>
 <body>
+<div class="hedder R">
+	<a href="MasterList.html" class="Hsquare_btn" >マスターリスト</a>
+	<a href="cart.html" class="square_btn">カート</a>
+	<a href="UserData.html" class="square_btn">ユーザ情報</a>
+	<a href="Login.html" class="square_btn">ログインorログアウト</a>
+</div>
+
+
 <div class="wrapper">
 <h1>商品更新</h1>
 <p class="txt">商品名:<input type="text" value="げーむめい" name="title">
@@ -38,6 +46,6 @@
 <input type="checkbox" name="janru" value="5">シューティング
 </div>
 
-<div class="c"><input type="button" href="MasterList.html" value="確認画面へ"></div>
+<div class="c"><input type="button" onclick="location.href='MasterList.html'" value="更新完了"></div>
 </body>
 </html>

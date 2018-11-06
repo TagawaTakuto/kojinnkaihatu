@@ -1,0 +1,247 @@
+.Bbtn{
+  display: inline-block;
+  text-decoration: none;
+  background: #87befd;
+  color: #FFF;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  transition: .4s;
+}
+
+.Bbtn:hover{
+    background: #668ad8;
+}
+
+.Gbtn{
+  display: inline-block;
+  text-decoration: none;
+  background: #38a92c;
+  color: #FFF;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  transition: .4s;
+}
+
+.Rbtn:hover{
+    background: #008000;
+}
+
+.Rbtn{
+  display: inline-block;
+  text-decoration: none;
+  background: #ea0000;
+  color: #FFF;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  transition: .4s;
+}
+
+.Rbtn:hover{
+    background: #bf0000;
+}
+
+.c {
+	text-align: center;
+}
+
+.maru {
+	border-radius: 10px;
+}
+
+.tab td, .tab th {
+	border: solid 1px;
+}
+
+.tab {
+	border: solid 1px;
+	table-layout: fixed;
+	margin: auto;
+	 width:50%;
+}
+
+.tab td, .tab th {
+	border: solid 1px;
+}
+
+.C {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.R {
+	text-align: right;
+}
+
+.L {
+	text-align: left;
+}
+
+.hidari{display: table-cell; text-align:left; float:left;
+}
+
+.migi{ display: table-cell; text-align: right;
+}
+
+.wrapper {
+	max-width: 300px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.txt {
+	display: inline-block;
+	text-align: left;
+}
+
+.hedder {
+	color: red;
+	background-color: #00008b;
+	display: table;
+	width: 100%;
+
+}
+
+.square_btn{
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-left: solid 4px #668ad8;
+    border-right: solid 4px #668ad8;
+    color: #668ad8;
+    background: #e1f3ff;
+    transition: .4s;
+}
+
+.square_btn:hover {
+    background: #668ad8;
+    color: #FFF;
+}
+
+.his_btn {
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #67c5ff;
+    border: solid 2px #67c5ff;
+    border-radius: 3px;
+    transition: .4s;
+}
+
+.his_btn:hover {
+    background: #67c5ff;
+    color: white;
+}
+
+.Hsquare_btn{
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-left: solid 4px #668ad8;
+    border-right: solid 4px #668ad8;
+    color: #668ad8;
+    background: #ffff80;
+    transition: .4s;
+}
+
+.Hsquare_btn:hover {
+    background: #668ad8;
+    color: #FFF;
+}
+.subject {
+	display: table-cell;
+	float: left;
+	display: inline;
+}
+
+.hedderR {
+	float: right;
+	display: inline;
+}
+
+.TOP {
+
+}
+
+.full {
+	width: 100%;
+	height: 100%;
+}
+
+.deletebutton td{
+	border-top-style:hidden;
+	border-right-style:hidden;
+	border-style-bottom:hidden;
+}
+
+.T {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.Img{
+	width: 150px;
+	height: 150px;
+}
+
+.pager {
+   /zoom: 1;
+	overflow: hidden;
+	margin: 0 0 20px;
+	padding: 0;
+	background: #fff;
+}
+
+.pager ul {
+    list-style: none;
+    position: relative;
+    left: 50%;
+    float: left;
+    background: #fff;
+}
+
+.pager ul li {
+    margin: 0 5px;
+    position: relative;
+    left: -50%;
+    float: left;
+}
+
+.pager ul li span,
+.pager ul li a {
+    display: block;
+    font-size: 16px;
+    padding: 0.6em 1em;
+   border: 1px solid #80ffff;
+   border-radius:10px;
+}
+
+.pager ul li a {
+    background: #EEE;
+    color: #000;
+    text-decoration: none;
+}
+
+.pager ul li a:hover {
+    background: #ccf;
+    border-color: #000;
+    color: #000;
+}
