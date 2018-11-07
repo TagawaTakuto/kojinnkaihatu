@@ -1,30 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="layout/style.css">
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+ <!-- a{ text-decoration:none;} -->
+ </style>
 <title>購入履歴画面</title>
 </head>
 <body>
-<div class="hedder R">
-	<a href="MasterList.html" class="Hsquare_btn" >マスターリスト</a>
-	<a href="cart.html" class="square_btn">カート</a>
-	<a href="UserData.html" class="square_btn">ユーザ情報</a>
-	<a href="Login.html" class="square_btn">ログインorログアウト</a>
-</div>
+<div class="hedder">
+				<ul style="float:left;">
+					<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
+				</ul>
+					<ul  style="float:right;">
+					<li><a href="ItemList.html" class="top">TOP</a></li>
+					<li>　　　　　　　　　　　　　</li>
+					<li><a href="cart.html" class="square_btn">カート</a></li>
+					<li><a href="User.htmll" class="square_btn">ユーザ情報</a></li>
+					<li><a href="Login.html" class="square_btn">ログインorログアウト</a></li>
+				</ul>
+			</div>
 
 
-<h1 class="c">購入確認画面</h1>
-<div class="c">以下の内容でよろしいですか？</div>
+<h1 class="c">購入履歴</h1>
 <br>
-	<table class="table table-striped">
+	<table class="table table-striped c">
 		<tr>
-			<th>購入日時</th>
+			<th>購入日時:20XX年XX月XX日</th>
+			<th>配送方法:通常配送</th>
 		</tr>
 	</table>
-
-
+<br>
 	<table class="table table-striped">
 		<tr>
 			<th>商品画像</th>
@@ -35,43 +43,40 @@
 		</tr>
 		<tr>
 			<td class="">商品画像１</td>
-			<td class="">商品名：あああああああああああ</td>
-			<td class="">価格：１１１１円</td>
-			<td class="">個数：１個</td>
-			<td class="">ハード：？？？</td>
+			<td class="">あああああああああああ</td>
+			<td class="">１１１１円</td>
+			<td class="">１個</td>
+			<td class="">？？？</td>
 		</tr>
 		<tr>
 			<td class="">商品画像２</td>
-			<td class="">商品名：いいいいいいいいいいいiii</td>
-			<td class="">価格：２２２２２円</td>
-			<td class="">個数：２個</td>
-			<td class="">ハード：？？？</td>
+			<td class="">いいいいいいいいいいいiii</td>
+			<td class="">２２２２２円</td>
+			<td class="">２個</td>
+			<td class="">？？？</td>
 		</tr>
 		<tr>
 			<td class="">商品画像３</td>
-			<td class="">商品名：うううううううううううう</td>
-			<td class="">価格：３３３３円</td>
-			<td class="">個数：３個</td>
-			<td class="">ハード：？？？</td>
-		</tr>
-	</table>
-	<br>
-	<table class="table table-striped">
-		<tr>
-			<th>配送方法：</th>
-			<th>配送単価：</th>
-			<th>合計金額：</th>
+			<td class="">うううううううううううう</td>
+			<td class="">３３３３円</td>
+			<td class="">３個</td>
+			<td class="">？？？</td>
 		</tr>
 		<tr>
+			<td>　</td>
 			<td>通常配送</td>
 			<td>２００円</td>
-			<td>１２３４５６円</td>
+			<td>　</td>
+			<td>　</td>
+		<tr>
+			<th colspan="5" class="c">合計金額：123456円</th>
 		</tr>
+
 	</table>
 	<br>
+	<br>
 <div class="c">
-	<input type="button" value="修正する" onClick="location.href='cart.html'">
-	<input type="button" value="購入する" onClick="location.href='ItemList.html'">
+	<a href="User.html" class="his_btn">←戻る</a>
 </div>
 </body>
 </html>
