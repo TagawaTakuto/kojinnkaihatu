@@ -4,57 +4,81 @@
 <link rel="stylesheet" href="layout/style.css">
 <meta charset="UTF-8">
 <style type="text/css">
- <!-- a{ text-decoration:none;} -->
- </style>
+<!--
+a {
+	text-decoration: none;
+}
+-->
+</style>
 <title>マスター商品更新</title>
 </head>
 <body>
-<div class="hedder">
-				<ul style="float:left;">
-					<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
-				</ul>
-					<ul  style="float:right;">
-					<li><a href="ItemList.html" class="top">TOP</a></li>
-					<li>　　　　　　　　　　　　　</li>
-					<li><a href="cart.html" class="square_btn">カート</a></li>
-					<li><a href="User.htmll" class="square_btn">ユーザ情報</a></li>
-					<li><a href="Login.html" class="square_btn">ログインorログアウト</a></li>
-				</ul>
-			</div>
+	<div class="hedder">
+		<ul style="float: left;">
+			<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
+		</ul>
+		<div class="top-teisai">
+			<a href="ItemList.html" class="top">TOP</a>
+		</div>
+		<ul style="float: right;">
+			<li><a href="cart.html" class="square_btn">カート</a></li>
+			<li><a href="User.html" class="square_btn">ユーザ情報</a></li>
+			<li><a href="Login.html" class="square_btn">ログイン</a></li>
+		</ul>
+	</div>
 
-
-<div class="wrapper">
-<h1>商品更新</h1>
-<p class="txt">商品名:<input type="text" value="げーむめい" name="title">
-<br>
-<p class="txt">商品説明:
-	<textarea name="setumei" rows="6" cols="40" >
+	<div class="wrapper">
+		<h1>商品更新</h1>
+		<p class="txt">
+			商品名:<input type="text" value="げーむめい" name="title"> <br>
+		<p class="txt">
+			商品説明:
+			<textarea name="setumei" rows="6" cols="40">
 	あああああああああああああああああああああああああああああああああああああああああああああああああああああああ
 	</textarea>
-<p class="txt">単価:<input type="text" value="10,000" name="price">円
+		<p class="txt">
+			単価:<input type="text" value="10,000" name="price">円 <br>
+			<br> 在庫:<input type="text" value="100" name="zaiko">個 <br>
+		</p>
+	</div>
+	<div class="c">
+		ハード：
+		<div class="search_select">
+			<input id="h_ch1" type="checkbox" /><label for="h_ch1">PC</label> <input
+				id="h_ch2" type="checkbox" /><label for="h_ch2">PS4</label> <input
+				id="h_ch3" type="checkbox" /><label for="h_ch3">Swich</label> <input
+				id="h_ch4" type="checkbox" /><label for="h_ch4">Xbox</label>
+		</div>
+	</div>
 	<br>
-	<br>
-	在庫:<input type="text" value="100" name="zaiko">個
-<br>
-<p class="txt">
-ハード：
-<br>
-<input type="checkbox" name="hard" value="1">PC
-<input type="checkbox" name="hard" value="2">PS4
-<input type="checkbox" name="hard" value="3">Swich
-<input type="checkbox" name="hard" value="4">Xbox
-<br>
-<br>
-ジャンル:
-<br>
-<input type="checkbox" name="janru" value="1">アクション
-<input type="checkbox" name="janru" value="2">RPG
-<input type="checkbox" name="janru" value="3">格闘
-<br>
-<input type="checkbox" name="janru" value="4">シミュレーション
-<input type="checkbox" name="janru" value="5">シューティング
-</div>
+	<div class="c">
+		ジャンル:
+		<div class="search_select">
+			<input id="j_ch1" type="checkbox" /><label for="j_ch1">アクション</label>
+			<input id="j_ch2" type="checkbox" /><label for="j_ch2">RPG</label> <input
+				id="j_ch3" type="checkbox" /><label for="j_ch3">格闘</label> <input
+				id="j_ch4" type="checkbox" /><label for="j_ch4">シミュレーション</label> <input
+				id="j_ch5" type="checkbox" /><label for="j_ch5">シューティング</label>
+		</div>
+		<div class="c">
+			並び替え： <select name="sort">
+				<option value="ID_young">ID昇順</option>
+				<option value="ID_old">ID降順</option>
+				<option value="sale_young">発売日昇順</option>
+				<option value="sale_old">発売日降順</option>
+				<option value="update_young">更新日昇順</option>
+				<option value="update_old">更新日降順</option>
+				<option value="yasui">価格昇順</option>
+				<option value="takai">価格降順</option>
+				<option value="sukunai">在庫昇順</option>
+				<option value="ooi">在庫降順</option>
+			</select>
+		</div>
+	</div>
 
-<div class="c"><input type="button" onclick="location.href='MasterList.html'" value="更新完了"></div>
+	<div class="c">
+		<input type="button" onclick="location.href='MasterList.html'"
+			value="更新完了">
+	</div>
 </body>
 </html>

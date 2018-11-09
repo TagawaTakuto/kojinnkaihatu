@@ -10,37 +10,30 @@
 </head>
 <body>
 <div class="hedder">
-				<ul style="float:left;">
-					<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
-				</ul>
-					<ul  style="float:right;">
-					<li><a href="ItemList.html" class="top">TOP</a></li>
-					<li>　　　　　　　　　　　　　</li>
-					<li><a href="cart.html" class="square_btn">カート</a></li>
-					<li><a href="User.htmll" class="square_btn">ユーザ情報</a></li>
-					<li><a href="Login.html" class="square_btn">ログインorログアウト</a></li>
-				</ul>
-			</div>
-
-
-<h1 class="c">カート画面</h1>
+		<ul style="float: left;">
+			<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
+		</ul>
+		<div class="top-teisai">
+			<a href="ItemList.html"  class="top">TOP</a>
+		</div>
+		<ul style="float: right;">
+			<li><a href="cart.html" class="square_btn">カート</a></li>
+			<li><a href="User.html" class="square_btn">ユーザ情報</a></li>
+			<li><a href="Login.html" class="square_btn">ログイン</a></li>
+		</ul>
+	</div>
+	<h1 class="c">カート画面</h1>
 <table class="tab">
 	<tr>
-		<td width="150" height="150px" rowspan="4">商品画像１</td>
+		<td class="Img" rowspan="3">商品画像１</td>
 		<td rowspan="1" colspan="2" class="L">商品名：ああああああああああ</td>
-		<td width="100" rowspan="4"><input type="checkbox" name="delete" value="1">削除する</td>
+		<td class="c" width="100" rowspan="3"><input class="del_btn" type="button" name="delete" value="削除する"></td>
 	</tr>
 	<tr>
 		<td rowspan="1" colspan="2">価格：１１１１１円</td>
 	</tr>
-	<tr>
-		<td rowspan="1" colspan="1" class="">配送方法：<select name="haisou">
-									<option value="1">通常配送</option>
-									<option value="2">特急配送</option>
-									<option value="3">日時指定配送</option>
-								</select>
-		</td>
-		<td rowspan="1" class="">個数：<select name="kosuu">
+	<tr class="c">
+		<td rowspan="1" colspan="2">個数：<select name="kosuu">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -51,23 +44,18 @@
 	</tr>
 </table>
 <br>
+<br>
 <table class="tab">
 	<tr>
-		<td width="150" height="150px" rowspan="4">商品画像２</td>
+		<td class="Img" rowspan="3">商品画像２</td>
 		<td rowspan="1" colspan="2" class="L">商品名：いいいいいいいいいいい</td>
-		<td width="100" rowspan="4"><input type="checkbox" name="delete" value="1">削除する</td>
+		<td class="c" width="100" rowspan="3"><input class="del_btn" type="button" name="delete" value="削除する"></td>
 	</tr>
 	<tr>
 		<td rowspan="1" colspan="2">価格：2222222円</td>
 	</tr>
-	<tr>
-		<td rowspan="1" colspan="1" class="">配送方法：<select name="haisou">
-									<option value="1">通常配送</option>
-									<option value="2">特急配送</option>
-									<option value="3">日時指定配送</option>
-								</select>
-		</td>
-		<td rowspan="1" class="">個数：<select name="kosuu">
+	<tr class="c">
+		<td rowspan="1" colspan="2">個数：<select name="kosuu">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -78,23 +66,18 @@
 	</tr>
 </table>
 <br>
+<br>
 <table class="tab">
 	<tr>
-		<td width="150" height="150px" rowspan="4">商品画像３</td>
+		<td class="Img" rowspan="3">商品画像３</td>
 		<td rowspan="1" colspan="2" class="L">商品名：うううううううううううう</td>
-		<td width="100" rowspan="4"><input type="checkbox" name="delete" value="1">削除する</td>
+		<td class="c" width="100" rowspan="3"><input class="del_btn" type="button" name="delete" value="削除する"></td>
 	</tr>
 	<tr>
 		<td rowspan="1" colspan="2">価格：３３３３円</td>
 	</tr>
-	<tr>
-		<td rowspan="1" colspan="1" class="">配送方法：<select name="haisou">
-									<option value="1">通常配送</option>
-									<option value="2">特急配送</option>
-									<option value="3">日時指定配送</option>
-								</select>
-		</td>
-		<td rowspan="1" class="">個数：<select name="kosuu">
+	<tr class="c">
+		<td rowspan="1" colspan="2">個数：<select name="kosuu">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -105,6 +88,19 @@
 	</tr>
 </table>
 <br>
-<div class="c"><input type="button" value="購入画面へ" onclick="location.href='buykakunin.html'"></div>
+<br>
+<table class="table table-striped">
+	<tr>
+		<th class="R">配送方法：</th>
+		<td><select name="haisou">
+								<option value="1">通常配送</option>
+								<option value="2">特急配送</option>
+								<option value="3">日時指定</option>
+								</select>
+</table>
+
+<div class="c">
+<input class="buy_btn" type="button" value="購入画面へ" onclick="location.href='buykakunin.html'">
+</div>
 </body>
 </html>

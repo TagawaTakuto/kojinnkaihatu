@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 <link rel="stylesheet" type="text/css" href="layout/style.css">
 <meta charset="UTF-8">
 <style type="text/css">
- <!-- a{ text-decoration:none;} -->
- </style>
+<!--
+a {
+	text-decoration: none;
+}
+-->
+</style>
 <title>購入確認画面</title>
 </head>
 <body>
-<div class="hedder">
-				<ul style="float:left;">
-					<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
-				</ul>
-					<ul  style="float:right;">
-					<li><a href="ItemList.html" class="top">TOP</a></li>
-					<li>　　　　　　　　　　　　　</li>
-					<li><a href="cart.html" class="square_btn">カート</a></li>
-					<li><a href="User.htmll" class="square_btn">ユーザ情報</a></li>
-					<li><a href="Login.html" class="square_btn">ログインorログアウト</a></li>
-				</ul>
-			</div>
-
-
-<h1 class="c">購入確認画面</h1>
-<div class="c">以下の内容でよろしいですか？</div>
-<br>
+	<div class="hedder">
+		<ul style="float: left;">
+			<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
+		</ul>
+		<div class="top-teisai">
+			<a href="ItemList.html"  class="top">TOP</a>
+		</div>
+		<ul style="float: right;">
+			<li><a href="cart.html" class="square_btn">カート</a></li>
+			<li><a href="User.html" class="square_btn">ユーザ情報</a></li>
+			<li><a href="Login.html" class="square_btn">ログイン</a></li>
+		</ul>
+	</div>
+	<h1 class="c">購入確認画面</h1>
+	<div class="c">以下の内容でよろしいですか？</div>
+	<br>
 	<table class="table table-striped">
 		<tr>
 			<th>商品画像</th>
@@ -71,9 +74,9 @@
 		</tr>
 	</table>
 	<br>
-<div class="c">
-	<input type="button" value="修正する" onClick="location.href='cart.html'">
-	<input type="button" value="購入する" onClick="location.href='ItemList.html'">
-</div>
+	<div class="c">
+		<input class="back_btn" type="button" value="修正する" onClick="location.href='cart.html'">
+		<input class="buy_btn" type="button" value="購入確定" onClick="location.href='ItemList.html'">
+	</div>
 </body>
 </html>
