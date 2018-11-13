@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
+<link rel="stylesheet" href="layout/style.css">
 <head>
-<link rel="stylesheet" href="style.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <style type="text/css">
  <!-- a{ text-decoration:none;} -->
  </style>
-<title>ヘッダー</title>
+<title>ユーザ情報削除</title>
 </head>
 <body>
-<!-- ▼▼/layout/hedder.htmlの内容▼▼ -->
-	<div class="hedder">
+<div class="hedder">
 		<ul style="float: left;">
 			<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
 			<li class="L"><a href="UserList.html" class="Hsquare_btn">ユーザリスト</a></li>
@@ -24,6 +23,21 @@
 			<li><a href="Login.html" class="square_btn">ログイン</a></li>
 		</ul>
 	</div>
-	<!-- ▲▲/layout/hedder.htmlの内容▲▲ -->
+<h1 class="c">ユーザ情報削除</h1>
+<div class="c">
+ログインID：001
+<br>
+<br>
+ユーザ名:サンプル太郎
+<br>
+<br>
+</div>
+<div class="c">本当に削除してよろしいですか？</div>
+<br>
+<div class="c">
+	<input class="search_btn" type="button" value="キャンセル" onClick="location.href='UserList.html'">
+	<input class="del_btn" style="width:90px;height:32px;" type="button" value="　OK　" onClick="location.href='UserList.html'">
+</div>
+
 </body>
 </html>

@@ -17,6 +17,7 @@ a {
 	<div class="hedder">
 		<ul style="float: left;">
 			<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
+			<li class="L"><a href="UserList.html" class="Hsquare_btn">ユーザリスト</a></li>
 		</ul>
 		<div class="top-teisai">
 			<a href="ItemList.html"  class="top">TOP</a>
@@ -38,7 +39,8 @@ a {
 			name="Edate">
 	</div>
 	<br>
-	<div class="c">
+	<div class="shadow c">
+		<br>
 		ハード：
 		<div class="search_select">
 		<input id="h_ch1" type="checkbox"/><label for="h_ch1">PC</label>
@@ -46,9 +48,11 @@ a {
 		<input id="h_ch3" type="checkbox"/><label for="h_ch3">Swich</label>
 		<input id="h_ch4" type="checkbox"/><label for="h_ch4">Xbox</label>
 		</div>
+		<br>
 	</div>
 	<br>
-	<div class="c">
+	<div class="shadow c">
+		<br>
 		ジャンル:
 		<div class="search_select">
 		<input id="j_ch1" type="checkbox"/><label for="j_ch1">アクション</label>
@@ -57,12 +61,34 @@ a {
 		<input id="j_ch4" type="checkbox"/><label for="j_ch4">シミュレーション</label>
 		<input id="j_ch5" type="checkbox"/><label for="j_ch5">シューティング</label>
 	</div>
+	<br>
 	</div>
 	<br>
+	<div class="c">
+			並び替え： <select name="sort">
+				<option value="sale_young">発売日昇順</option>
+				<option value="sale_old">発売日降順</option>
+				<option value="update_young">更新日昇順</option>
+				<option value="update_old">更新日降順</option>
+				<option value="yasui">価格昇順</option>
+				<option value="takai">価格降順</option>
+				<option value="sukunai">在庫昇順</option>
+				<option value="ooi">在庫降順</option>
+			</select>
+		</div>
+		<br>
+		<div class="bold c">検索結果：300件</div>
+		<br>
 	<div class="c">
 		<input class="search_btn" type="button" value="検索">
 	</div>
 	<hr>
+	<div class="c red big bold">
+	<br>
+	商品をカートに追加しました。
+	<br>
+	<br>
+	</div>
 	<table class="T c" >
 		<tr>
 			<td class="Img cell" colspan="2"><a href="ItemData.html">商品画像1</a></td>
@@ -75,7 +101,7 @@ a {
 		</tr>
 		<tr>
 			<td class="cell" colspan="1">値段:1000円</td>
-			<td class="cell" colspan="1">在庫数:1個</td>
+			<td class="cell" colspan="1">在庫数:0個</td>
 			<td  colspan="1">　　</td>
 			<td class="cell" colspan="1">値段:2000円</td>
 			<td class="cell" colspan="1">在庫数:2個</td>
@@ -87,37 +113,64 @@ a {
 			<td class="cell" colspan="1">在庫数:4個</td>
 		</tr>
 		<tr>
-			<td class="cell c" colspan="2"><select name="buycount">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option></select>
-			<input type="button" value="購入" class="buy_btn">
+		<td class="cell c" colspan="2">
+		ハード:<select name="hard_select">
+			<option value="1">PC</option>
+			<option value="2">PS4</option>
+			<option value="3">Swich</option>
+			<option value="4">Xbox</option>
+			</select>
+			<td colspan="1">　</td>
+			<td class="cell c" colspan="2">ハード:<select name="hard_select">
+			<option value="1">PC</option>
+			<option value="2">PS4</option>
+			<option value="3">Swich</option>
+			<option value="4">Xbox</option>
+			</select>
+			<td colspan="1">　</td>
+			<td class="cell c" colspan="2">ハード:<select name="hard_select">
+			<option value="1">PC</option>
+			<option value="2">PS4</option>
+			<option value="3">Swich</option>
+			<option value="4">Xbox</option>
+			</select>
+			<td colspan="1">　</td>
+			<td class="cell c" colspan="2">ハード:<select name="hard_select">
+			<option value="1">PC</option>
+			<option value="2">PS4</option>
+			<option value="3">Swich</option>
+			<option value="4">Xbox</option>
+			</select>
+			</td>
+			</tr>
+
+		<tr>
+			<td class="cell c" colspan="2">売り切れ
 			<td colspan="1">　</td>
 			<td class="cell c" colspan="2"><select name="buycount">
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 			<option value="4">4</option>
-			<option value="5">5</option></select>
-			<input type="button" value="購入" class="buy_btn">
+			<option value="5">5</option></select>個
+			<input type="button" value="カートに追加" class="buy_btn">
+			</td>
 			<td colspan="1">　</td>
 			<td class="cell c" colspan="2"><select name="buycount">
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 			<option value="4">4</option>
-			<option value="5">5</option></select>
-			<input type="button" value="購入" class="buy_btn">
+			<option value="5">5</option></select>個
+			<input type="button" value="カートに追加" class="buy_btn">
 			<td colspan="1">　</td>
 			<td class="cell c" colspan="2"><select name="buycount">
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 			<option value="4">4</option>
-			<option value="5">5</option></select>
-			<input type="button" value="購入" class="buy_btn">
+			<option value="5">5</option></select>個
+			<input type="button" value="カートに追加" class="buy_btn">
 			</td>
 			</tr>
 	</table>
@@ -147,39 +200,69 @@ a {
 			<td class="cell" colspan="1">値段:4000円</td>
 			<td class="cell" colspan="1">在庫数:4個</td>
 		</tr>
-
+<tr>
+		<td class="cell c" colspan="2">
+		ハード:<select name="hard_select">
+			<option value="1">PC</option>
+			<option value="2">PS4</option>
+			<option value="3">Swich</option>
+			<option value="4">Xbox</option>
+			</select>
+			<td colspan="1">　</td>
+			<td class="cell c" colspan="2">ハード:<select name="hard_select">
+			<option value="1">PC</option>
+			<option value="2">PS4</option>
+			<option value="3">Swich</option>
+			<option value="4">Xbox</option>
+			</select>
+			<td colspan="1">　</td>
+			<td class="cell c" colspan="2">ハード:<select name="hard_select">
+			<option value="1">PC</option>
+			<option value="2">PS4</option>
+			<option value="3">Swich</option>
+			<option value="4">Xbox</option>
+			</select>
+			<td colspan="1">　</td>
+			<td class="cell c" colspan="2">ハード:<select name="hard_select">
+			<option value="1">PC</option>
+			<option value="2">PS4</option>
+			<option value="3">Swich</option>
+			<option value="4">Xbox</option>
+			</select>
+			</td>
+			</tr>
 		<tr>
 			<td class="cell c" colspan="2"><select name="buycount">
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 			<option value="4">4</option>
-			<option value="5">5</option></select>
-			<input type="button" value="購入" class="buy_btn">
+			<option value="5">5</option></select>個
+			<input type="button" value="カートに追加" class="buy_btn">
 			<td colspan="1">　</td>
 			<td class="cell c" colspan="2"><select name="buycount">
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 			<option value="4">4</option>
-			<option value="5">5</option></select>
-			<input type="button" value="購入" class="buy_btn">
+			<option value="5">5</option></select>個
+			<input type="button" value="カートに追加" class="buy_btn">
 			<td colspan="1">　</td>
 			<td class="cell c" colspan="2"><select name="buycount">
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 			<option value="4">4</option>
-			<option value="5">5</option></select>
-			<input type="button" value="購入" class="buy_btn">
+			<option value="5">5</option></select>個
+			<input type="button" value="カートに追加" class="buy_btn">
 			<td colspan="1">　</td>
 			<td class="cell c" colspan="2"><select name="buycount">
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 			<option value="4">4</option>
-			<option value="5">5</option></select>
-			<input type="button" value="購入" class="buy_btn">
+			<option value="5">5</option></select>個
+			<input type="button" value="カートに追加" class="buy_btn">
 			</td>
 			</tr>
 	</table>

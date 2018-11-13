@@ -11,7 +11,7 @@ a {
 }
 -->
 </style>
-<title>購入確認画面</title>
+<title>購完了画面</title>
 </head>
 <body>
 	<div class="hedder">
@@ -28,9 +28,17 @@ a {
 			<li><a href="Login.html" class="square_btn">ログイン</a></li>
 		</ul>
 	</div>
-	<h1 class="c">購入確認画面</h1>
-	<div class="c">以下の内容でよろしいですか？</div>
+	<h1 class="c">購入完了</h1>
+	<div class="c">購入が完了しました</div>
 	<br>
+	<div class="c">
+		<input class="back_btn" type="button" value="引き続き買い物する" onClick="location.href='ItemList.html'">
+		　　　<input class="buy_btn" type="button" value="ユーザ情報へ" onClick="location.href='User.html'">
+	</div>
+	<br>
+	<div class="c">
+	<h3>購入詳細</h3>
+	</div>
 	<table class="table table-striped">
 		<tr>
 			<th>商品画像</th>
@@ -74,10 +82,5 @@ a {
 			<td>１２３４５６円</td>
 		</tr>
 	</table>
-	<br>
-	<div class="c">
-		<input class="back_btn" type="button" value="修正する" onClick="location.href='cart.html'">
-		<input class="buy_btn" type="button" value="購入確定" onClick="location.href='buycomplete.html'">
-	</div>
 </body>
 </html>

@@ -10,7 +10,7 @@ a {
 }
 -->
 </style>
-<title>マスター商品更新</title>
+<title>マスター商品登録</title>
 </head>
 <body>
 	<div class="hedder">
@@ -28,27 +28,24 @@ a {
 		</ul>
 	</div>
 	<div class="wrapper">
-		<h1>商品更新</h1>
-		<p class="txt">商品ID:001</p>
-		<p class="txt">
-			商品名:<input type="text" value="げーむめい" name="title"> <br>
+		<h1>商品登録</h1>
+		<p class="c">
+			商品名:<input type="text" value="" name="title"> <br>
 		<p class="txt">
 			商品説明:
 			<textarea name="setumei" rows="6" cols="40">
-	あああああああああああああああああああああああああああああああああああああああああああああああああああああああ
 	</textarea>
-		<p class="txt">
-			単価:<input type="text" value="10,000" name="price">円 <br>
-			<br> 在庫:<input type="text" value="100" name="zaiko">個 <br>
+		<p class="c">
+			単価:<input type="text"name="price">円 <br>
+			<br> 在庫:<input type="text"name="zaiko">個 <br>
 		</p>
 	</div>
-	<div class="c">
-		ハード：
-		<div class="search_select">
-			<input id="h_ch1" type="checkbox" /><label for="h_ch1">PC</label> <input
-				id="h_ch2" type="checkbox" /><label for="h_ch2">PS4</label> <input
-				id="h_ch3" type="checkbox" /><label for="h_ch3">Swich</label> <input
-				id="h_ch4" type="checkbox" /><label for="h_ch4">Xbox</label>
+	<div class="c">ハード:
+		<div class="hard_select">
+				<input type="radio" name="hard_select" id="h_ch1" checked /><label for="h_ch1">PC</label>
+				<input type="radio" name="hard_select" id="h_ch2"/><label for="h_ch2">PS4</label>
+				<input type="radio" name="hard_select" id="h_ch3"/><label for="h_ch3">Swich</label>
+				<input type="radio" name="hard_select" id="h_ch4"/><label for="h_ch4">Xbox</label>
 		</div>
 	</div>
 	<br>
@@ -65,7 +62,7 @@ a {
 
 	<div class="c">
 		<input class="search_btn" type="button" onclick="location.href='MasterList.html'"
-			value="更新完了">
+			value="登録">
 	</div>
 </body>
 </html>

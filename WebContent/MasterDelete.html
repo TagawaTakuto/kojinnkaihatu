@@ -12,6 +12,7 @@
 <div class="hedder">
 		<ul style="float: left;">
 			<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
+			<li class="L"><a href="UserList.html" class="Hsquare_btn">ユーザリスト</a></li>
 		</ul>
 		<div class="top-teisai">
 			<a href="ItemList.html"  class="top">TOP</a>
@@ -23,25 +24,36 @@
 		</ul>
 	</div>
 	<h1 class="c">商品削除</h1>
-<div class="c">この商品を削除してもよろしいですか？</div>
-<div class="c">商品ID:0001</div>
-<table class="tab">
-	<tr>
-		<td height="150" width="150" rowspan="2">商品画像</td>
-		<td colspan="2">商品名:ああああああああああああああああああああ</td>
+<div class="c">この商品情報を削除してもよろしいですか？</div>
+<br>
+<table class="tab" width=”50%”>
+	<tr class="c">
+		<td colspan="4">商品ID:0001</td>
+	</tr>
+	<tr class="c">
+		<td class="c" colspan="2">発売日:20XX年XX月XX日</td>
+		<td colspan="2">商品名：タイトル１</td>
+	</tr>
+	<tr class="c">
+		<td rowspan="2" width="150px" height="150px">商品画像１</td>
+		<td colspan="2">ハード:？？？</td>
+		<td rowspan="1" colspam="1">価格：1111円
+	</tr>
+	<tr class="c">
+		<td colspan="2">ジャンル:？？？　？？？</td>
+		<td rowspan="1" colspan="1">在庫:10個</td>
 	</tr>
 	<tr>
-		<td colspan="1">価格：１１１１１円</td>
-		<td colspan="1">在庫数：２２２個</td>
+		<td colspan="4" height="200px" valign="top">商品説明:
+		<br>ああああああああああああああああああああああああああああああああああああああああああああ
+		</td>
 	</tr>
 	<tr>
-		<td valign="top" height="200"colspan="3">商品説明:
-		<br>いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい</td>
-	</tr>
+		<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
 </table>
 <br>
-<div class="c"><input type="button" value="キャンセル" onClick="location.href='MasterList.html'">
-	<input type="button" value="　ＯＫ　" onClick="location.href='MasterList.html'">
+<div class="c"><input type="button" class="search_btn" value="キャンセル" onClick="location.href='MasterList.html'">
+	<input type="button" class="del_btn" style="width:80px;" value="　ＯＫ　" onClick="location.href='MasterList.html'">
 </div>
 </body>
 </html>

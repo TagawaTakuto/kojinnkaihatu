@@ -12,6 +12,7 @@
 <div class="hedder">
 		<ul style="float: left;">
 			<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
+			<li class="L"><a href="UserList.html" class="Hsquare_btn">ユーザリスト</a></li>
 		</ul>
 		<div class="top-teisai">
 			<a href="ItemList.html"  class="top">TOP</a>
@@ -22,7 +23,6 @@
 			<li><a href="Login.html" class="square_btn">ログイン</a></li>
 		</ul>
 	</div>
-
 <h1 class="c">マスター商品リスト</h1>
 <div class="c">
 		キーワード：<input type="text" name="Keyword">
@@ -34,7 +34,8 @@
 			name="Edate">
 	</div>
 	<br>
-	<div class="c">
+	<div class="c shadow">
+		<br>
 		ハード：
 		<div class="search_select">
 		<input id="h_ch1" type="checkbox"/><label for="h_ch1">PC</label>
@@ -42,9 +43,11 @@
 		<input id="h_ch3" type="checkbox"/><label for="h_ch3">Swich</label>
 		<input id="h_ch4" type="checkbox"/><label for="h_ch4">Xbox</label>
 		</div>
+		<br>
 	</div>
 	<br>
-	<div class="c">
+	<div class="c shadow">
+		<br>
 		ジャンル:
 		<div class="search_select">
 		<input id="j_ch1" type="checkbox"/><label for="j_ch1">アクション</label>
@@ -53,6 +56,7 @@
 		<input id="j_ch4" type="checkbox"/><label for="j_ch4">シミュレーション</label>
 		<input id="j_ch5" type="checkbox"/><label for="j_ch5">シューティング</label>
 	</div>
+	<br>
 	</div>
 	<br>
 	<div class="c">
@@ -71,36 +75,43 @@
 		</div>
 
 	<br>
+	<div class="bold c">検索結果：300件</div>
+	<br>
 	<div class="c">
 		<input class="search_btn" type="button" value="検索">
 	</div>
 <hr>
+<br>
+<div class="c"><input style="width:150px;" class="search_btn" type="button" value="新規登録" onclick="location.href='MasterCreate.html'"></div>
 <c:forEach>
 <br>
 <table class="tab" width=”50%”>
+	<tr class="c">
+		<td colspan="4">商品ID:0001</td>
+	</tr>
 	<tr class="c">
 		<td class="c" colspan="2">発売日:20XX年XX月XX日</td>
 		<td colspan="2">商品名：タイトル１</td>
 	</tr>
-	<tr>
+	<tr class="c">
 		<td rowspan="2" width="150px" height="150px">商品画像１</td>
 		<td colspan="2">ハード:？？？</td>
 		<td rowspan="1" colspam="1">価格：1111円
 	</tr>
-	<tr>
+	<tr class="c">
 		<td colspan="2">ジャンル:？？？　？？？</td>
-		<td class="c" rowspan="1" colspan="1">在庫:10個</td>
+		<td rowspan="1" colspan="1">在庫:10個</td>
 	</tr>
 	<tr>
-		<td colspan="4" height="200px">商品説明:
+		<td colspan="4" height="200px" valign="top">商品説明:
 		<br>ああああああああああああああああああああああああああああああああああああああああああああ
 		</td>
 	</tr>
 	<tr>
 		<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
 	<tr>
-		<td colspan="2" width="50%"><input class="full" type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
-		<td colspan="2" width="50%"><input class="full" type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
+		<td colspan="2" width="50%"><input class="full search_btn" type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
+		<td colspan="2" width="50%"><input class="full del_btn" type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
 	</tr>
 </table>
 <c:forEach>
@@ -108,59 +119,94 @@
 <br>
 <table class="tab" width=”50%”>
 	<tr class="c">
+		<td colspan="4">商品ID:0002</td>
+	</tr>
+	<tr class="c">
 		<td class="c" colspan="2">発売日:20XX年XX月XX日</td>
 		<td colspan="2">商品名：タイトル２</td>
 	</tr>
-	<tr>
+	<tr class="c">
 		<td rowspan="2" width="150px" height="150px">商品画像２</td>
 		<td colspan="2">ハード:？？？</td>
-		<td rowspan="1" colspam="1">価格：2222円
+		<td rowspan="1" colspan="1">価格：2222円
 	</tr>
-	<tr>
+	<tr class="c">
 		<td colspan="2">ジャンル:？？？　？？？</td>
-		<td class="c" rowspan="1" colspan="1">在庫:20個</td>
+		<td rowspan="1" colspan="1">在庫:20個</td>
 	</tr>
 	<tr>
-		<td colspan="4" height="200px">商品説明:
+		<td colspan="4" height="200px" valign="top">商品説明:
 		<br>ああああああああああああああああああああああああああああああああああああああああああああ
 		</td>
 	</tr>
 	<tr>
 		<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
 	<tr>
-		<td colspan="2" width="50%"><input class="full" type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
-		<td colspan="2" width="50%"><input class="full" type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
+		<td colspan="2" width="50%"><input class="full search_btn" type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
+		<td colspan="2" width="50%"><input class="full del_btn" type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
 	</tr>
 </table>
 <br>
 <br>
 <table class="tab" width=”50%”>
 	<tr class="c">
+		<td colspan="4">商品ID:0003</td>
+	</tr>
+	<tr class="c">
 		<td class="c" colspan="2">発売日:20XX年XX月XX日</td>
 		<td colspan="2">商品名：タイトル３</td>
 	</tr>
-	<tr>
+	<tr class="c">
 		<td rowspan="2" width="150px" height="150px">商品画像３</td>
 		<td colspan="2">ハード:？？？</td>
-		<td rowspan="1" colspam="1">価格：3333円
+		<td rowspan="1" colspan="1">価格：3333円
 	</tr>
-	<tr>
+	<tr class="c">
 		<td colspan="2">ジャンル:？？？　？？？</td>
-		<td class="c" rowspan="1" colspan="1">在庫:30個</td>
+		<td rowspan="1" colspan="1">在庫:30個</td>
 	</tr>
 	<tr>
-		<td colspan="4" height="200px">商品説明:
+		<td colspan="4" height="200px" valign="top">商品説明:
 		<br>ああああああああああああああああああああああああああああああああああああああああああああ
 		</td>
 	</tr>
 	<tr>
 		<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
 	<tr>
-		<td colspan="2" width="50%"><input class="full" type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
-		<td colspan="2" width="50%"><input class="full" type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
+		<td colspan="2" width="50%"><input class="full search_btn" type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
+		<td colspan="2" width="50%"><input class="full del_btn" type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
 	</tr>
 </table>
 <br>
+<table class="tab" width=”50%”>
+	<tr class="c">
+		<td colspan="4">商品ID:0004</td>
+	</tr>
+	<tr class="c">
+		<td colspan="2">発売日:20XX年XX月XX日</td>
+		<td colspan="2">商品名：タイトル４</td>
+	</tr>
+	<tr class="c">
+		<td rowspan="2" width="150px" height="150px">商品画像３</td>
+		<td colspan="2">ハード:？？？</td>
+		<td rowspan="1" colspam="1">価格：4444円
+	</tr>
+	<tr class="c">
+		<td colspan="2">ジャンル:？？？　？？？</td>
+		<td rowspan="1" colspan="1">在庫:30個</td>
+	</tr>
+	<tr>
+		<td colspan="4" height="200px" valign="top">商品説明:
+		<br>ああああああああああああああああああああああああああああああああああああああああああああ
+		</td>
+	</tr>
+	<tr>
+		<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
+	<tr>
+		<td colspan="2" width="50%"><input class="full search_btn" type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
+		<td colspan="2" width="50%"><input class="full search_btn" type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
+	</tr>
+</table>
 <div class="pager C">
 		<ul>
 			<li><a href="1.html">&laquo; 前</a></li>
