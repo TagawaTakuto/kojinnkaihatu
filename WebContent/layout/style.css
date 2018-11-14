@@ -350,12 +350,12 @@ ul {
 	overflow: hidden;
 }
 
-.login_btn span {
+.login_btn {
 	display: inline-block;
 	transition: .5s
 }
 
-.login_btn:hover span {
+.login_btn:hover {
 	transform: rotateX(360deg);
 }
 

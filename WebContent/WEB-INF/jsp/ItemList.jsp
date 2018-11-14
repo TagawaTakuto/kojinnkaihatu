@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +27,7 @@ a {
 		<ul style="float: right;">
 			<li><a href="cart.html" class="square_btn">カート</a></li>
 			<li><a href="User.html" class="square_btn">ユーザ情報</a></li>
-			<li><a href="Login.html" class="square_btn">ログイン</a></li>
+			<li><a href="Login" class="square_btn">ログイン</a></li>
 		</ul>
 	</div>
 	<h1 class="c">商品一覧</h1>
