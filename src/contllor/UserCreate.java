@@ -8,19 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import dao.UserDao;
+import model.User;
 
 /**
- * Servlet implementation class ItemList
+ * Servlet implementation class UserCreate
  */
-@WebServlet("/ItemList")
-public class ItemList extends HttpServlet {
+@WebServlet("/UserCreate")
+public class UserCreate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ItemList() {
+    public UserCreate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +32,8 @@ public class ItemList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-
-		if(session == null) {
-
-			response.sendRedirect("Login");
-			return;
-		}
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemList.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserCreate.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 	/**
@@ -48,6 +41,15 @@ public class ItemList extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String loginId = request.getParameter("LoginId");
+		String Password = request.getParameter("Password");
+		String KPass = request.getParameter("Kpassword");
+		String Name = request.getParameter("UserName");
+		String Birthdate = request.getParameter("BirthDate");
+
+		UserDao userdao = new UserDao();
+		User hikaku = userdao.insertuser(loginId);
+
 
 	}
 

@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 
 import base.DBManager;
 import beans.UserDataBeans;
+import model.User;
 
 public class UserDao {
 
@@ -37,39 +38,41 @@ public class UserDao {
 	}
 
 	/*ログイン*/
-	public int getUserId(String loginId, String password) throws SQLException {
-		Connection con = null;
-		PreparedStatement st = null;
+	public User UserData(String login_id,String password) {
+		Connection conn = null;
 		try {
-			con = DBManager.getConnection();
+			conn = DBManager.getConnection();
 
-			st = con.prepareStatement("SELECT * FROM t_user WHERE login_id = ?");
-			st.setString(1, loginId);
+			String sql = "SELECT * FROM user WHERE login_id = ? and password = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1,login_id);
+			pStmt.setString(2,password);
+			ResultSet rs = pStmt.executeQuery();
 
-			ResultSet rs = st.executeQuery();
+			if(!rs.next()) {
+			return null;
+		}
+			String loginIdData = rs.getString("login_id");
+			String nameData = rs.getString("user_name");
+			return new User(loginIdData,nameData);
 
-			int userId = 0;
-			while (rs.next()) {
-				if (password.equals(rs.getString("password"))) {
-					userId = rs.getInt("id");
-					System.out.println("login succeeded");
-					break;
+		}catch(SQLException e){
+			e.printStackTrace();
+			return null;
+
+		}finally {
+			if(conn != null) {
+				try {
+					conn .close();
+				}catch (SQLException e) {
+					e.printStackTrace();
+					return null;
 				}
-			}
-
-			System.out.println("searching userId by loginId has been completed");
-			return userId;
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			throw new SQLException(e);
-		} finally {
-			if (con != null) {
-				con.close();
 			}
 		}
 	}
 
-	public static UserDataBeans getUserDataBeansByUserId(int userId) throws SQLException {
+	public UserDataBeans getUserDataBeansByUserId(int userId) throws SQLException {
 		UserDataBeans udb = new UserDataBeans();
 		Connection con = null;
 		PreparedStatement st = null;

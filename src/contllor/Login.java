@@ -1,7 +1,6 @@
 package contllor;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.UserDataBeans;
 import dao.UserDao;
+import model.User;
 
 /**
  * Servlet implementation class Login
@@ -62,26 +61,22 @@ public class Login extends HttpServlet {
 		String loginId = request.getParameter("LoginId");
 		String password = request.getParameter("password");
 
-		UserDataBeans user = new UserDataBeans();
 		UserDao userdao = new UserDao();
-		try {
-			user = userdao.getUserDataBeansByUserId(userdao.getUserId(loginId, password));
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+
+			User user = userdao.UserData(loginId, password);
+
+			if (user == null) {
+				request.setAttribute("errMsg", "ログインIDまたはパスワードが異なります");
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
+			HttpSession session = request.getSession();
+			session.setAttribute("userInfo", user);
+
+
+			response.sendRedirect("ItemList");
 		}
-
-		if (user == null) {
-			request.setAttribute("errMsg", "ログインIDまたはパスワードが異なります");
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
-			dispatcher.forward(request, response);
-			return;
-		}
-
-		HttpSession session = request.getSession();
-		session.setAttribute("userInfo", user);
-
-		response.sendRedirect("ItemList");
 	}
-}
+

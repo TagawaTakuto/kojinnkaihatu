@@ -1,34 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="ja">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="layout/style.css">
 <head>
-<link rel="stylesheet" type="text/css" href="layout/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style type="text/css">
-<!-- a{text-decoration:none;} -->
-</style>
 <title>ユーザページ</title>
 </head>
 <body>
-<div class="hedder">
-		<ul style="float: left;">
-			<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
-			<li class="L"><a href="UserList.html" class="Hsquare_btn">ユーザリスト</a></li>
-		</ul>
-		<div class="top-teisai">
-			<a href="ItemList.html"  class="top">TOP</a>
-		</div>
-		<ul style="float: right;">
-			<li><a href="cart.html" class="square_btn">カート</a></li>
-			<li><a href="User.html" class="square_btn">ユーザ情報</a></li>
-			<li><a href="Login.html" class="square_btn">ログイン</a></li>
-		</ul>
-	</div>
+<jsp:include page="/layout/hedder.jsp" />
 <h1 class="c">ユーザページ</h1>
 <br>
 <div class="c">
-	<a href="UserUpdate.html" class="Bbtn">更新</a>
-	<a href="UserData.html" class="Gbtn">詳細</a>
-	<a href="UserDelete.html" class="Rbtn">削除</a>
+	<a href="UserUpdate" class="Bbtn">更新</a>
+	<a href="UserData" class="Gbtn">詳細</a>
+	<a href="UserDelete" class="Rbtn">削除</a>
 </div>
 <br>
 <br>

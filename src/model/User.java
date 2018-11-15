@@ -17,6 +17,23 @@ public class User{
 	private String create_date;
 	private String update_date;
 
+	/*ログイン用*/
+	public User(String login_id,String name) {
+		this.login_id = login_id;
+		this.name = name;
+	}
+
+	/*ユーザリスト*/
+	public User(int id,String login_id,String name,Date birth_date,String password,String create_date,String update_date) {
+		this.id =id;
+		this.login_id = login_id;
+		this.name = name;
+		this.birth_date = birth_date;
+		this.password = password;
+		this.create_date = create_date;
+		this.update_date = update_date;
+	}
+
 	public int getId() {
 		return id;
 	}
