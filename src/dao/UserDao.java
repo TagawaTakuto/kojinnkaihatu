@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import base.DBManager;
 import beans.UserDataBeans;
@@ -13,19 +12,19 @@ import model.User;
 public class UserDao {
 
 	/*新規登録*/
-	public static void insertUser(UserDataBeans udb) throws SQLException {
+	public static void insertUser(String loginId, String Name, String Password, String Birthdate) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("INSERT INTO user(login_id,user_name,password,create_date,update_date) VALUES(?,?,?,?,?)");
-			st.setString(1, udb.getLoginId());
-			st.setString(2, udb.getName());
-			st.setString(3, udb.getPassword());
-			st.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+			st = con.prepareStatement(
+					"INSERT INTO user(login_id,user_name,password,birth_date,create_date,update_date) VALUES(?,?,?,?, now(),now());");
+			st.setString(1, loginId);
+			st.setString(2, Name);
+			st.setString(3, Password);
+			st.setString(4, Birthdate);
 			st.executeUpdate();
-			st.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
-			st.executeUpdate();
+
 			System.out.println("inserting user has been completed");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -38,33 +37,33 @@ public class UserDao {
 	}
 
 	/*ログイン*/
-	public User UserData(String login_id,String password) {
+	public User UserData(String login_id, String password) {
 		Connection conn = null;
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM user WHERE login_id = ? and password = ?";
+			String sql = "SELECT * FROM user WHERE login_id = ? and password = ? ;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1,login_id);
-			pStmt.setString(2,password);
+			pStmt.setString(1, login_id);
+			pStmt.setString(2, password);
 			ResultSet rs = pStmt.executeQuery();
 
-			if(!rs.next()) {
-			return null;
-		}
+			if (!rs.next()) {
+				return null;
+			}
 			String loginIdData = rs.getString("login_id");
 			String nameData = rs.getString("user_name");
-			return new User(loginIdData,nameData);
+			return new User(loginIdData, nameData);
 
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 
-		}finally {
-			if(conn != null) {
+		} finally {
+			if (conn != null) {
 				try {
-					conn .close();
-				}catch (SQLException e) {
+					conn.close();
+				} catch (SQLException e) {
 					e.printStackTrace();
 					return null;
 				}
@@ -72,18 +71,57 @@ public class UserDao {
 		}
 	}
 
-	public UserDataBeans getUserDataBeansByUserId(int userId) throws SQLException {
+	/*ID比較*/
+	public String getUserDataBeansByUserId(String loginId) throws SQLException {
+		String udb = null;
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement("SELECT * FROM user WHERE login_id = ?");
+			st.setString(1, loginId);
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+
+				udb = (rs.getString("login_id"));
+			}
+
+			st.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+
+		System.out.println("searching UserDataBeans by userId has been completed");
+		return udb;
+	}
+
+	/*ユーザデータ検索*/
+	public UserDataBeans getUserData(String loginId) throws SQLException {
 		UserDataBeans udb = new UserDataBeans();
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("SELECT * FROM user WHERE id =" + userId);
+			st = con.prepareStatement("SELECT * FROM user WHERE login_id = ?");
+			st.setString(1, loginId);
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
+				udb.setId(rs.getInt("user_id"));
 				udb.setLoginId(rs.getString("login_id"));
 				udb.setName(rs.getString("user_name"));
+				udb.setPassword(rs.getString("password"));
+				udb.setBirth_date(rs.getDate("birth_date"));
+				udb.setCreateDate(rs.getDate("create_date"));
+				udb.setUpdateDate(rs.getDate("update_date"));
+
 			}
 
 			st.close();
@@ -138,6 +176,7 @@ public class UserDao {
 			}
 		}
 	}
+
 	/*ID重複確認*/
 	public static boolean isOverlapLoginId(String loginId, int userId) throws SQLException {
 		// 重複しているかどうか表す変数

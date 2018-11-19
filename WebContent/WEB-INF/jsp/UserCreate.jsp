@@ -10,6 +10,9 @@
 	<jsp:include page="/layout/hedder.jsp" />
 	<div class="wrapper">
 		<h1 class="box17">新規登録</h1>
+		<font color="red"> <c:if test="${errMsg != null}">
+				<div class="C" >${errMsg}</div>
+			</c:if></font> <br>
 		<div class="shadow">
 			<form action="UserCreate" method="post">
 			<p class="txt">

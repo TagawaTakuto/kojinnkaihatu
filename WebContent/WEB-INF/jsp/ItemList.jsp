@@ -10,6 +10,7 @@
 
 </head>
 <body>
+ <input type="hidden" ${LoginInfo.login_id}>
 	<jsp:include page="/layout/hedder.jsp" />
 	<div class="box17 c">
 	<h1>商品一覧</h1>

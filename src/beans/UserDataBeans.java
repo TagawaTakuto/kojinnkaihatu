@@ -9,6 +9,7 @@ public class UserDataBeans implements Serializable {
 	private String loginId;
 	private String name;
 	private String password;
+	private Date birthdate;
 	private Date createDate;
 	private Date updateDate;
 
@@ -44,6 +45,14 @@ public class UserDataBeans implements Serializable {
 		this.password = password;
 	}
 
+	public Date getBirth_date() {
+		return birthdate;
+	}
+
+	public void setBirth_date(Date birth_date) {
+		this.birthdate = birth_date;
+	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -69,4 +78,10 @@ public class UserDataBeans implements Serializable {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH時mm分");
 		return sdf.format(updateDate);
 	}
+
+	public String getBirthFormatDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH時mm分");
+		return sdf.format(updateDate);
+	}
+
 }

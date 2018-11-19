@@ -31,7 +31,7 @@ public class Logout extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 
-		session.removeAttribute("userInfo");
+		session.removeAttribute("LoginInfo");
 
 		response.sendRedirect("Login");
 	}

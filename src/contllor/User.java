@@ -34,7 +34,7 @@ public class User extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		if (session.getAttribute("userInfo") == null) {
+		if (session.getAttribute("LoginInfo") == null) {
 
 			response.sendRedirect("Login");
 			return;

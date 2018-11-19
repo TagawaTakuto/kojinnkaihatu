@@ -73,7 +73,7 @@ public class Login extends HttpServlet {
 				return;
 			}
 			HttpSession session = request.getSession();
-			session.setAttribute("userInfo", user);
+			session.setAttribute("LoginInfo", user);
 
 
 			response.sendRedirect("ItemList");

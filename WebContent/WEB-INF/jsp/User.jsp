@@ -27,21 +27,21 @@
 
 		</tr>
 		<tr>
-			<td><a href="buyhistory.html" class="his_btn">詳細→</a></td>
+			<td><a href="buyhistory" class="his_btn">詳細→</a></td>
 			<td class="">20XX年XX月XX日</td>
 			<td class="">あああああああああああ</td>
 			<td class="">１１１１円</td>
 			<td class="">通常配送</td>
 		</tr>
 		<tr>
-			<td><a href="buyhistory.html" class="his_btn">詳細→</a></td>
+			<td><a href="buyhistory" class="his_btn">詳細→</a></td>
 			<td class="">20XX年XX月XX日</td>
 			<td class="">いいいいいいいいいいいiii</td>
 			<td class="">２２２２２円</td>
 			<td class="">日時指定</td>
 		</tr>
 		<tr>
-			<td><a href="buyhistory.html" class="his_btn">詳細→</a></td>
+			<td><a href="buyhistory" class="his_btn">詳細→</a></td>
 			<td class="">20XX年XX月XX日</td>
 			<td class="">うううううううううううう</td>
 			<td class="">３３３３円</td>

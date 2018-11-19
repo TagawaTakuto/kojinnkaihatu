@@ -21,10 +21,10 @@
 		<ul style="float: right;margin-top: 16px;">
 			<li><a href="cart.html" class="square_btn">カート</a></li>
 			<li><a href="User" class="square_btn">ユーザ情報</a></li>
-			<li><c:if test="${empty userInfo}">
+			<li><c:if test="${empty LoginInfo}">
 					<a href="Login" class="square_btn">ログイン</a>
 				</c:if>
-				<c:if test="${not empty userInfo}">
+				<c:if test="${not empty LoginInfo}">
 					<a href="Logout" class="square_btn">ログアウト</a>
 				</c:if></li>
 		</ul>
