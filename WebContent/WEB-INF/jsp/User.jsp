@@ -8,7 +8,9 @@
 </head>
 <body>
 <jsp:include page="/layout/hedder.jsp" />
+<div class="box17">
 <h1 class="c">ユーザページ</h1>
+</div>
 <br>
 <div class="c">
 	<a href="UserUpdate" class="Bbtn">更新</a>

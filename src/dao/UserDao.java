@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import base.DBManager;
 import beans.UserDataBeans;
-import model.User;
 
 public class UserDao {
 
@@ -37,8 +36,9 @@ public class UserDao {
 	}
 
 	/*ログイン*/
-	public User UserData(String login_id, String password) {
+	public UserDataBeans UserData(String login_id, String password) {
 		Connection conn = null;
+		UserDataBeans udb = new UserDataBeans();
 		try {
 			conn = DBManager.getConnection();
 
@@ -51,24 +51,22 @@ public class UserDao {
 			if (!rs.next()) {
 				return null;
 			}
-			String loginIdData = rs.getString("login_id");
-			String nameData = rs.getString("user_name");
-			return new User(loginIdData, nameData);
+			udb.setId(rs.getInt("user_id"));
+			udb.setLoginId(rs.getString("login_id"));
+			udb.setName(rs.getString("user_name"));
+			udb.setPassword(rs.getString("password"));
+			udb.setBirthDate(rs.getDate("birth_date"));
+			udb.setCreateDate(rs.getDate("create_date"));
+			udb.setUpdateDate(rs.getDate("update_date"));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
-
 		} finally {
 			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					return null;
-				}
 			}
 		}
+		return udb;
 	}
 
 	/*ID比較*/
@@ -118,7 +116,7 @@ public class UserDao {
 				udb.setLoginId(rs.getString("login_id"));
 				udb.setName(rs.getString("user_name"));
 				udb.setPassword(rs.getString("password"));
-				udb.setBirth_date(rs.getDate("birth_date"));
+				udb.setBirthDate(rs.getDate("birth_date"));
 				udb.setCreateDate(rs.getDate("create_date"));
 				udb.setUpdateDate(rs.getDate("update_date"));
 
@@ -140,39 +138,43 @@ public class UserDao {
 	}
 
 	/*ユーザデータ更新*/
-	public static void updateUser(UserDataBeans udb) throws SQLException {
-		// 更新された情報をセットされたJavaBeansのリスト
-		UserDataBeans updatedUdb = new UserDataBeans();
-		Connection con = null;
-		PreparedStatement st = null;
-
+	public void UserUpdate(String UserId, String loginId, String nameData, String Password) {
+		Connection conn = null;
 		try {
-			con = DBManager.getConnection();
-			st = con.prepareStatement("UPDATE user SET name=?, login_id=? WHERE id=?;");
-			st.setString(1, udb.getName());
-			st.setString(2, udb.getLoginId());
-			st.setInt(3, udb.getId());
-			st.executeUpdate();
-			System.out.println("update has been completed");
+			conn = DBManager.getConnection();
 
-			st = con.prepareStatement("SELECT name, login_id FROM user WHERE id=" + udb.getId());
-			ResultSet rs = st.executeQuery();
+			String sql = "UPDATE user SET update_date = now() ";
 
-			while (rs.next()) {
-
-				updatedUdb.setName(rs.getString("name"));
-				updatedUdb.setLoginId(rs.getString("login_id"));
+			if (!loginId.equals("")) {
+				sql += " ,login_id" + " = " + "'" + loginId + "'";
 			}
 
-			st.close();
-			System.out.println("searching updated-UserDataBeans has been completed");
+			if (!nameData.equals("")) {
+				sql += " ,user_name" + "=" + "'" + nameData + "'";
+			}
 
+			if (!Password.equals("")) {
+				sql += " ,password" + "=" + "'" + Password + "'";
+			}
+
+			sql += "WHERE user_id" + "=" + UserId ;
+
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.executeUpdate();
+			System.out.println(st);
+			st.close();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			throw new SQLException(e);
+			e.printStackTrace();
+			return;
+
 		} finally {
-			if (con != null) {
-				con.close();
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return;
+				}
 			}
 		}
 	}

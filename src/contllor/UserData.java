@@ -1,7 +1,6 @@
 package contllor;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import beans.UserDataBeans;
-import dao.UserDao;
 
 /**
  * Servlet implementation class UserData
@@ -47,23 +43,7 @@ public class UserData extends HttpServlet {
 			return;
 
 		}
-
-		String id = request.getParameter("login_id");
-
-		UserDao userdao = new UserDao();
-		UserDataBeans user;
-		try {
-			user = userdao.getUserData(id);
-			session.setAttribute("UserInfo",user);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserData.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserData.jsp");
 			dispatcher.forward(request, response);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
 		}
-
-
-
-	}
-
 }

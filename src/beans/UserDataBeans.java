@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class UserDataBeans implements Serializable {
 	private int id;
-	private String loginId;
+	private String login_id;
 	private String name;
 	private String password;
 	private Date birthdate;
@@ -22,11 +22,11 @@ public class UserDataBeans implements Serializable {
 	}
 
 	public String getLoginId() {
-		return loginId;
+		return login_id;
 	}
 
 	public void setLoginId(String loginId) {
-		this.loginId = loginId;
+		this.login_id = loginId;
 	}
 
 	public String getName() {
@@ -45,12 +45,12 @@ public class UserDataBeans implements Serializable {
 		this.password = password;
 	}
 
-	public Date getBirth_date() {
+	public Date getBirthDate() {
 		return birthdate;
 	}
 
-	public void setBirth_date(Date birth_date) {
-		this.birthdate = birth_date;
+	public void setBirthDate(Date birthdate) {
+		this.birthdate = birthdate;
 	}
 
 	public Date getCreateDate() {
@@ -81,7 +81,7 @@ public class UserDataBeans implements Serializable {
 
 	public String getBirthFormatDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH時mm分");
-		return sdf.format(updateDate);
+		return sdf.format(birthdate);
 	}
 
 }
