@@ -13,7 +13,7 @@
 	<div class="hedder">
 		<ul style="float: left;margin-top: 16px;">
 			<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
-			<li class="L"><a href="UserList.html" class="Hsquare_btn">ユーザリスト</a></li>
+			<li class="L"><a href="UserList" class="Hsquare_btn">ユーザリスト</a></li>
 		</ul>
 		<div class="top-teisai">
 			<a href="ItemList" class="top">TOP</a>

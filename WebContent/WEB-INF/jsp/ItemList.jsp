@@ -67,7 +67,7 @@
 	</div>
 	<hr>
 	<div class="c red big bold">
-		<br> 商品をカートに追加しました。 <br> <br>
+		<br> ${Mess} <br> <br>
 	</div>
 	<table class="T c">
 		<tr>
@@ -80,8 +80,8 @@
 			<td class="cell Img" colspan="2"><a href="ItemData.html">商品画像4</a></td>
 		</tr>
 		<tr>
-			<td class="cell" colspan="1">値段:1000円</td>
-			<td class="cell" colspan="1">在庫数:0個</td>
+			<td class="cell" colspan="1">値段:${Item.price}円</td>
+			<td class="cell" colspan="1">在庫数:${Item.stock}個</td>
 			<td colspan="1"></td>
 			<td class="cell" colspan="1">値段:2000円</td>
 			<td class="cell" colspan="1">在庫数:2個</td>
@@ -114,7 +114,7 @@
 					<option value="4">Xbox</option>
 			</select>
 			<td colspan="1"></td>
-			<td class="cell c" colspan="2">ハード:<select name="hard_select">
+			<td class="cell c" colspan="2">ハード:<select form="Item4" name="hard_select">
 					<option value="1">PC</option>
 					<option value="2">PS4</option>
 					<option value="3">Swich</option>
@@ -142,20 +142,23 @@
 					<option value="5">5</option>
 			</select>個 <input type="button" value="カートに追加" class="buy_btn">
 			<td colspan="1"></td>
-			<td class="cell c" colspan="2"><select name="buycount">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-			</select>個 <input type="button" value="カートに追加" class="buy_btn"></td>
+			<td class="cell c" colspan="2"><form action="Easybuy"
+					method="post">
+					<select name="buycount">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>個 <input id="Item4" type="submit" value="カートに追加" class="buy_btn">
+				</form></td>
 		</tr>
 	</table>
 	<br>
 	<br>
 	<table class="T c">
 		<tr>
-			<td class="cell Img" colspan="2"><a href="ItemData.html">商品画像5</a></td>
+			<td class="cell Img" colspan="2"><a href="ItemData">商品画像5</a></td>
 			<td colspan="1">　　</td>
 			<td class="cell Img" colspan="2"><a href="ItemData.html">商品画像6</a></td>
 			<td colspan="1">　　</td>

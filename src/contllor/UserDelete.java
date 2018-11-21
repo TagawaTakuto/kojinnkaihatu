@@ -13,16 +13,16 @@ import javax.servlet.http.HttpSession;
 import dao.UserDao;
 
 /**
- * Servlet implementation class UserUpdate
+ * Servlet implementation class UserDelete
  */
-@WebServlet("/UserUpdate")
-public class UserUpdate extends HttpServlet {
+@WebServlet("/UserDelete")
+public class UserDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UserUpdate() {
+	public UserDelete() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -39,14 +39,14 @@ public class UserUpdate extends HttpServlet {
 
 		if (session.getAttribute("LoginInfo") == null) {
 
-			response.sendRedirect("Login");
+			request.setAttribute("errMsg", "ログインセッションが切れました。");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+			dispatcher.forward(request, response);
 			return;
 
 		}
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserUpdate.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserDelete.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 	/**
@@ -56,26 +56,14 @@ public class UserUpdate extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		String UserId = request.getParameter("userId");
-		String loginId = request.getParameter("LoginId");
-		String Password = request.getParameter("Password");
-		String Kpass = request.getParameter("Kpassword");
-		String Name = request.getParameter("Name");
 
-		UserDao userDao = new UserDao();
 
-		if (!Kpass.equals(Password)) {
-			request.setAttribute("errMsg", "入力された内容が正しくありません。");
+		String UserId = request.getParameter("UserId");
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserUpdate.jsp");
-			dispatcher.forward(request, response);
-			return;
+		UserDao userdao = new UserDao();
+		userdao.UserDelete(UserId);
 
-		} else
-
-			userDao.UserUpdate(UserId, loginId, Name, Password);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/User.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("Logout");
 	}
 
 }

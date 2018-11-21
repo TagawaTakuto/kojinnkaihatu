@@ -7,6 +7,7 @@
 <title>ユーザページ</title>
 </head>
 <body>
+<input type="hidden" value="${LoginInfo.id}" name="UserId">
 <jsp:include page="/layout/hedder.jsp" />
 <div class="box17">
 <h1 class="c">ユーザページ</h1>
