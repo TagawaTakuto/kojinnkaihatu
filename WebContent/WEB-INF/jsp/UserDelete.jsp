@@ -8,15 +8,15 @@
 </head>
 <body>
 	<form action="UserDelete" method="post">
-		<input type="hidden" value=${LoginInfo.id} name="UserId">
+		<input type="hidden" value="${LoginInfo.id}" name="UserId">
 		<jsp:include page="/layout/hedder.jsp" />
-		<h1 class="c">ユーザ情報削除</h1>
-
-		<div class="c">
-
-			ログインID：${LoginInfo.loginId} <br> <br>
-			ユーザ名:${LoginInfo.name} <br> <br>
+		<h1 class="box c">ユーザ情報削除</h1>
+		<div class="shadow c" style="width: 300px;">
+			<br> <br> ログインID：${LoginInfo.loginId} <br> <br>
+			<br> ユーザ名:${LoginInfo.name} <br>
+			<br> <br>
 		</div>
+		<br>
 		<div class="c">本当に削除してよろしいですか？</div>
 		<br>
 		<div class="c">

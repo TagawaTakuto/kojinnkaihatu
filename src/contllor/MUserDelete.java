@@ -15,16 +15,16 @@ import beans.UserDataBeans;
 import dao.UserDao;
 
 /**
- * Servlet implementation class MUserUpdate
+ * Servlet implementation class MUserDelete
  */
-@WebServlet("/MUserUpdate")
-public class MUserUpdate extends HttpServlet {
+@WebServlet("/MUserDelete")
+public class MUserDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MUserUpdate() {
+    public MUserDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,49 +38,38 @@ public class MUserUpdate extends HttpServlet {
 
 		int Id = Integer.parseInt(request.getParameter("id"));
 
-
 		UserDao userdao = new UserDao();
 		try {
-			UserDataBeans userU = userdao.getUserData(Id);
+			UserDataBeans userd = userdao.getUserData(Id);
 			HttpSession session = request.getSession();
-			session.setAttribute("userU", userU);
+			session.setAttribute("userd", userd);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MUserUpdate.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MUserDelete.jsp");
 			dispatcher.forward(request, response);
+			return;
+
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
-
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		String UserId = request.getParameter("userId");
-		String loginId = request.getParameter("LoginId");
-		String Password = request.getParameter("Password");
-		String Kpass = request.getParameter("Kpassword");
-		String Name = request.getParameter("Name");
 
-		UserDao userDao = new UserDao();
 
-		if (!Kpass.equals(Password)) {
-			request.setAttribute("errMsg", "入力された内容が正しくありません。");
+		String Id = request.getParameter("id");
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MUserUpdate.jsp");
-			dispatcher.forward(request, response);
-			return;
+		UserDao userdao = new UserDao();
+		userdao.UserDelete(Id);
 
-		} else
+		response.sendRedirect("UserList");
 
-			userDao.UserUpdate(UserId, loginId, Name, Password);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserList.jsp");
-		dispatcher.forward(request, response);
+
 	}
 
 }

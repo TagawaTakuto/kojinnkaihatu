@@ -7,13 +7,13 @@
 <link rel="stylesheet" href="layout/style.css">
 <meta charset="UTF-8">
 <title>商品一覧</title>
-
 </head>
 <body>
 	<jsp:include page="/layout/hedder.jsp" />
-	<div class="box17 c">
+	<div class="box c">
 	<h1>商品一覧</h1>
 	</div>
+	<form action="ItemList" method="post">
 	<div class="c">
 		キーワード：<input type="text" name="Keyword">
 	</div>
@@ -27,10 +27,10 @@
 	<div class="shadow c">
 		<br> ハード：
 		<div class="search_select">
-			<input id="h_ch1" type="checkbox" /><label for="h_ch1">PC</label> <input
-				id="h_ch2" type="checkbox" /><label for="h_ch2">PS4</label> <input
-				id="h_ch3" type="checkbox" /><label for="h_ch3">Swich</label> <input
-				id="h_ch4" type="checkbox" /><label for="h_ch4">Xbox</label>
+			<input id="h_ch1" type="checkbox" name="Hard" value="1"/><label for="h_ch1">PC</label> <input
+				id="h_ch2" type="checkbox" name="Hard" value="2"/><label for="h_ch2">PS4</label> <input
+				id="h_ch3" type="checkbox" name="Hard" value="3"/><label for="h_ch3">Swich</label> <input
+				id="h_ch4" type="checkbox" name="Hard" value="4"/><label for="h_ch4">Xbox</label>
 		</div>
 		<br>
 	</div>
@@ -38,33 +38,32 @@
 	<div class="shadow c">
 		<br> ジャンル:
 		<div class="search_select">
-			<input id="j_ch1" type="checkbox" /><label for="j_ch1">アクション</label>
-			<input id="j_ch2" type="checkbox" /><label for="j_ch2">RPG</label> <input
-				id="j_ch3" type="checkbox" /><label for="j_ch3">格闘</label> <input
-				id="j_ch4" type="checkbox" /><label for="j_ch4">シミュレーション</label> <input
-				id="j_ch5" type="checkbox" /><label for="j_ch5">シューティング</label>
+			<input id="g_ch1" type="checkbox" name="Genre" value="1"/><label for="g_ch1">アクション</label>
+			<input id="g_ch2" type="checkbox" name="Genre" value="2"/><label for="g_ch2">RPG</label> <input
+				id="g_ch3" type="checkbox" name="Genre" value="3"/><label for="g_ch3">格闘</label> <input
+				id="g_ch4" type="checkbox" name="Genre" value="4"/><label for="g_ch4">シミュレーション</label> <input
+				id="g_ch5" type="checkbox" name="Genre" value="5"/><label for="g_ch5">シューティング</label>
 		</div>
 		<br>
 	</div>
 	<br>
 	<div class="c">
 		並び替え： <select name="sort">
-			<option value="sale_young">発売日昇順</option>
-			<option value="sale_old">発売日降順</option>
-			<option value="update_young">更新日昇順</option>
-			<option value="update_old">更新日降順</option>
-			<option value="yasui">価格昇順</option>
-			<option value="takai">価格降順</option>
-			<option value="sukunai">在庫昇順</option>
-			<option value="ooi">在庫降順</option>
+			<option value="sale_date">発売日昇順</option>
+			<option value="sale_date DESC">発売日降順</option>
+			<option value="price">価格昇順</option>
+			<option value="price DESC">価格降順</option>
+			<option value="stock">在庫昇順</option>
+			<option value="stock DESC">在庫降順</option>
 		</select>
 	</div>
 	<br>
 	<div class="bold c">検索結果：${page}件</div>
 	<br>
 	<div class="c">
-		<input class="search_btn" type="button" value="検索">
+		<input class="search_btn" type="submit" value="検索">
 	</div>
+	</form>
 	<hr>
 	<div class="c red big bold">
 		<br> ${Mess} <br> <br>

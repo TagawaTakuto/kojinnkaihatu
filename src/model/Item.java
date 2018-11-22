@@ -1,10 +1,8 @@
-package beans;
+package model;
 
-import java.io.Serializable;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
-public class ItemDataBeans implements Serializable {
+public class Item {
 	private int id;
 	private String name;
 	private String detail;
@@ -85,10 +83,5 @@ public class ItemDataBeans implements Serializable {
 
 	public void setSale_date(Date sale_date) {
 		this.saleDate = sale_date;
-	}
-
-	public String getSaleFormatDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-		return sdf.format(saleDate);
 	}
 }

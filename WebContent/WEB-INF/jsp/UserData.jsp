@@ -9,9 +9,13 @@
 </head>
 <body>
 	<jsp:include page="/layout/hedder.jsp" />
-	<div class="box17">
+	<div class="box">
 		<h1 class="c">ユーザ詳細</h1>
 	</div>
+	<div class="shadow" style="
+    width: 500px;
+    margin:auto;
+">
 	<br>
 	<table class="T">
 		<tr>
@@ -48,9 +52,12 @@
 			<td class="">${LoginInfo.getUpdateFormatDate()}</td>
 		</tr>
 	</table>
+
+	<br>
+	</div>
 	<br>
 	<div class="c">
-		<a class="search_btn" href="User">戻る</a> 　　　<a class="his_btn"
+		<a class="his_btn" href="User">戻る</a> 　　　<a class="his_btn"
 	href="UserUpdate">更新する</a>
 	</div>
 </body>

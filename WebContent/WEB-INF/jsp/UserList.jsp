@@ -8,8 +8,7 @@
 </head>
 <body>
 	<jsp:include page="/layout/hedder.jsp" />
-	<h1 class="c">ユーザ一覧</h1>
-
+	<h1 class="box c">ユーザ一覧</h1>
 	<table class="tab c">
 		<form action="UserList" method="post">
 			<div class="c">

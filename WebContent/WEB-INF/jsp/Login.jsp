@@ -9,8 +9,8 @@
 <body>
 	<jsp:include page="/layout/hedder.jsp" />
 
-	<div class="box17">
-		<h1 class="c">ログイン画面</h1>
+	<div class="box c">
+		<h1>ログイン画面</h1>
 	</div>
 	<div class="c">
 		<font color="red"> <c:if test="${errMsg != null}">
@@ -31,13 +31,12 @@
 			<div class="c">
 				パスワード：<input class="" type="password" name="password">
 			</div>
-
 			<br> <br>
 			<div class="c">
 				<a class="login_btn" href="javascript:document.form1.submit()"><span>ログイン</span></a>
 			</div>
 		</form>
-		<br> <br>
+		<br>
 	</div>
 </body>
 </html>

@@ -10,11 +10,11 @@
 	<jsp:include page="/layout/hedder.jsp" />
 	<div class="wrapper">
 		<h1>ユーザ情報更新</h1>
-		<form action="UserUpdate" method="post">
-		<input type="hidden" value="${LoginInfo.id}" name="userId">
+		<form name="form1" action="UserUpdate" method="post">
+			<input type="hidden" value="${LoginInfo.id}" name="userId">
 			<p class="txt">
-				ログインID: <br> <input type="text" value="${LoginInfo.loginId}"
-					name="LoginId">
+				ログインID: <br> <input type="text"
+					placeholder="${LoginInfo.loginId}" name="LoginId">
 			</p>
 			<br>
 			<p class="txt">
@@ -26,14 +26,14 @@
 			</p>
 			<br>
 			<p class="txt">
-				ユーザ名: <br> <input type="text" value="${LoginInfo.name}"
+				ユーザ名: <br> <input type="text" placeholder="${LoginInfo.name}"
 					name="Name">
 			</p>
-			<br>
-			<br>
+			<br> <br>
 			<div class="c">
-				<a class="search_btn" href="User">戻る</a>　　　 <input class="his_btn"
-					type="submit" value="更新">
+				<a class="his_btn" href="User">戻る</a>
+				　　　<a class="his_btn"
+					href="javascript:document.form1.submit()">更新</a>
 			</div>
 		</form>
 	</div>
