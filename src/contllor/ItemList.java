@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.ItemDataBeans;
 import dao.ItemDao;
+import model.Item;
 
 /**
  * Servlet implementation class ItemList
@@ -61,22 +61,35 @@ public class ItemList extends HttpServlet {
 		String[] HardId = request.getParameterValues("Hard");
 		String[] GenreId = request.getParameterValues("Genre");
 		String Sort = request.getParameter("sort");
-		List<Integer> HId = new ArrayList<Integer>();
-		List<Integer> GId = new ArrayList<Integer>();
+		int HId[] = new int[4];
+		int GId[] = new int[5];
 		for (int i = 0; i < HardId.length; i++) {
 			String s = HardId[i];
 			int I = Integer.parseInt(s);
-			HId.add(I);
-		}
-
+			HId[i] = I;
+			}
+		int HId1 = HId[0];
+		int HId2 = HId[1];
+		int HId3 = HId[2];
+		int HId4 = HId[3];
 		for (int i = 0; i < GenreId.length; i++) {
 			String s = GenreId[i];
 			int I = Integer.parseInt(s);
-			GId.add(I);
+			GId[i] = I;
 		}
-		List<ItemDataBeans> ItemList = new ArrayList<ItemDataBeans>();
+		int GId1 = GId[0];
+		int GId2 = GId[1];
+		int GId3 = GId[2];
+		int GId4 = GId[3];
+		int GId5 = GId[4];
+		List<Item> ItemList = new ArrayList<Item>();
 		ItemDao itemdao = new ItemDao();
-		ItemList = itemdao.ItemSearch(Keyword, SdateS, SdateE, HId, GId, Sort);
-	}
+		ItemList = itemdao.ItemSearch(Keyword, SdateS, SdateE, HId1,HId2,HId3,HId4, GId1,GId2,GId3,GId4,GId5,Sort);
+		HttpSession session = request.getSession();
+		session.setAttribute("ItemList", ItemList);
 
+
+		response.sendRedirect("ItemList");
+	}
 }
+

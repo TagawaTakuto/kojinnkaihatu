@@ -10,8 +10,22 @@ public class Item {
 	private int stock;
 	private Date saleDate;
 	private String fileName;
-	private int hardId;
-	private int genreId;
+	private String hardName;
+	private String genreName;
+
+	//アイテムリスト//
+	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName,
+			String hardName, String genreName) {
+		this.id = id;
+		this.name = name;
+		this.detail = detail;
+		this.price = price;
+		this.stock = stock;
+		this.saleDate = saleDate;
+		this.fileName = fileName;
+		this.hardName = hardName;
+		this.setGenreName(genreName);
+	}
 
 	public int getId() {
 		return id;
@@ -61,27 +75,27 @@ public class Item {
 		this.fileName = fileName;
 	}
 
-	public int getHardId() {
-		return hardId;
-	}
-
-	public void setHardId(int hardId) {
-		this.hardId = hardId;
-	}
-
-	public int getGenreId() {
-		return genreId;
-	}
-
-	public void setGenreId(int genreId) {
-		this.genreId = genreId;
-	}
-
 	public Date getSaleDate() {
 		return saleDate;
 	}
 
 	public void setSale_date(Date sale_date) {
 		this.saleDate = sale_date;
+	}
+
+	public String getHardName() {
+		return hardName;
+	}
+
+	public void setHardName(String hardName) {
+		this.hardName = hardName;
+	}
+
+	public String getGenreName() {
+		return genreName;
+	}
+
+	public void setGenreName(String genreName) {
+		this.genreName = genreName;
 	}
 }

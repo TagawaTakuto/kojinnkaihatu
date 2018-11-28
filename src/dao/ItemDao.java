@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,7 +15,7 @@ public class ItemDao {
 
 	//商品表示//
 	public List<Item> ItemSearch(String Keyword, String SaleDateS,
-			String SaleDateE, int hardId, int genreId, String Sort) {
+			String SaleDateE, int hardId1, int hardId2, int hardId3, int hardId4, int genreId1,int genreId2,int genreId3,int genreId4,int genreId5, String Sort) {
 		Connection conn = null;
 		List<Item> ItemList = new ArrayList<Item>();
 		try {
@@ -22,7 +23,11 @@ public class ItemDao {
 
 			String sql = "SELECT * FROM item ";
 
-			if(!Keyword.equals("") && !SaleDateS.equals("") && !SaleDateE.equals("") && hardId != 0) {
+			if(hardId1 != 0 || hardId2 != 0 || hardId3 != 0 || hardId4 != 0) {
+				sql += "JOIN hard ON item.hard_id = hard.id";
+			}
+
+			if(!Keyword.equals("") && !SaleDateS.equals("") && !SaleDateE.equals("")) {
 				sql += "WHERE";
 			}
 
@@ -32,23 +37,14 @@ public class ItemDao {
 
 			if (!SaleDateS.equals("")) {
 				sql += " AND sale_date" + ">=" + "'" + SaleDateS + "'";
-
 			}
 
 			if (!SaleDateE.equals("")) {
 				sql += " AND sale_date" + "<=" + "'" + SaleDateE + "'";
 			}
 
-			if (hardId != 0) {
-				sql += "AND hard_id"+"=" + hardId;
-			}
-
-			if (genreId != 0) {
-				sql += "AND genre_id"+"=" + genreId;
-			}
-
 			if (!Sort.equals("")) {
-				sql += "ORDER BY" + "'" + Sort + "'";
+				sql += " ORDER BY" + "'" + Sort + "'";
 
 			}
 
@@ -63,11 +59,11 @@ public class ItemDao {
 				String Detail = rs.getString("detail");
 				int Price = rs.getInt("price");
 				int Stock = rs.getInt("stock");
-				String SaleDate = rs.getString("sale_date");
+				Date SaleDate = rs.getDate("sale_date");
 				String FileName = rs.getString("file_name");
-				int HardId = rs.getInt("hard_id");
-				int GenreId = rs.getInt("genre_id");
-				Item item = new Item(Id,Name,Detail,Price,Stock,SaleDate,FileName,HardId,GenreId);
+				String Hard = rs.getString("hard.name");
+				String Genre = rs.getString("genre.name");
+				Item item = new Item(Id,Name,Detail,Price,Stock,SaleDate,FileName,Hard,Genre);
 
 				ItemList.add(item);
 			}
