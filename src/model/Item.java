@@ -14,8 +14,7 @@ public class Item {
 	private String genreName;
 
 	//アイテムリスト//
-	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName,
-			String hardName, String genreName) {
+	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName) {
 		this.id = id;
 		this.name = name;
 		this.detail = detail;
@@ -23,8 +22,6 @@ public class Item {
 		this.stock = stock;
 		this.saleDate = saleDate;
 		this.fileName = fileName;
-		this.hardName = hardName;
-		this.setGenreName(genreName);
 	}
 
 	public int getId() {

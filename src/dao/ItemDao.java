@@ -15,38 +15,65 @@ public class ItemDao {
 
 	//商品表示//
 	public List<Item> ItemSearch(String Keyword, String SaleDateS,
-			String SaleDateE, int hardId1, int hardId2, int hardId3, int hardId4, int genreId1,int genreId2,int genreId3,int genreId4,int genreId5, String Sort) {
+			String SaleDateE, ArrayList<Integer> HId, ArrayList<Integer> GId, String Sort) {
 		Connection conn = null;
 		List<Item> ItemList = new ArrayList<Item>();
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item ";
+			String sql = "SELECT * FROM item";
 
-			if(hardId1 != 0 || hardId2 != 0 || hardId3 != 0 || hardId4 != 0) {
-				sql += "JOIN hard ON item.hard_id = hard.id";
-			}
-
-			if(!Keyword.equals("") && !SaleDateS.equals("") && !SaleDateE.equals("")) {
-				sql += "WHERE";
+			if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("") || !HId.isEmpty()
+					|| !GId.isEmpty()) {
+				sql += " WHERE";
 			}
 
 			if (!Keyword.equals("")) {
-				sql += " AND name" + " LIKE " + "'" + "%" + Keyword + "%" + "'";
+				sql += " name" + " LIKE " + "'" + "%" + Keyword + "%" + "'";
 			}
 
 			if (!SaleDateS.equals("")) {
-				sql += " AND sale_date" + ">=" + "'" + SaleDateS + "'";
+				if (!Keyword.equals("")) {
+					sql += " AND ";
+				}
+				sql += " sale_date" + ">=" + "'" + SaleDateS + "'";
 			}
 
 			if (!SaleDateE.equals("")) {
-				sql += " AND sale_date" + "<=" + "'" + SaleDateE + "'";
+				if (!Keyword.equals("") || !SaleDateS.equals("")) {
+					sql += " AND ";
+				}
+				sql += " sale_date" + "<=" + "'" + SaleDateE + "'";
 			}
-
-			if (!Sort.equals("")) {
-				sql += " ORDER BY" + "'" + Sort + "'";
-
+			if (!HId.isEmpty()) {
+				if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("")) {
+					sql += " AND ";
+				}
+				for (int i = 0; HId.size() > i; i++) {
+					switch (i) {
+					case 0:
+						break;
+					default:
+						sql += " OR ";
+					}
+					sql += " hard_id" + "=" + "'" + HId.get(i) + "'";
+				}
 			}
+			if (!GId.isEmpty()) {
+				if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("") || !HId.isEmpty()) {
+					sql += " AND ";
+				}
+				for (int n = 0; GId.size() > n; n++) {
+					switch (n) {
+					case 0:
+						break;
+					default:
+						sql += " OR ";
+					}
+					sql += " genre_id" + " = " + "'" + GId.get(n) + "'";
+				}
+			}
+			sql += " ORDER BY " + "'" + Sort + "'";
 
 			System.out.println(sql);
 
@@ -61,13 +88,13 @@ public class ItemDao {
 				int Stock = rs.getInt("stock");
 				Date SaleDate = rs.getDate("sale_date");
 				String FileName = rs.getString("file_name");
-				String Hard = rs.getString("hard.name");
-				String Genre = rs.getString("genre.name");
-				Item item = new Item(Id,Name,Detail,Price,Stock,SaleDate,FileName,Hard,Genre);
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName);
 
 				ItemList.add(item);
 			}
-		} catch (SQLException e) {
+		} catch (
+
+		SQLException e) {
 			e.printStackTrace();
 			return null;
 		} finally {
