@@ -16,16 +16,16 @@ import dao.ItemDao;
 import model.Item;
 
 /**
- * Servlet implementation class ItemList
+ * Servlet implementation class MasterList
  */
-@WebServlet("/ItemList")
-public class ItemList extends HttpServlet {
+@WebServlet("/MasterList")
+public class MasterList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ItemList() {
+	public MasterList() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -44,13 +44,12 @@ public class ItemList extends HttpServlet {
 			return;
 		}
 
-
 		List<Item> ItemList = new ArrayList<Item>();
 		ItemDao itemdao = new ItemDao();
 		ItemList = itemdao.ItemAll();
 
 		session.setAttribute("ItemList", ItemList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemList.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterList.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -76,6 +75,7 @@ public class ItemList extends HttpServlet {
 				HId.add(I);
 			}
 		}
+
 		if (GenreId != null) {
 			for (int i = 0; i < GenreId.length; i++) {
 				String s = GenreId[i];
@@ -83,6 +83,7 @@ public class ItemList extends HttpServlet {
 				GId.add(I);
 			}
 		}
+
 		List<Item> ItemList = new ArrayList<Item>();
 		ItemDao itemdao = new ItemDao();
 		ItemList = itemdao.ItemSearch(Keyword, SdateS, SdateE, HId, GId,

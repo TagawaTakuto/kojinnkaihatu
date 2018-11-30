@@ -70,7 +70,7 @@
 	</div>
 	<table class="T c">
 		<tr>
-			<td class="Img cell" colspan="2"><a href="ItemData.html">商品画像1</a></td>
+			<td class="Img cell" colspan="2"><a href="ItemData.html">{ItemList.fileName}</a></td>
 			<td colspan="1">　　</td>
 			<td class="cell Img" colspan="2"><a href="ItemData.html">商品画像2</a></td>
 			<td colspan="1">　　</td>
@@ -79,8 +79,8 @@
 			<td class="cell Img" colspan="2"><a href="ItemData.html">商品画像4</a></td>
 		</tr>
 		<tr>
-			<td class="cell" colspan="1">値段:${Item.price}円</td>
-			<td class="cell" colspan="1">在庫数:${Item.stock}個</td>
+			<td class="cell" colspan="1">値段:{Item.price}円</td>
+			<td class="cell" colspan="1">在庫数:{Item.stock}個</td>
 			<td colspan="1"></td>
 			<td class="cell" colspan="1">値段:2000円</td>
 			<td class="cell" colspan="1">在庫数:2個</td>

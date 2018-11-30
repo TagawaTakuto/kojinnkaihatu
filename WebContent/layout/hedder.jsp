@@ -13,7 +13,7 @@
 	<div class="hedder">
 		<ul style="float: left; margin-top: 16px;">
 			<c:if test="${LoginInfo.loginId == 'admin'}">
-				<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a>
+				<li class="L"><a href="MasterList" class="Hsquare_btn">マスターリスト</a>
 				</li>
 				<li class="L"><a href="UserList" class="Hsquare_btn">ユーザリスト</a></li>
 			</c:if><c:if test="${LoginInfo.loginId != 'admin'}">
