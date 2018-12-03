@@ -10,19 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ItemDao;
-
 /**
- * Servlet implementation class MasterDelete
+ * Servlet implementation class cart
  */
-@WebServlet("/MasterDelete")
-public class MasterDelete extends HttpServlet {
+@WebServlet("/cart")
+public class cart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MasterDelete() {
+    public cart() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,26 +32,27 @@ public class MasterDelete extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 
-		int Id = Integer.parseInt(request.getParameter("id"));
-		ItemDao itemdao = new ItemDao();
+		HttpSession session = request.getSession();
 
-		itemdao.(Id);
+		if (session.getAttribute("LoginInfo") == null) {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterDelete.jsp");
+			response.sendRedirect("Login");
+			return;
+
+		}
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");
 		dispatcher.forward(request, response);
+
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int Id = Integer.parseInt(request.getParameter("id"));
-		ItemDao itemdao = new ItemDao();
-
-		itemdao.ItemDelete(Id);
-
-		response.sendRedirect("MasterList");
+		doGet(request, response);
 	}
 
 }

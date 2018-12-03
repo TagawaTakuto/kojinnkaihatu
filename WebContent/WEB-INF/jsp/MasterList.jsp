@@ -23,8 +23,8 @@
 			name="Edate">
 	</div>
 	<br>
+	<form action="MasterList" method="post">
 	<div class="c shadow">
-		<form action="MasterList" method="post">
 			<br> ハード：
 			<div class="search_select">
 				<input id="h_ch1" type="checkbox" name="Hard" value="1" /><label
@@ -72,8 +72,8 @@
 	<br>
 	<div class="c">
 		<input class="search_btn" type="submit" value="検索">
-		</form>
 	</div>
+	</form>
 	<hr>
 	<br>
 	<div class="c">
@@ -82,132 +82,37 @@
 	</div>
 
 	<br>
+	<c:forEach var="ItemList" items="${ItemList}">
 	<table class="tab" width=”50%”>
 		<tr class="c">
-			<td colspan="4">商品ID:0001</td>
+			<td colspan="4">商品ID:${ItemList.id}</td>
 		</tr>
 		<tr class="c">
-			<td class="c" colspan="2">発売日:20XX年XX月XX日</td>
-			<td colspan="2">商品名：タイトル１</td>
+			<td class="c" colspan="2">発売日:${ItemList.saleDate}</td>
+			<td colspan="2">商品名：${ItemList.name}</td>
 		</tr>
 		<tr class="c">
-			<td rowspan="2" width="150px" height="150px">商品画像１</td>
+			<td rowspan="2" width="150px" height="150px">${ItemLst.fileName}</td>
 			<td colspan="2">ハード:？？？</td>
-			<td rowspan="1" colspam="1">価格：1111円
+			<td rowspan="1" colspan="1">価格：${ItemList.price}円
 		</tr>
 		<tr class="c">
 			<td colspan="2">ジャンル:？？？ ？？？</td>
-			<td rowspan="1" colspan="1">在庫:10個</td>
+			<td rowspan="1" colspan="1">在庫:${ItemList.stock}個</td>
 		</tr>
 		<tr>
-			<td colspan="4" height="200px" valign="top">商品説明: <br>ああああああああああああああああああああああああああああああああああああああああああああ
-			</td>
+			<td colspan="4" height="200px" valign="top">商品説明: <br>${ItemList.detail}</td>
 		</tr>
 		<tr>
-			<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
+			<td class="c" colspan="4">更新日時:${ItemList.updatedate}</td>
 		<tr>
 			<td colspan="2" width="50%"><input class="full search_btn"
-				type="button" value="更新" onClick="location.href='MasterUpdate'"></td>
+				type="button" value="更新" onClick="location.href='MasterUpdate?id=${ItemList.id}'"></td>
 			<td colspan="2" width="50%"><input class="full del_btn"
-				type="button" value="削除" onClick="location.href='MasterDelete'"></td>
+				type="button" value="削除" onClick="location.href='MasterDelete?id=${ItemList.id}'"></td>
 		</tr>
 	</table>
-
-	<br>
-	<br>
-	<table class="tab" width=”50%”>
-		<tr class="c">
-			<td colspan="4">商品ID:0002</td>
-		</tr>
-		<tr class="c">
-			<td class="c" colspan="2">発売日:20XX年XX月XX日</td>
-			<td colspan="2">商品名：タイトル２</td>
-		</tr>
-		<tr class="c">
-			<td rowspan="2" width="150px" height="150px">商品画像２</td>
-			<td colspan="2">ハード:？？？</td>
-			<td rowspan="1" colspan="1">価格：2222円
-		</tr>
-		<tr class="c">
-			<td colspan="2">ジャンル:？？？ ？？？</td>
-			<td rowspan="1" colspan="1">在庫:20個</td>
-		</tr>
-		<tr>
-			<td colspan="4" height="200px" valign="top">商品説明: <br>ああああああああああああああああああああああああああああああああああああああああああああ
-			</td>
-		</tr>
-		<tr>
-			<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
-		<tr>
-			<td colspan="2" width="50%"><input class="full search_btn"
-				type="button" value="更新" onClick="location.href='MasterUpdate'"></td>
-			<td colspan="2" width="50%"><input class="full del_btn"
-				type="button" value="削除" onClick="location.href='MasterDelete'"></td>
-		</tr>
-	</table>
-	<br>
-	<br>
-	<table class="tab" width=”50%”>
-		<tr class="c">
-			<td colspan="4">商品ID:0003</td>
-		</tr>
-		<tr class="c">
-			<td class="c" colspan="2">発売日:20XX年XX月XX日</td>
-			<td colspan="2">商品名：タイトル３</td>
-		</tr>
-		<tr class="c">
-			<td rowspan="2" width="150px" height="150px">商品画像３</td>
-			<td colspan="2">ハード:？？？</td>
-			<td rowspan="1" colspan="1">価格：3333円
-		</tr>
-		<tr class="c">
-			<td colspan="2">ジャンル:？？？ ？？？</td>
-			<td rowspan="1" colspan="1">在庫:30個</td>
-		</tr>
-		<tr>
-			<td colspan="4" height="200px" valign="top">商品説明: <br>ああああああああああああああああああああああああああああああああああああああああああああ
-			</td>
-		</tr>
-		<tr>
-			<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
-		<tr>
-			<td colspan="2" width="50%"><input class="full search_btn"
-				type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
-			<td colspan="2" width="50%"><input class="full del_btn"
-				type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
-		</tr>
-	</table>
-	<br>
-	<table class="tab" width=”50%”>
-		<tr class="c">
-			<td colspan="4">商品ID:0004</td>
-		</tr>
-		<tr class="c">
-			<td colspan="2">発売日:20XX年XX月XX日</td>
-			<td colspan="2">商品名：タイトル４</td>
-		</tr>
-		<tr class="c">
-			<td rowspan="2" width="150px" height="150px">商品画像３</td>
-			<td colspan="2">ハード:？？？</td>
-			<td rowspan="1" colspam="1">価格：4444円
-		</tr>
-		<tr class="c">
-			<td colspan="2">ジャンル:？？？ ？？？</td>
-			<td rowspan="1" colspan="1">在庫:30個</td>
-		</tr>
-		<tr>
-			<td colspan="4" height="200px" valign="top">商品説明: <br>ああああああああああああああああああああああああああああああああああああああああああああ
-			</td>
-		</tr>
-		<tr>
-			<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
-		<tr>
-			<td colspan="2" width="50%"><input class="full search_btn"
-				type="button" value="更新" onClick="location.href='MasterUpdate.html'"></td>
-			<td colspan="2" width="50%"><input class="full search_btn"
-				type="button" value="削除" onClick="location.href='MasterDelete.html'"></td>
-		</tr>
-	</table>
+</c:forEach>
 	<div class="pager C">
 		<ul>
 			<li><a href="1.html">&laquo; 前</a></li>

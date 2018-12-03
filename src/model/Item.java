@@ -12,9 +12,10 @@ public class Item {
 	private String fileName;
 	private String hardName;
 	private String genreName;
+	private String updatedate;
 
 	//アイテムリスト//
-	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName) {
+	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName, String updateDate) {
 		this.id = id;
 		this.name = name;
 		this.detail = detail;
@@ -22,6 +23,7 @@ public class Item {
 		this.stock = stock;
 		this.saleDate = saleDate;
 		this.fileName = fileName;
+		this.updatedate = updateDate;
 	}
 
 	public int getId() {
@@ -94,5 +96,13 @@ public class Item {
 
 	public void setGenreName(String genreName) {
 		this.genreName = genreName;
+	}
+
+	public String getUpdatedate() {
+		return updatedate;
+	}
+
+	public void setUpdatedate(String updatedate) {
+		this.updatedate = updatedate;
 	}
 }

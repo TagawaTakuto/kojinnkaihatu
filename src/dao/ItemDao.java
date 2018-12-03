@@ -35,7 +35,8 @@ public class ItemDao {
 				int Stock = rs.getInt("stock");
 				Date SaleDate = rs.getDate("sale_date");
 				String FileName = rs.getString("file_name");
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName);
+				String UpdateDate = rs.getString("update_date");
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate);
 
 				ItemList.add(item);
 			}
@@ -132,7 +133,8 @@ public class ItemDao {
 				int Stock = rs.getInt("stock");
 				Date SaleDate = rs.getDate("sale_date");
 				String FileName = rs.getString("file_name");
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName);
+				String UpdateDate = rs.getString("update_date");
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName,UpdateDate);
 
 				ItemList.add(item);
 			}
@@ -162,7 +164,7 @@ public class ItemDao {
 		try {
 			con = DBManager.getConnection();
 			st = con.prepareStatement(
-					"INSERT INTO item(name,detail,price,stock,sale_date,file_name,hard_id) VALUES(?,?,?,?,?,?,?, now(),now());");
+					"INSERT INTO item (name,detail,price,stock,sale_date,file_name,hard_id,create_date,update_date) VALUES(?,?,?,?,?,?,?, now(),now());");
 			st.setString(1, title);
 			st.setString(2, detail);
 			st.setInt(3, price);
@@ -172,9 +174,8 @@ public class ItemDao {
 			st.setInt(7, hard);
 			st.executeUpdate();
 
-			System.out.println("inserting user has been completed");
+			System.out.println(st);
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
 			throw new SQLException(e);
 		} finally {
 			if (con != null) {
@@ -274,11 +275,12 @@ public class ItemDao {
 	}
 
 	//ジャンル追加用引数検索//
+	@SuppressWarnings("null")
 	public int Id() {
 		Connection con = null;
 		int Id = 0;
 
-		String sql = "SELECT * FROM item ORDERBY create_date DESC";
+		String sql = "SELECT * FROM item ORDER BY create_date DESC";
 		System.out.println(sql);
 
 		Statement stmt;

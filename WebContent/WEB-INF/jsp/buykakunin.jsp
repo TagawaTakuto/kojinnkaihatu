@@ -1,34 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-
-<link rel="stylesheet" type="text/css" href="layout/style.css">
+<link rel="stylesheet" href="layout/style.css">
 <meta charset="UTF-8">
-<style type="text/css">
-<!--
-a {
-	text-decoration: none;
-}
--->
-</style>
 <title>購入確認画面</title>
 </head>
 <body>
-	<div class="hedder">
-		<ul style="float: left;">
-			<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
-			<li class="L"><a href="UserList.html" class="Hsquare_btn">ユーザリスト</a></li>
-		</ul>
-		<div class="top-teisai">
-			<a href="ItemList.html"  class="top">TOP</a>
-		</div>
-		<ul style="float: right;">
-			<li><a href="cart.html" class="square_btn">カート</a></li>
-			<li><a href="User.html" class="square_btn">ユーザ情報</a></li>
-			<li><a href="Login.html" class="square_btn">ログイン</a></li>
-		</ul>
-	</div>
-	<h1 class="c">購入確認画面</h1>
+	<jsp:include page="/layout/hedder.jsp" />
+	<h1 class="box c">購入確認画面</h1>
 	<div class="c">以下の内容でよろしいですか？</div>
 	<br>
 	<table class="table table-striped">
@@ -76,8 +58,9 @@ a {
 	</table>
 	<br>
 	<div class="c">
-		<input class="back_btn" type="button" value="修正する" onClick="location.href='cart.html'">
-		<input class="buy_btn" type="button" value="購入確定" onClick="location.href='buycomplete.html'">
+		<input class="back_btn" type="button" value="修正する"
+			onClick="location.href='cart.html'"> <input class="buy_btn"
+			type="button" value="購入確定" onClick="location.href='buycomplete.html'">
 	</div>
 </body>
 </html>

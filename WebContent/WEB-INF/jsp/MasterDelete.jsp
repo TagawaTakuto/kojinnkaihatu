@@ -16,27 +16,26 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 	<table class="tab" width=”50%”>
 		<form action="MasterDelete" method="post">
 		<tr class="c">
-			<td colspan="4">商品ID:0001</td>
+			<td colspan="4">商品ID:${ItemList.id}</td>
 		</tr>
 		<tr class="c">
-			<td class="c" colspan="2">発売日:20XX年XX月XX日</td>
+			<td class="c" colspan="2">発売日:${ItemList.saleDate}</td>
 			<td colspan="2">商品名：タイトル１</td>
 		</tr>
 		<tr class="c">
-			<td rowspan="2" width="150px" height="150px">商品画像１</td>
+			<td rowspan="2" width="150px" height="150px">{ItemList.faileName}</td>
 			<td colspan="2">ハード:？？？</td>
-			<td rowspan="1" colspam="1">価格：1111円
+			<td rowspan="1" colspam="1">価格：{ItemList.price}円
 		</tr>
 		<tr class="c">
 			<td colspan="2">ジャンル:？？？ ？？？</td>
-			<td rowspan="1" colspan="1">在庫:10個</td>
+			<td rowspan="1" colspan="1">在庫:{ItemList.stock}個</td>
 		</tr>
 		<tr>
-			<td colspan="4" height="200px" valign="top">商品説明: <br>ああああああああああああああああああああああああああああああああああああああああああああ
-			</td>
+			<td colspan="4" height="200px" valign="top">商品説明: <br>{ItemList.detail}</td>
 		</tr>
 		<tr>
-			<td class="c" colspan="4">更新日時:20NN年NN月NN日</td>
+			<td class="c" colspan="4">更新日時:{ItemList.updatedate}</td>
 	</table>
 	<br>
 	<div class="c">
