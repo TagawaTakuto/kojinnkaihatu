@@ -10,12 +10,13 @@ public class Item {
 	private int stock;
 	private Date saleDate;
 	private String fileName;
+	private int hardId;
 	private String hardName;
 	private String genreName;
 	private String updatedate;
 
 	//アイテムリスト//
-	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName, String updateDate) {
+	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName, String updateDate, int hardId) {
 		this.id = id;
 		this.name = name;
 		this.detail = detail;
@@ -24,6 +25,8 @@ public class Item {
 		this.saleDate = saleDate;
 		this.fileName = fileName;
 		this.updatedate = updateDate;
+		this.hardId = hardId;
+
 	}
 
 	public int getId() {
@@ -104,5 +107,13 @@ public class Item {
 
 	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
+	}
+
+	public int getHardId() {
+		return hardId;
+	}
+
+	public void setHardId(int hardId) {
+		this.hardId = hardId;
 	}
 }

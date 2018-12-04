@@ -35,8 +35,9 @@ public class ItemDao {
 				int Stock = rs.getInt("stock");
 				Date SaleDate = rs.getDate("sale_date");
 				String FileName = rs.getString("file_name");
+				int HardId = rs.getInt("hard_id");
 				String UpdateDate = rs.getString("update_date");
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate);
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate,HardId);
 
 				ItemList.add(item);
 			}
@@ -133,8 +134,9 @@ public class ItemDao {
 				int Stock = rs.getInt("stock");
 				Date SaleDate = rs.getDate("sale_date");
 				String FileName = rs.getString("file_name");
+				int HardId = rs.getInt("hard_id");
 				String UpdateDate = rs.getString("update_date");
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName,UpdateDate);
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName,UpdateDate,HardId);
 
 				ItemList.add(item);
 			}
@@ -185,117 +187,7 @@ public class ItemDao {
 		}
 	}
 
-	//商品追加ジャンル//
-	public void GenreCreate(int Id, ArrayList<Integer> g) {
-		Connection con = null;
-		try {
-			con = DBManager.getConnection();
-			String sql = "INSERT INTO genre_detail VALUES (" + Id + "," + g.get(0) + ")";
-			for (int i = 1; g.size() > i; i++) {
-				sql += ",";
-				sql += "(" + Id + "," + g.get(i) + ")";
-			}
-			System.out.println(sql);
 
-			Statement stmt = con.createStatement();
-			stmt.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		} finally {
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO 自動生成された catch ブロック
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	//ジャンル更新用一旦削除""
-	public void GenreDelete(int id) {
-		Connection conn = null;
-		try {
-			conn = DBManager.getConnection();
-
-			String sql = "DELETE FROM genre_detail WHERE item_id =?";
-			PreparedStatement st = conn.prepareStatement(sql);
-
-			st.setInt(1, id);
-
-			int i = st.executeUpdate();
-			System.out.println(i);
-			st.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return;
-
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					return;
-				}
-			}
-		}
-	}
-
-	//ジャンル更新//
-	public void GenreUpdate(int id, ArrayList<Integer> gId) {
-		Connection con = null;
-		try {
-			con = DBManager.getConnection();
-			String sql = "UPDATE genre_detail SET";
-			for (int i = 0; gId.size() > i; i++) {
-				sql += ",";
-				sql += ",genre_id =" + "(" + gId.get(i) + ")";
-			}
-			sql += " WHERE item_id =" + id;
-			System.out.println(sql);
-
-			Statement stmt = con.createStatement();
-			stmt.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		} finally {
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO 自動生成された catch ブロック
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	//ジャンル追加用引数検索//
-	@SuppressWarnings("null")
-	public int Id() {
-		Connection con = null;
-		int Id = 0;
-
-		String sql = "SELECT * FROM item ORDER BY create_date DESC";
-		System.out.println(sql);
-
-		Statement stmt;
-		try {
-			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
-			if (rs.next()) {
-				Id = rs.getInt("item_id");
-			}
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		return Id;
-	}
 
 	//商品削除//
 	public void ItemDelete(int id) {
@@ -384,5 +276,46 @@ public class ItemDao {
 		}
 	}
 
+	//商品情報参照//
+	public Item Data(int id) {
+		Connection conn = null;
+		Item item = null;
+		try {
+			conn = DBManager.getConnection();
 
+			String sql = "SELECT * FROM item WHERE id = " + id ;
+			System.out.println(sql);
+
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+
+			if (rs.next()) {
+				int Id = rs.getInt("id");
+				String Name = rs.getString("name");
+				String Detail = rs.getString("detail");
+				int Price = rs.getInt("price");
+				int Stock = rs.getInt("stock");
+				Date SaleDate = rs.getDate("sale_date");
+				String FileName = rs.getString("file_name");
+				String UpdateDate = rs.getString("update_date");
+				int Hard = rs.getInt("hard_id");
+				item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate,Hard);
+			}
+		} catch (
+
+		SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+		return item;
+	}
 }

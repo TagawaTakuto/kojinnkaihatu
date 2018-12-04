@@ -2,6 +2,7 @@ package contllor;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dao.GenreDao;
 import dao.ItemDao;
+import model.Item;
 
 /**
  * Servlet implementation class MasterUpdate
@@ -33,6 +37,18 @@ public class MasterUpdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int Id = Integer.parseInt(request.getParameter("id"));
+
+		ItemDao itemdao = new ItemDao();
+		GenreDao genredao = new GenreDao();
+		List<Integer> GL = new ArrayList<Integer>();
+		Item item = itemdao.Data(Id);
+		GL = genredao.GenreSeach(Id);
+
+
+		HttpSession session = request.getSession();
+		session.setAttribute("Item", item);
+		session.setAttribute("GL", GL);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterUpdate.jsp");
 		dispatcher.forward(request, response);
@@ -63,9 +79,10 @@ public class MasterUpdate extends HttpServlet {
 			}
 		}
 		ItemDao itemdao = new ItemDao();
+		GenreDao genredao = new GenreDao();
 		itemdao.ItemUpdate(Id, Name, fileName, Detail, saleDate, Price, Stock, Hard);
-		itemdao.GenreDelete(Id);
-		itemdao.GenreCreate(Id, GId);
+		genredao.GenreDelete(Id);
+		genredao.GenreCreate(Id, GId);
 
 		response.sendRedirect("MasterList");
 

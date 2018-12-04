@@ -80,7 +80,6 @@
 		<input style="width: 150px;" class="search_btn" type="button"
 			value="新規登録" onclick="location.href='MasterCreate'">
 	</div>
-
 	<br>
 	<c:forEach var="ItemList" items="${ItemList}">
 	<table class="tab" width=”50%”>
@@ -112,6 +111,7 @@
 				type="button" value="削除" onClick="location.href='MasterDelete?id=${ItemList.id}'"></td>
 		</tr>
 	</table>
+	<br>
 </c:forEach>
 	<div class="pager C">
 		<ul>

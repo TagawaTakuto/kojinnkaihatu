@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.GenreDao;
 import dao.ItemDao;
 
 /**
@@ -63,10 +64,11 @@ public class MasterCreate extends HttpServlet {
 			}
 		}
 		ItemDao itemdao = new ItemDao();
+		GenreDao genredao = new GenreDao();
 		try {
 			itemdao.Create(Title, Detail, Price, Stock, saleDate, fileName, Hard);
-			int Id = itemdao.Id();
-			itemdao.GenreCreate(Id, G);
+			int Id = genredao.Id();
+			genredao.GenreCreate(Id, G);
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

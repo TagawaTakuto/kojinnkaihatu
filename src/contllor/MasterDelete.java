@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ItemDao;
+import model.Item;
 
 /**
  * Servlet implementation class MasterDelete
@@ -37,7 +38,10 @@ public class MasterDelete extends HttpServlet {
 		int Id = Integer.parseInt(request.getParameter("id"));
 		ItemDao itemdao = new ItemDao();
 
-		itemdao.(Id);
+		Item item = itemdao.Data(Id);
+
+		HttpSession session = request.getSession();
+		session.setAttribute("Item", item);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterDelete.jsp");
 		dispatcher.forward(request, response);
