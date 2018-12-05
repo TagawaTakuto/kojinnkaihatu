@@ -16,7 +16,7 @@ public class Item {
 	private String updatedate;
 
 	//アイテムリスト//
-	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName, String updateDate, int hardId) {
+	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName, String updateDate, int hardId, String hardName) {
 		this.id = id;
 		this.name = name;
 		this.detail = detail;
@@ -26,6 +26,7 @@ public class Item {
 		this.fileName = fileName;
 		this.updatedate = updateDate;
 		this.hardId = hardId;
+		this.hardName = hardName;
 
 	}
 

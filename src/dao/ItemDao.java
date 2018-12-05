@@ -21,7 +21,7 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item";
+			String sql = "SELECT * FROM item INNER JOIN hard on item.hard_id = hard.id";
 			System.out.println(sql);
 
 			Statement stmt = conn.createStatement();
@@ -36,8 +36,9 @@ public class ItemDao {
 				Date SaleDate = rs.getDate("sale_date");
 				String FileName = rs.getString("file_name");
 				int HardId = rs.getInt("hard_id");
+				String HardName = rs.getString("hard.name");
 				String UpdateDate = rs.getString("update_date");
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate,HardId);
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate,HardId,HardName);
 
 				ItemList.add(item);
 			}
@@ -67,7 +68,7 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item";
+			String sql = "SELECT * FROM item INNER JOIN hard on item.hard_id = hard.id";
 
 			if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("") || !HId.isEmpty()
 					|| !GId.isEmpty()) {
@@ -135,8 +136,9 @@ public class ItemDao {
 				Date SaleDate = rs.getDate("sale_date");
 				String FileName = rs.getString("file_name");
 				int HardId = rs.getInt("hard_id");
+				String HardName = rs.getString("hard.name");
 				String UpdateDate = rs.getString("update_date");
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName,UpdateDate,HardId);
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName,UpdateDate,HardId,HardName);
 
 				ItemList.add(item);
 			}
@@ -283,7 +285,7 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item WHERE id = " + id ;
+			String sql = "SELECT * FROM item INNER JOIN hard on item.hard_id = hard.id WHERE id = " + id ;
 			System.out.println(sql);
 
 			Statement stmt = conn.createStatement();
@@ -298,8 +300,9 @@ public class ItemDao {
 				Date SaleDate = rs.getDate("sale_date");
 				String FileName = rs.getString("file_name");
 				String UpdateDate = rs.getString("update_date");
-				int Hard = rs.getInt("hard_id");
-				item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate,Hard);
+				int HardId = rs.getInt("hard_id");
+				String HardName = rs.getString("hard.name");
+				item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate,HardId,HardName);
 			}
 		} catch (
 
