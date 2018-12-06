@@ -28,8 +28,8 @@ public class ItemDao {
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				int Id = rs.getInt("id");
-				String Name = rs.getString("name");
+				int Id = rs.getInt("item.id");
+				String Name = rs.getString("item.name");
 				String Detail = rs.getString("detail");
 				int Price = rs.getInt("price");
 				int Stock = rs.getInt("stock");
@@ -60,6 +60,29 @@ public class ItemDao {
 		return ItemList;
 	}
 
+	//ジャンル追加用引数検索//
+		public int Id() {
+			Connection con = null;
+			int Id = 0;
+
+			String sql = "SELECT * FROM item ORDER BY create_date DESC";
+			System.out.println(sql);
+
+			Statement stmt;
+			try {
+				con = DBManager.getConnection();
+				stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				if (rs.next()) {
+					Id = rs.getInt("id");
+				}
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+			return Id;
+		}
+
 	//商品検索//
 	public List<Item> ItemSearch(String Keyword, String SaleDateS,
 			String SaleDateE, ArrayList<Integer> HId, ArrayList<Integer> GId, String Sort) {
@@ -76,7 +99,7 @@ public class ItemDao {
 			}
 
 			if (!Keyword.equals("")) {
-				sql += " name" + " LIKE " + "'" + "%" + Keyword + "%" + "'";
+				sql += " item.name" + " LIKE " + "'" + "%" + Keyword + "%" + "'";
 			}
 
 			if (!SaleDateS.equals("")) {
@@ -120,7 +143,7 @@ public class ItemDao {
 					sql += " genre_id" + " = " + "'" + GId.get(n) + "'";
 				}
 			}
-			sql += " ORDER BY " + "'" + Sort + "'";
+			sql += " ORDER BY "  + Sort ;
 
 			System.out.println(sql);
 
@@ -285,15 +308,15 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item INNER JOIN hard on item.hard_id = hard.id WHERE id = " + id ;
+			String sql = "SELECT * FROM item INNER JOIN hard on item.hard_id = hard.id WHERE item.id = " + id ;
 			System.out.println(sql);
 
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 
 			if (rs.next()) {
-				int Id = rs.getInt("id");
-				String Name = rs.getString("name");
+				int Id = rs.getInt("item.id");
+				String Name = rs.getString("item.name");
 				String Detail = rs.getString("detail");
 				int Price = rs.getInt("price");
 				int Stock = rs.getInt("stock");

@@ -9,6 +9,9 @@ a:hover {
 .bold {
 	font-weight: bold;
 }
+.center{
+	float:center;
+}
 
 .red {
 	color: red;
@@ -17,6 +20,7 @@ a:hover {
 .left{
 	float: left;
 	width: 300px;
+	margin: 20px;
 }
 
 .aka {

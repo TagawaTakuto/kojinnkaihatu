@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import base.DBManager;
+import beans.GenreDataBeans;
 
 public class GenreDao {
 	//商品のジャンル参照//
@@ -34,29 +35,6 @@ public class GenreDao {
 		}
 		return GL;
 
-	}
-
-	//ジャンル追加用引数検索//
-	public int Id() {
-		Connection con = null;
-		int Id = 0;
-
-		String sql = "SELECT * FROM item ORDER BY create_date DESC";
-		System.out.println(sql);
-
-		Statement stmt;
-		try {
-			con = DBManager.getConnection();
-			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
-			if (rs.next()) {
-				Id = rs.getInt("item_id");
-			}
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		return Id;
 	}
 
 	//ジャンル更新用一旦削除""
@@ -116,5 +94,31 @@ public class GenreDao {
 				}
 			}
 		}
+	}
+
+	//ジャンルデータベースの抽出//
+	public List<GenreDataBeans> GenreAll(){
+		Connection con = null;
+		List<GenreDataBeans> GL = new ArrayList<GenreDataBeans>();
+		try {
+			con = DBManager.getConnection();
+			String sql = "SELECT * FROM genre ";
+			Statement stmt;
+
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			System.out.println(sql);
+			while (rs.next()) {
+				GenreDataBeans gddb = new GenreDataBeans();
+				gddb.setId(rs.getInt("genre_detail.genre_id"));
+				gddb.setName(rs.getString("name"));
+				GL.add(gddb);
+			}
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		return GL;
+
 	}
 }

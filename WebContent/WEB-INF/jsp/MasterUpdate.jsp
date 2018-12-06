@@ -16,8 +16,8 @@
 		</div>
 		<form action="MasterUpdate" method="post">
 			<p class="txt">
-				商品ID:${Item.id}<br>
-				<input type="hidden" value="${Item.id}" name="id">
+				商品ID:${Item.id}<br> <input type="hidden" value="${Item.id}"
+					name="id">
 			<div class="shadow">
 				<br>
 				<p class="c">
@@ -30,7 +30,8 @@
 					<textarea name="setumei" rows="6" cols="40">${Item.detail}
 	</textarea>
 				<p class="c">
-					発売日:<input type="date" name="saleDate" value="${Item.saleDate}" style="width: 170px;">
+					発売日:<input type="date" name="saleDate" value="${Item.saleDate}"
+						style="width: 170px;">
 				<p class="c">
 					単価:<input type="text" value="${Item.price}" name="price">円
 					<br> <br> 在庫:<input type="text" value="${Item.stock}"
@@ -61,14 +62,27 @@
 			<div class=" shadow c">
 				<br> ジャンル:
 				<div class="search_select">
-					<input type="checkbox" name="Genre" value="1"  <c:if test="${GL.contains(1)}"> checked = "checked" </c:if> id="j_ch1" /><label
-						for="j_ch1">アクション</label> <input id="j_ch2" name="Genre" value="2" <c:if test="${GL.contains(2)}"> checked = "checked" </c:if>
-						type="checkbox" /><label for="j_ch2">RPG</label> <input
-						id="j_ch3" name="Genre" value="3" <c:if test="${GL.contains(3)}"> checked = "checked" </c:if> type="checkbox" /><label
-						for="j_ch3">格闘</label> <input id="j_ch4" name="Genre" value="4" <c:if test="${GL.contains(4)}"> checked = "checked" </c:if>
-						type="checkbox" /><label for="j_ch4">シミュレーション</label> <input
-						id="j_ch5" name="Genre" value="5" <c:if test="${GL.contains(5)}"> checked = "checked" </c:if> type="checkbox" /><label
-						for="j_ch5">シューティング</label>
+					<c:forEach var="GL" items="GL">
+						<input type="checkbox" name="Genre" value="1"
+							<c:if test="${GL == 1}"> checked = "checked" </c:if> id="j_ch1" />
+						<label for="j_ch1">アクション</label>
+						<input id="j_ch2" name="Genre" value="2"
+							<c:if test="${GL == 2}"> checked = "checked" </c:if>
+							type="checkbox" />
+						<label for="j_ch2">RPG</label>
+						<input id="j_ch3" name="Genre" value="3"
+							<c:if test="${GL== 3}"> checked = "checked" </c:if>
+							type="checkbox" />
+						<label for="j_ch3">格闘</label>
+						<input id="j_ch4" name="Genre" value="4"
+							<c:if test="${GL==4}"> checked = "checked" </c:if>
+							type="checkbox" />
+						<label for="j_ch4">シミュレーション</label>
+						<input id="j_ch5" name="Genre" value="5"
+							<c:if test="${GL==5}"> checked = "checked" </c:if>
+							type="checkbox" />
+						<label for="j_ch5">シューティング</label>
+					</c:forEach>
 				</div>
 				<br>
 			</div>

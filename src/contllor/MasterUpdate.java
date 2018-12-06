@@ -37,8 +37,8 @@ public class MasterUpdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		int Id = Integer.parseInt(request.getParameter("id"));
-
 		ItemDao itemdao = new ItemDao();
 		GenreDao genredao = new GenreDao();
 		List<Integer> GL = new ArrayList<Integer>();
@@ -60,6 +60,7 @@ public class MasterUpdate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		int Id = Integer.parseInt(request.getParameter("id"));
 		String Name = request.getParameter("title");
 		String fileName = request.getParameter("fileName");

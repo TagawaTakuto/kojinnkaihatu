@@ -72,11 +72,17 @@
 	<div class="c red big bold">
 		<br> ${Mess} <br> <br>
 	</div>
+	<div class="left" style="
+    width: 65px;
+     height: 550px;
+"></div>
 	<c:forEach var="Item" items="${ItemList}">
 		<div class="c left shadow">
-
 			<a href="ItemData?id=${Item.id}"><img
-				src="img/{ItemList.fileName}"></a> <br>
+				src="img/${Item.fileName}" style="
+    width: 250px;
+    height: 300px;
+"></a> <br>
 			<p>値段:${Item.price}円</p>
 			<p>在庫数:${Item.stock}個</p>
 			<p>ハード:${Item.hardName}</p>
@@ -92,12 +98,14 @@
 					<option value="4">4</option>
 					<option value="5">5</option>
 				</select>個 <input type="button" value="カートに追加" class="buy_btn">
+			<br>
 			</c:if>
 			<br>
 		</div>
 	</c:forEach>
 	<br>
-	<div class="pager C">
+	<br>
+	<div class="pager center C" style="clear:both;">
 		<ul>
 			<li><a href="1.html">&laquo; 前</a></li>
 			<li><a href="1.html">1</a></li>

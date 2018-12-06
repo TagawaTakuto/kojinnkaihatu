@@ -67,12 +67,14 @@ public class MasterCreate extends HttpServlet {
 		GenreDao genredao = new GenreDao();
 		try {
 			itemdao.Create(Title, Detail, Price, Stock, saleDate, fileName, Hard);
-			int Id = genredao.Id();
+			int Id = itemdao.Id();
 			genredao.GenreCreate(Id, G);
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+		response.sendRedirect("MasterList");
+		return;
 
 	}
 }

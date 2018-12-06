@@ -61,6 +61,7 @@ public class ItemList extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		String Keyword = request.getParameter("Keyword");
 		String SdateS = request.getParameter("Sdate");
 		String SdateE = request.getParameter("Edate");
@@ -90,6 +91,7 @@ public class ItemList extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("ItemList", ItemList);
 
-		response.sendRedirect("ItemList");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemList.jsp");
+		dispatcher.forward(request, response);
 	}
 }
