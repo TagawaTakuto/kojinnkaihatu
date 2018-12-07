@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Item {
 	private int id;
@@ -12,11 +13,11 @@ public class Item {
 	private String fileName;
 	private int hardId;
 	private String hardName;
-	private String genreName;
+	private List<String> genreName;
 	private String updatedate;
 
 	//アイテムリスト//
-	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName, String updateDate, int hardId, String hardName) {
+	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName, String updateDate, int hardId, String hardName, List<String> genreName) {
 		this.id = id;
 		this.name = name;
 		this.detail = detail;
@@ -27,6 +28,7 @@ public class Item {
 		this.updatedate = updateDate;
 		this.hardId = hardId;
 		this.hardName = hardName;
+		this.genreName = genreName;
 
 	}
 
@@ -94,11 +96,11 @@ public class Item {
 		this.hardName = hardName;
 	}
 
-	public String getGenreName() {
+	public List<String> getGenreName() {
 		return genreName;
 	}
 
-	public void setGenreName(String genreName) {
+	public void setGenreName(List<String> genreName) {
 		this.genreName = genreName;
 	}
 

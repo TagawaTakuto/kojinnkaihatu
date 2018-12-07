@@ -43,18 +43,12 @@
 			<div class="shadow c">
 				<br> ハード：
 				<div class="hard_select">
-					<input type="radio" name="Hard" value="1"
-						<c:if test="${Item.hardId == 1 }"> checked = "checked" </c:if>
-						id="h_ch1" /><label for="h_ch1">PC</label> <input type="radio"
-						name="Hard" value="2"
-						<c:if test="${Item.hardId == 2 }"> checked = "checked" </c:if>
-						id="h_ch2" /><label for="h_ch2">PS4</label> <input type="radio"
-						name="Hard" value="3"
-						<c:if test="${Item.hardId == 3 }"> checked = "checked" </c:if>
-						id="h_ch3" /><label for="h_ch3">Swich</label> <input type="radio"
-						name="Hard" value="4"
-						<c:if test="${Item.hardId == 4 }"> checked = "checked" </c:if>
-						id="h_ch4" /><label for="h_ch4">Xbox</label>
+					<c:forEach var="hard" items="${HL}">
+						<input type="radio" name="Hard" value="${hard.id}"
+							<c:if test="${Item.hardId == hard.id}"> checked = "checked" </c:if>
+							id="h&${hard.id}" />
+						<label for="h&${hard.id}">${hard.name}</label>
+					</c:forEach>
 				</div>
 				<br>
 			</div>
@@ -62,26 +56,11 @@
 			<div class=" shadow c">
 				<br> ジャンル:
 				<div class="search_select">
-					<c:forEach var="GL" items="GL">
-						<input type="checkbox" name="Genre" value="1"
-							<c:if test="${GL == 1}"> checked = "checked" </c:if> id="j_ch1" />
-						<label for="j_ch1">アクション</label>
-						<input id="j_ch2" name="Genre" value="2"
-							<c:if test="${GL == 2}"> checked = "checked" </c:if>
-							type="checkbox" />
-						<label for="j_ch2">RPG</label>
-						<input id="j_ch3" name="Genre" value="3"
-							<c:if test="${GL== 3}"> checked = "checked" </c:if>
-							type="checkbox" />
-						<label for="j_ch3">格闘</label>
-						<input id="j_ch4" name="Genre" value="4"
-							<c:if test="${GL==4}"> checked = "checked" </c:if>
-							type="checkbox" />
-						<label for="j_ch4">シミュレーション</label>
-						<input id="j_ch5" name="Genre" value="5"
-							<c:if test="${GL==5}"> checked = "checked" </c:if>
-							type="checkbox" />
-						<label for="j_ch5">シューティング</label>
+					<c:forEach var="GL" items="${GL}">
+						<input type="checkbox" name="Genre" value="${GL.hikakuId}"
+							<c:if test="${GL.genreId == GL.hikakuId}"> checked = "checked" </c:if>
+							id="g&${GL.hikakuId}" />
+						<label for="g&${GL.hikakuId}">${GL.name}</label>
 					</c:forEach>
 				</div>
 				<br>

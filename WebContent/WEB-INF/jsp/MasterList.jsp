@@ -93,7 +93,7 @@
 			<tr class="c">
 				<td rowspan="2" width="150px" height="150px"><img
 					src="img/${ItemList.fileName}" style="width: 150px; height: 200px;"></td>
-				<td colspan="2">ハード:？？？</td>
+				<td colspan="2">ハード:${ItemList.hardName}</td>
 				<td rowspan="1" colspan="1">価格：${ItemList.price}円
 			</tr>
 			<tr class="c">

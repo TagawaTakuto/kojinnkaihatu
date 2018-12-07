@@ -1,6 +1,7 @@
 package contllor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import beans.ItemDataBeans;
 
 /**
  * Servlet implementation class cart
@@ -34,11 +37,11 @@ public class cart extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		if (session.getAttribute("LoginInfo") == null) {
+		ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
 
-			response.sendRedirect("Login");
-			return;
-
+		if (cart == null) {
+			cart = new ArrayList<ItemDataBeans>();
+			session.setAttribute("cart", cart);
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");

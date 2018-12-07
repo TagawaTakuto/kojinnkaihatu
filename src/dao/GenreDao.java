@@ -10,23 +10,26 @@ import java.util.List;
 
 import base.DBManager;
 import beans.GenreDataBeans;
+import model.GenreSeach;
 
 public class GenreDao {
 	//商品のジャンル参照//
-	public List<Integer> GenreSeach(int Id) {
+	public List<GenreSeach> GenreSeach(int Id) {
 		Connection con = null;
-		List<Integer> GL = new ArrayList<Integer>();
+		List<GenreSeach> GL = new ArrayList<GenreSeach>();
 		try {
 			con = DBManager.getConnection();
-			String sql = "SELECT * FROM genre_detail WHERE item_id = " + Id;
+			String sql = "SELECT * FROM genre LEFT JOIN genre_detail ON  genre.id = genre_detail.genre_id AND genre_detail.item_id = " + Id + " ORDER BY genre.id";
 			Statement stmt;
 
 			stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			System.out.println(sql);
 			while (rs.next()) {
-				int gddb;
-				gddb = rs.getInt("genre_id");
+				GenreSeach gddb = new GenreSeach();
+				gddb.setGenreId(rs.getInt("genre_detail.genre_id"));
+				gddb.setName(rs.getString("genre.name"));
+				gddb.setHikakuId(rs.getInt("genre.id"));
 				GL.add(gddb);
 			}
 		} catch (SQLException e) {
@@ -96,13 +99,13 @@ public class GenreDao {
 		}
 	}
 
-	//ジャンルデータベースの抽出//
+	//商品更新時の比較用ジャンルデータベースの抽出//
 	public List<GenreDataBeans> GenreAll(){
 		Connection con = null;
 		List<GenreDataBeans> GL = new ArrayList<GenreDataBeans>();
 		try {
 			con = DBManager.getConnection();
-			String sql = "SELECT * FROM genre ";
+			String sql = "SELECT * FROM genre INNER JOIN genre_detail ON genre.id = genre_detail.genre_id";
 			Statement stmt;
 
 			stmt = con.createStatement();
@@ -119,6 +122,5 @@ public class GenreDao {
 			e.printStackTrace();
 		}
 		return GL;
-
 	}
 }

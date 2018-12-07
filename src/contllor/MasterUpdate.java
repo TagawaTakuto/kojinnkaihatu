@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.HardDataBeans;
 import dao.GenreDao;
+import dao.HardDao;
 import dao.ItemDao;
+import model.GenreSeach;
 import model.Item;
 
 /**
@@ -41,15 +44,17 @@ public class MasterUpdate extends HttpServlet {
 		int Id = Integer.parseInt(request.getParameter("id"));
 		ItemDao itemdao = new ItemDao();
 		GenreDao genredao = new GenreDao();
-		List<Integer> GL = new ArrayList<Integer>();
+		HardDao harddao = new HardDao();
+		List<GenreSeach> GL = new ArrayList<GenreSeach>();
+		List<HardDataBeans> HL = new ArrayList<HardDataBeans>();
 		Item item = itemdao.Data(Id);
 		GL = genredao.GenreSeach(Id);
-
+		HL = harddao.HardAll();
 
 		HttpSession session = request.getSession();
 		session.setAttribute("Item", item);
 		session.setAttribute("GL", GL);
-
+		session.setAttribute("HL", HL);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterUpdate.jsp");
 		dispatcher.forward(request, response);
 	}

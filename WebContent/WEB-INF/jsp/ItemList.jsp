@@ -72,40 +72,36 @@
 	<div class="c red big bold">
 		<br> ${Mess} <br> <br>
 	</div>
-	<div class="left" style="
-    width: 65px;
-     height: 550px;
-"></div>
-	<c:forEach var="Item" items="${ItemList}">
-		<div class="c left shadow">
-			<a href="ItemData?id=${Item.id}"><img
-				src="img/${Item.fileName}" style="
-    width: 250px;
-    height: 300px;
-"></a> <br>
-			<p>値段:${Item.price}円</p>
-			<p>在庫数:${Item.stock}個</p>
-			<p>ハード:${Item.hardName}</p>
-			<br>
-			<c:if test="${Item.stock == 0}">
+	<div class="left" style="width: 65px; height: 550px;"></div>
+	<form action="EasyBuy" method="post">
+		<c:forEach var="Item" items="${ItemList}">
+			<div class="c left shadow">
+				<a href="ItemData?id=${Item.id}"><img src="img/${Item.fileName}"
+					style="width: 250px; height: 300px;"></a> <br>
+				<p>値段:${Item.price}円</p>
+				<p>在庫数:${Item.stock}個</p>
+				<p>ハード:${Item.hardName}</p>
+				<br>
+				<c:if test="${Item.stock == 0}">
 					売り切れ
 				</c:if>
-			<c:if test="${Item.stock != 0}">
-				<select name="buycount">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</select>個 <input type="button" value="カートに追加" class="buy_btn">
-			<br>
-			</c:if>
-			<br>
-		</div>
-	</c:forEach>
+				<c:if test="${Item.stock != 0}">
+					<select name="buycount">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>個 <input type="submit" value="カートに追加" class="buy_btn">
+					<br>
+				</c:if>
+				<br>
+			</div>
+		</c:forEach>
+	</form>
 	<br>
 	<br>
-	<div class="pager center C" style="clear:both;">
+	<div class="pager center C" style="clear: both;">
 		<ul>
 			<li><a href="1.html">&laquo; 前</a></li>
 			<li><a href="1.html">1</a></li>

@@ -21,13 +21,14 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item INNER JOIN hard on item.hard_id = hard.id";
+			String sql = "SELECT * FROM item INNER JOIN hard ON item.hard_id = hard.id INNER JOIN genre_detail ON item.id = genre_detail.item_id INNER JOIN genre ON genre.id = genre_detail.genre_id" ;
 			System.out.println(sql);
 
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
+				List<String> GenreName = new ArrayList<String>();
 				int Id = rs.getInt("item.id");
 				String Name = rs.getString("item.name");
 				String Detail = rs.getString("detail");
@@ -38,7 +39,8 @@ public class ItemDao {
 				int HardId = rs.getInt("hard_id");
 				String HardName = rs.getString("hard.name");
 				String UpdateDate = rs.getString("update_date");
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate,HardId,HardName);
+				GenreName.add(rs.getString("genre.name"));
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate,HardId,HardName,GenreName);
 
 				ItemList.add(item);
 			}
@@ -161,7 +163,7 @@ public class ItemDao {
 				int HardId = rs.getInt("hard_id");
 				String HardName = rs.getString("hard.name");
 				String UpdateDate = rs.getString("update_date");
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName,UpdateDate,HardId,HardName);
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName,UpdateDate,HardId,HardName,);
 
 				ItemList.add(item);
 			}
@@ -308,7 +310,7 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item INNER JOIN hard on item.hard_id = hard.id WHERE item.id = " + id ;
+			String sql = "SELECT * FROM item INNER JOIN hard ON item.hard_id = hard.id WHERE item.id = " + id ;
 			System.out.println(sql);
 
 			Statement stmt = conn.createStatement();
