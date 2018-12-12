@@ -1,6 +1,7 @@
 package contllor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.ItemDao;
+import model.Item;
 
 /**
  * Servlet implementation class Easybuy
@@ -28,6 +33,21 @@ public class Easybuy extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		Item item = ItemDao.Data(id);
+
+		request.setAttribute("item", item);
+
+		ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
+
+		if (cart == null) {
+			cart = new ArrayList<Item>();
+		}
+		cart.add(item);
+		session.setAttribute("cart", cart);
 		request.setAttribute("Mess", "カートに商品を追加しました。");
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemList.jsp");

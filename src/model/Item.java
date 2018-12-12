@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Item {
@@ -30,6 +31,20 @@ public class Item {
 		this.hardName = hardName;
 		this.genreName = genreName;
 
+	}
+
+	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName,
+			String updateDate, int hardId, String hardName) {
+		this.id=id;
+		this.name=name;
+		this.detail=detail;
+		this.price=price;
+		this.stock=stock;
+		this.saleDate=saleDate;
+		this.fileName=fileName;
+		this.updatedate=updateDate;
+		this.hardId=hardId;
+		this.hardName=hardName;
 	}
 
 	public int getId() {
@@ -118,5 +133,10 @@ public class Item {
 
 	public void setHardId(int hardId) {
 		this.hardId = hardId;
+	}
+
+	public String getSaleFormatDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+		return sdf.format(saleDate);
 	}
 }

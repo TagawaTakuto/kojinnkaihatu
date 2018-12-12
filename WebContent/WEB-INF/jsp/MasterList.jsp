@@ -14,16 +14,15 @@
 		<h1>マスター商品リスト</h1>
 	</div>
 	<form action="MasterList" method="post">
-	<div class="c">
-		キーワード：<input type="text" name="Keyword">
-	</div>
-	<br>
-	<br>
-	<div class="c">
-		発売日：<input type="date" name="Sdate"> ～ <input type="date"
-			name="Edate">
-	</div>
-	<br>
+		<div class="c">
+			キーワード：<input type="text" name="Keyword">
+		</div>
+		<br> <br>
+		<div class="c">
+			発売日：<input type="date" name="Sdate"> ～ <input type="date"
+				name="Edate">
+		</div>
+		<br>
 		<div class="c shadow">
 			<br> ハード：
 			<div class="search_select">
@@ -97,7 +96,8 @@
 				<td rowspan="1" colspan="1">価格：${ItemList.price}円
 			</tr>
 			<tr class="c">
-				<td colspan="2">ジャンル:？？？ ？？？</td>
+				<td colspan="2">ジャンル:<c:forEach var="G"
+						items="${ItemList.genreName}">${G}　</c:forEach></td>
 				<td rowspan="1" colspan="1">在庫:${ItemList.stock}個</td>
 			</tr>
 			<tr>
@@ -114,6 +114,7 @@
 					onClick="location.href='MasterDelete?id=${ItemList.id}'"></td>
 			</tr>
 		</table>
+		<br>
 		<br>
 	</c:forEach>
 	<div class="pager C">

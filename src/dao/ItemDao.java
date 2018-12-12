@@ -21,7 +21,7 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item INNER JOIN hard ON item.hard_id = hard.id INNER JOIN genre_detail ON item.id = genre_detail.item_id INNER JOIN genre ON genre.id = genre_detail.genre_id" ;
+			String sql = "SELECT * FROM item INNER JOIN hard ON item.hard_id = hard.id";
 			System.out.println(sql);
 
 			Statement stmt = conn.createStatement();
@@ -39,7 +39,8 @@ public class ItemDao {
 				int HardId = rs.getInt("hard_id");
 				String HardName = rs.getString("hard.name");
 				String UpdateDate = rs.getString("update_date");
-				GenreName.add(rs.getString("genre.name"));
+				GenreDao genredao = new GenreDao();
+				GenreName.addAll(genredao.Genre(rs.getInt("item.id")));
 				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate,HardId,HardName,GenreName);
 
 				ItemList.add(item);
@@ -153,17 +154,20 @@ public class ItemDao {
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				int Id = rs.getInt("id");
-				String Name = rs.getString("name");
+				List<String> GenreName = new ArrayList<String>();
+				int Id = rs.getInt("item.id");
+				String Name = rs.getString("item.name");
 				String Detail = rs.getString("detail");
 				int Price = rs.getInt("price");
 				int Stock = rs.getInt("stock");
 				Date SaleDate = rs.getDate("sale_date");
 				String FileName = rs.getString("file_name");
-				int HardId = rs.getInt("hard_id");
+				int HardId = rs.getInt("hard.id");
 				String HardName = rs.getString("hard.name");
+				GenreDao genredao = new GenreDao();
+				GenreName.addAll(genredao.Genre(rs.getInt("item.id")));
 				String UpdateDate = rs.getString("update_date");
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName,UpdateDate,HardId,HardName,);
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName,UpdateDate,HardId,HardName,GenreName);
 
 				ItemList.add(item);
 			}
@@ -304,7 +308,7 @@ public class ItemDao {
 	}
 
 	//商品情報参照//
-	public Item Data(int id) {
+	public static Item Data(int id) {
 		Connection conn = null;
 		Item item = null;
 		try {

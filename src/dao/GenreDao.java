@@ -13,7 +13,7 @@ import beans.GenreDataBeans;
 import model.GenreSeach;
 
 public class GenreDao {
-	//商品のジャンル参照//
+	//更新用商品のジャンル参照//
 	public List<GenreSeach> GenreSeach(int Id) {
 		Connection con = null;
 		List<GenreSeach> GL = new ArrayList<GenreSeach>();
@@ -123,4 +123,30 @@ public class GenreDao {
 		}
 		return GL;
 	}
+
+	//商品詳細ジャンルデータ参照//
+	public List<String> Genre(int Id) {
+		Connection con = null;
+		List<String> G = new ArrayList<String>();
+		try {
+			con = DBManager.getConnection();
+			String sql = "SELECT * FROM item LEFT JOIN genre_detail ON item.id = genre_detail.item_id LEFT JOIN genre ON genre_detail.genre_id = genre.id WHERE item.id =" + Id;
+			Statement stmt;
+
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			System.out.println(sql);
+			while (rs.next()) {
+				String g = "";
+				g = rs.getString("genre.name");
+				G.add(g);
+			}
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		return G;
+	}
+
+
 }

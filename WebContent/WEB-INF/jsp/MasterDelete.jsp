@@ -21,15 +21,16 @@
 			</tr>
 			<tr class="c">
 				<td class="c" colspan="2">発売日:${Item.saleDate}</td>
-				<td colspan="2">商品名：タイトル１</td>
+				<td colspan="2">商品名：${Item.name}</td>
 			</tr>
 			<tr class="c">
-				<td rowspan="2" width="150px" height="150px">${Item.fileName}</td>
-				<td colspan="2">ハード:？？？</td>
+				<td rowspan="2" width="150px" height="150px"><img
+					src="img/${Item.fileName}" style="width: 150px; height: 200px;"></td>
+				<td colspan="2">ハード:${Item.hardName}</td>
 				<td rowspan="1" colspan="1">価格：${Item.price}円
 			</tr>
 			<tr class="c">
-				<td colspan="2">ジャンル:？？？ ？？？</td>
+				<td colspan="2">ジャンル:${Item.genreName}</td>
 				<td rowspan="1" colspan="1">在庫:${Item.stock}個</td>
 			</tr>
 			<tr>

@@ -72,15 +72,19 @@
 	<div class="c red big bold">
 		<br> ${Mess} <br> <br>
 	</div>
-	<div class="left" style="width: 65px; height: 550px;"></div>
-	<form action="EasyBuy" method="post">
+	<div class="left" style="width: 65px; height: 700px;"></div>
+	<form action="Easybuy" method="post">
 		<c:forEach var="Item" items="${ItemList}">
+		<input type="hidden" value="${Item.id}" name="id">
 			<div class="c left shadow">
+			<br>
 				<a href="ItemData?id=${Item.id}"><img src="img/${Item.fileName}"
 					style="width: 250px; height: 300px;"></a> <br>
+				<p>${Item.name}</p>
+				<p>発売日:${Item.getSaleFormatDate()}</p>
 				<p>値段:${Item.price}円</p>
-				<p>在庫数:${Item.stock}個</p>
 				<p>ハード:${Item.hardName}</p>
+				<p>在庫数:${Item.stock}個</p>
 				<br>
 				<c:if test="${Item.stock == 0}">
 					売り切れ

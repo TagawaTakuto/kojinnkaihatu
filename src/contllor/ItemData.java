@@ -1,7 +1,7 @@
 package contllor;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,19 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.GenreDao;
+import dao.ItemDao;
 import model.Item;
 
 /**
- * Servlet implementation class cart
+ * Servlet implementation class ItemData
  */
-@WebServlet("/cart")
-public class cart extends HttpServlet {
+@WebServlet("/ItemData")
+public class ItemData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public cart() {
+	public ItemData() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,27 +38,20 @@ public class cart extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 
+		int Id = Integer.parseInt(request.getParameter("id"));
+
+		ItemDao itemdao = new ItemDao();
+		GenreDao genredao = new GenreDao();
+
+		List<String> GL = genredao.Genre(Id);
+		Item itemd = itemdao.Data(Id);
 		HttpSession session = request.getSession();
+		session.setAttribute("itemd", itemd);
+		session.setAttribute("GL", GL);
 
-		ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
-
-		if (cart == null) {
-			cart = new ArrayList<Item>();
-			session.setAttribute("cart", cart);
-		}
-
-		String cartActionMessage = "";
-		//カートに商品が入っていないなら
-		if (cart.size() == 0) {
-			cartActionMessage = "カートに商品がありません";
-
-			request.setAttribute("CartMsg", cartActionMessage);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");
-			dispatcher.forward(request, response);
-			return;
-		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemData.jsp");
 		dispatcher.forward(request, response);
+		return;
 
 	}
 
@@ -66,10 +61,7 @@ public class cart extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		int Id = Integer.parseInt(request.getParameter("Id"));
-		int Stock = Integer.parseInt(request.getParameter("buycount"));
-
+		doGet(request, response);
 	}
 
 }

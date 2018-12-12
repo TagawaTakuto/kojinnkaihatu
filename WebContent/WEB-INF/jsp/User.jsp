@@ -29,6 +29,7 @@
 			<th>配送方法</th>
 
 		</tr>
+		<c:forEach var="buyhis" items="buylist">
 		<tr>
 			<td><a href="buyhistory" class="his_btn">詳細→</a></td>
 			<td class="">20XX年XX月XX日</td>
@@ -36,23 +37,9 @@
 			<td class="">１１１１円</td>
 			<td class="">通常配送</td>
 		</tr>
-		<tr>
-			<td><a href="buyhistory" class="his_btn">詳細→</a></td>
-			<td class="">20XX年XX月XX日</td>
-			<td class="">いいいいいいいいいいいiii</td>
-			<td class="">２２２２２円</td>
-			<td class="">日時指定</td>
-		</tr>
-		<tr>
-			<td><a href="buyhistory" class="his_btn">詳細→</a></td>
-			<td class="">20XX年XX月XX日</td>
-			<td class="">うううううううううううう</td>
-			<td class="">３３３３円</td>
-			<td class="">特急配送</td>
-		</tr>
+		</c:forEach>
 	</table>
 	<br>
-
 <div class="pager C">
 		<ul>
 			<li><a href="1.html">&laquo; 前</a></li>
