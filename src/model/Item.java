@@ -16,6 +16,7 @@ public class Item {
 	private String hardName;
 	private List<String> genreName;
 	private String updatedate;
+	private int buycount;
 
 	//アイテムリスト//
 	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName, String updateDate, int hardId, String hardName, List<String> genreName) {
@@ -138,5 +139,13 @@ public class Item {
 	public String getSaleFormatDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
 		return sdf.format(saleDate);
+	}
+
+	public int getBuycount() {
+		return buycount;
+	}
+
+	public void setBuycount(int buycount) {
+		this.buycount = buycount;
 	}
 }

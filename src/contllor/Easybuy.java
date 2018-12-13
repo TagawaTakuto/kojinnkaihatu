@@ -36,9 +36,10 @@ public class Easybuy extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		int id = Integer.parseInt(request.getParameter("id"));
+		int count = Integer.parseInt(request.getParameter("buycount"));
 
 		Item item = ItemDao.Data(id);
-
+		item.setBuycount(count);
 		request.setAttribute("item", item);
 
 		ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
@@ -47,6 +48,7 @@ public class Easybuy extends HttpServlet {
 			cart = new ArrayList<Item>();
 		}
 		cart.add(item);
+
 		session.setAttribute("cart", cart);
 		request.setAttribute("Mess", "カートに商品を追加しました。");
 

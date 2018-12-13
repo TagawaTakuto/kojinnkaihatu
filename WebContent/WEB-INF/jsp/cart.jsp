@@ -11,28 +11,36 @@
 <body>
 	<jsp:include page="/layout/hedder.jsp" />
 	<h1 class="box c">カート画面</h1>
-	<form action="buykakunin" method="post">
-	<div class="c">
-		<font color="red"> <c:if test="${CartMsg != null}">
-				<div class="C" role="alert">${CartMsg}</div>
-			</c:if></font> <br>
-	</div>
+	<div class="c red big bold">${Mess}</div>
+	<form action="CartDelete" method="post" name="delete">
+		<div class="c">
+			<font color="red"> <c:if test="${CartMsg != null}">
+					<div class="c red big bold">${CartMsg}</div>
+				</c:if></font> <br>
+		</div>
 		<c:forEach var="cart" items="${cart}">
+			<input type="hidden" name="id" value="${cart.id}">
 			<table class="tab c">
 				<tr>
-					<td class="Img" rowspan="3"><img src="img/${cart.fileName}" style="width: 200px;"></td>
+					<td class="Img" rowspan="3" style="padding-top: 7px;"><img
+						src="img/${cart.fileName}" style="width: 200px;"></td>
 					<td rowspan="1" colspan="2">商品名：${cart.name}</td>
-					<td rowspan="3">個数：<select name="kosuu">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
+					<td rowspan="3">個数：<select name="count">
+							<option value="1"
+								<c:if test="${cart.buycount == 1}">selected</c:if>>1</option>
+							<option value="2"
+								<c:if test="${cart.buycount == 2}">selected</c:if>>2</option>
+							<option value="3"
+								<c:if test="${cart.buycount == 3}">selected</c:if>>3</option>
+							<option value="4"
+								<c:if test="${cart.buycount == 4}">selected</c:if>>4</option>
+							<option value="5"
+								<c:if test="${cart.buycount == 5}">selected</c:if>>5</option>
 					</select>
 					</td>
-					<td class="c" width="100" rowspan="3"><input class="del_btn"
-						onclick="location.href='CratDel?id={cart.id}'" type="button"
-						name="delete" value="削除する"></td>
+					<td class="c" width="100" rowspan="3"><div class="boxes">
+							<input type="checkbox" name="del_list" value="${cart.id}" id="${cart.id}"> <label for="${cart.id}"></label>
+						</div>
 				</tr>
 				<tr>
 					<td rowspan="1" colspan="2">価格：${cart.price}円</td>
@@ -45,19 +53,24 @@
 			<br>
 		</c:forEach>
 		<c:if test="${!empty cart}">
-		<table class="table table-striped">
-			<tr>
-				<th class="R" style="vertical-align: middle;">配送方法：</th>
-				<td><select name="haisou"
-					style="font-size: 15px; height: 32px;">
-						<option value="1">通常配送</option>
-						<option value="2">特急配送</option>
-						<option value="3">日時指定</option>
-				</select>
-		</table>
 		<div class="c">
-			<input class="buy_btn" type="submit" value="購入画面へ">
+			<input class="del_btn" name="delete" type="submit" value="　削除　">
 		</div>
+		<br>
+			<table class="table table-striped">
+				<tr>
+					<th class="R" style="vertical-align: middle;">配送方法：</th>
+					<td><select name="delivery"
+						style="font-size: 15px; height: 32px;">
+							<option value="1">通常配送</option>
+							<option value="2">特急配送</option>
+							<option value="3">日時指定</option>
+					</select>
+			</table>
+			<div class="c">
+				<input class="buy_btn" name="buy" type="button" value="購入画面へ"
+				onclick="location.href='BuyConfirm'">
+			</div>
 		</c:if>
 	</form>
 </body>

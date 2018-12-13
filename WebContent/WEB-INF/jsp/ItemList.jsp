@@ -73,13 +73,13 @@
 		<br> ${Mess} <br> <br>
 	</div>
 	<div class="left" style="width: 65px; height: 700px;"></div>
-	<form action="Easybuy" method="post">
-		<c:forEach var="Item" items="${ItemList}">
-		<input type="hidden" value="${Item.id}" name="id">
+	<c:forEach var="Item" items="${ItemList}">
+		<form action="Easybuy?id=${Item.id}" method="post">
+			<input type="hidden" value="${Item.id}" name="id">
 			<div class="c left shadow">
-			<br>
-				<a href="ItemData?id=${Item.id}"><img src="img/${Item.fileName}"
-					style="width: 250px; height: 300px;"></a> <br>
+				<br> <a href="ItemData?id=${Item.id}"><img
+					src="img/${Item.fileName}" style="width: 250px; height: 300px;"></a>
+				<br>
 				<p>${Item.name}</p>
 				<p>発売日:${Item.getSaleFormatDate()}</p>
 				<p>値段:${Item.price}円</p>
@@ -101,8 +101,8 @@
 				</c:if>
 				<br>
 			</div>
-		</c:forEach>
-	</form>
+		</form>
+	</c:forEach>
 	<br>
 	<br>
 	<div class="pager center C" style="clear: both;">
