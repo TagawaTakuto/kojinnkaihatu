@@ -8,7 +8,6 @@
 </head>
 <body>
 	<jsp:include page="/layout/hedder.jsp" />
-
 	<div class="box c">
 		<h1>ログイン画面</h1>
 	</div>

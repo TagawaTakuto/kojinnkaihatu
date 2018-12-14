@@ -17,7 +17,7 @@ public class DeliveryDao {
 			con = DBManager.getConnection();
 
 			st = con.prepareStatement(
-					"SELECT * FROM m_delivery_method WHERE id = ?");
+					"SELECT * FROM delivery_method WHERE id = ?");
 			st.setInt(1, Id);
 
 			ResultSet rs = st.executeQuery();

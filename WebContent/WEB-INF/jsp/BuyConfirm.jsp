@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,51 +15,48 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 	<br>
 	<table class="table table-striped">
 		<tr>
+			<th style="width: 200px;"></th>
 			<th>商品画像</th>
 			<th>商品名</th>
 			<th>価格</th>
 			<th>個数</th>
 			<th>ハード</th>
+			<th style="width: 200px;"></th>
 		</tr>
-		<tr>
-			<td class="">商品画像１</td>
-			<td class="">あああああああああああ</td>
-			<td class="">１１１１円</td>
-			<td class="">１個</td>
-			<td class="">？？？</td>
-		</tr>
-		<tr>
-			<td class="">商品画像２</td>
-			<td class="">いいいいいいいいいiii</td>
-			<td class="">２２２２２円</td>
-			<td class="">２個</td>
-			<td class="">？？？</td>
-		</tr>
-		<tr>
-			<td class="">商品画像３</td>
-			<td class="">うううううううううううう</td>
-			<td class="">３３３３円</td>
-			<td class="">３個</td>
-			<td class="">？？？</td>
-		</tr>
+		<c:forEach var="item" items="${cart}">
+			<tr>
+				<td style="width: 200px;"></td>
+				<td class=""><img src="img/${item.fileName}"
+					style="width: 100px;"></td>
+				<td style="valign: middle;">${item.name}</td>
+				<td class="">${item.price}円</td>
+				<td class="">${item.buycount}個</td>
+				<td class="">${item.hardName}</td>
+				<td style="width: 200px;"></td>
+			</tr>
+		</c:forEach>
 	</table>
 	<br>
 	<table class="table table-striped">
 		<tr>
+			<th style="width: 200px;"></th>
 			<th>配送方法：</th>
 			<th>配送単価：</th>
 			<th>合計金額：</th>
+			<th style="width: 200px;"></th>
 		</tr>
 		<tr>
-			<td>通常配送</td>
-			<td>２００円</td>
-			<td>１２３４５６円</td>
+			<td style="width: 200px;"></td>
+			<td>${buydata.deliveryMethodName}</td>
+			<td>${buydata.deliveryMethodPrice}円</td>
+			<td>${buydata.totalPrice}円</td>
+			<td style="width: 200px;"></td>
 		</tr>
 	</table>
 	<br>
 	<div class="c">
 		<input class="back_btn" type="button" value="修正する"
-			onClick="location.href='cart.html'"> <input class="buy_btn"
+			onClick="history.back()"> <input class="buy_btn"
 			type="button" value="購入確定" onClick="location.href='buycomplete.html'">
 	</div>
 </body>

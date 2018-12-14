@@ -2,6 +2,7 @@ package contllor;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.BuyDataBeans;
 import beans.DeliveryMethodDataBeans;
 import dao.DeliveryDao;
+import dao.ItemDao;
 import model.Item;
 
 /**
@@ -40,15 +43,29 @@ public class BuyConfirm extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		if (session.getAttribute("LoginInfo") == null) {
-			response.sendRedirect("Login");
+			String Mess = "購入にはログインする必要があります。";
+			session.setAttribute("errMsg", Mess);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+			dispatcher.forward(request, response);
 			return;
 
 		}
 
+		List<Integer> count = new ArrayList<Integer>();
+		int userId = Integer.parseInt(request.getParameter("userId"));
 		int DeliveryId = Integer.parseInt(request.getParameter("delivery"));
-		DeliveryMethodDataBeans dmdb = DeliveryDao.DeliveryMethod(DeliveryId);
-		ArrayList<Item> cartIDBList = (ArrayList<Item>) session.getAttribute("cart");
+		int BuyCount = Integer.parseInt(request.getParameter("count"));
+		DeliveryMethodDataBeans selectDMB = DeliveryDao.DeliveryMethod(DeliveryId);
+		ArrayList<Item> cartList = (ArrayList<Item>) session.getAttribute("cart");
+		int totalPrice = ItemDao.getTotalPrice(cartList) + selectDMB.getPrice();
+		BuyDataBeans bdb = new BuyDataBeans();
+		bdb.setUserId(userId);
+		bdb.setTotalPrice(totalPrice);
+		bdb.setDeliveryMethodId(DeliveryId);
+		bdb.setDeliveryMethodPrice(selectDMB.getPrice());
+		bdb.setDeliveryMethodName(selectDMB.getName());
 
+		session.setAttribute("buydata", bdb);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BuyConfirm.jsp");
 		dispatcher.forward(request, response);
 

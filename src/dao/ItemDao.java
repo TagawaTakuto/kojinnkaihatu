@@ -350,4 +350,13 @@ public class ItemDao {
 		}
 		return item;
 	}
+
+	//合計金額//
+	public static int getTotalPrice(ArrayList<Item> ItemList) {
+		int total = 0;
+		for(Item item:ItemList) {
+			total += item.getPrice();
+		}
+		return total;
+	}
 }
