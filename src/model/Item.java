@@ -19,7 +19,8 @@ public class Item {
 	private int buycount;
 
 	//アイテムリスト//
-	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName, String updateDate, int hardId, String hardName, List<String> genreName) {
+	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName,
+			String updateDate, int hardId, String hardName, List<String> genreName) {
 		this.id = id;
 		this.name = name;
 		this.detail = detail;
@@ -36,16 +37,25 @@ public class Item {
 
 	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName,
 			String updateDate, int hardId, String hardName) {
-		this.id=id;
-		this.name=name;
-		this.detail=detail;
-		this.price=price;
-		this.stock=stock;
-		this.saleDate=saleDate;
-		this.fileName=fileName;
-		this.updatedate=updateDate;
-		this.hardId=hardId;
-		this.hardName=hardName;
+		this.id = id;
+		this.name = name;
+		this.detail = detail;
+		this.price = price;
+		this.stock = stock;
+		this.saleDate = saleDate;
+		this.fileName = fileName;
+		this.updatedate = updateDate;
+		this.hardId = hardId;
+		this.hardName = hardName;
+	}
+
+	public Item(int id, String name, int price, String fileName, String hardName, int buycount) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.fileName = fileName;
+		this.hardName = hardName;
+		this.buycount = buycount;
 	}
 
 	public int getId() {

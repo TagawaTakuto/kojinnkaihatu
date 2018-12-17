@@ -2,7 +2,6 @@ package contllor;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,15 +47,21 @@ public class BuyConfirm extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
 			dispatcher.forward(request, response);
 			return;
-
 		}
 
-		List<Integer> count = new ArrayList<Integer>();
 		int userId = Integer.parseInt(request.getParameter("userId"));
 		int DeliveryId = Integer.parseInt(request.getParameter("delivery"));
-		int BuyCount = Integer.parseInt(request.getParameter("count"));
+		String[] BuyCount = request.getParameterValues("count");
 		DeliveryMethodDataBeans selectDMB = DeliveryDao.DeliveryMethod(DeliveryId);
 		ArrayList<Item> cartList = (ArrayList<Item>) session.getAttribute("cart");
+		ArrayList<Item> BuyList = new ArrayList<Item>();
+		int i = 0;
+		for (Item cartInItem : cartList) {
+			String Count = BuyCount[i];
+			cartInItem.setBuycount(Integer.parseInt(Count));
+			BuyList.add(cartInItem);
+			i++;
+		}
 		int totalPrice = ItemDao.getTotalPrice(cartList) + selectDMB.getPrice();
 		BuyDataBeans bdb = new BuyDataBeans();
 		bdb.setUserId(userId);
@@ -66,6 +71,7 @@ public class BuyConfirm extends HttpServlet {
 		bdb.setDeliveryMethodName(selectDMB.getName());
 
 		session.setAttribute("buydata", bdb);
+		session.setAttribute("BuyList", BuyList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BuyConfirm.jsp");
 		dispatcher.forward(request, response);
 

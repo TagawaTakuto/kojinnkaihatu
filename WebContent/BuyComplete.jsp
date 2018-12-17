@@ -1,33 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-
-<link rel="stylesheet" type="text/css" href="layout/style.css">
+<link rel="stylesheet" href="layout/style.css">
 <meta charset="UTF-8">
-<style type="text/css">
-<!--
-a {
-	text-decoration: none;
-}
--->
-</style>
 <title>購完了画面</title>
 </head>
 <body>
-	<div class="hedder">
-		<ul style="float: left;">
-			<li class="L"><a href="MasterList.html" class="Hsquare_btn">マスターリスト</a></li>
-			<li class="L"><a href="UserList.html" class="Hsquare_btn">ユーザリスト</a></li>
-		</ul>
-		<div class="top-teisai">
-			<a href="ItemList.html"  class="top">TOP</a>
-		</div>
-		<ul style="float: right;">
-			<li><a href="cart.html" class="square_btn">カート</a></li>
-			<li><a href="User.html" class="square_btn">ユーザ情報</a></li>
-			<li><a href="Login.html" class="square_btn">ログイン</a></li>
-		</ul>
-	</div>
+	<jsp:include page="/layout/hedder.jsp" />
 	<h1 class="c">購入完了</h1>
 	<div class="c">購入が完了しました</div>
 	<br>

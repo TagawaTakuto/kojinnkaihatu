@@ -34,7 +34,7 @@
 					<td class="Img" rowspan="3" style="padding-top: 7px;"><img
 						src="img/${cart.fileName}" style="width: 200px;"></td>
 					<td rowspan="1" colspan="2">商品名：${cart.name}</td>
-					<td rowspan="3">個数：<select name="count?${cart.id}">
+					<td rowspan="3">個数：<select name="count">
 							<option value="1"
 								<c:if test="${cart.buycount == 1}">selected</c:if>>1</option>
 							<option value="2"

@@ -13,6 +13,8 @@
 	<h1 class="box c">購入確認画面</h1>
 	<div class="c">以下の内容でよろしいですか？</div>
 	<br>
+	<form action="BuyComplete" method="post">
+	<input type="hidden" value="${LoginInfo.id}" name="userId">
 	<table class="table table-striped">
 		<tr>
 			<th style="width: 200px;"></th>
@@ -23,7 +25,7 @@
 			<th>ハード</th>
 			<th style="width: 200px;"></th>
 		</tr>
-		<c:forEach var="item" items="${cart}">
+		<c:forEach var="item" items="${BuyList}">
 			<tr>
 				<td style="width: 200px;"></td>
 				<td class=""><img src="img/${item.fileName}"
@@ -57,7 +59,8 @@
 	<div class="c">
 		<input class="back_btn" type="button" value="修正する"
 			onClick="history.back()"> <input class="buy_btn"
-			type="button" value="購入確定" onClick="location.href='buycomplete.html'">
+			type="submit" value="購入確定">
 	</div>
+</form>
 </body>
 </html>
