@@ -63,20 +63,20 @@ public class Login extends HttpServlet {
 
 		UserDao userdao = new UserDao();
 
-			UserDataBeans user = userdao.UserData(loginId, password);
+		UserDataBeans user = userdao.UserData(loginId, password);
+		int userId = user.getId();
 
-			if (user == null) {
-				request.setAttribute("errMsg", "ログインIDまたはパスワードが異なります");
+		if (user == null) {
+			request.setAttribute("errMsg", "ログインIDまたはパスワードが異なります");
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
-				dispatcher.forward(request, response);
-				return;
-			}
-			HttpSession session = request.getSession();
-			session.setAttribute("LoginInfo", user);
-
-
-			response.sendRedirect("ItemList");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
-	}
+		HttpSession session = request.getSession();
+		session.setAttribute("LoginInfo", user);
+		session.setAttribute("userId", userId);
 
+		response.sendRedirect("ItemList");
+	}
+}

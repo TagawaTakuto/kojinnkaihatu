@@ -7,40 +7,40 @@
 <title>ユーザページ</title>
 </head>
 <body>
-<input type="hidden" value="${LoginInfo.id}" name="UserId">
-<jsp:include page="/layout/hedder.jsp" />
-<div class="box17">
-<h1 class="c">ユーザページ</h1>
-</div>
-<br>
-<div class="c">
-	<a href="UserUpdate" class="Bbtn">更新</a>
-	<a href="UserData" class="Gbtn">詳細</a>
-	<a href="UserDelete" class="Rbtn">削除</a>
-</div>
-<br>
-<br>
-<table width="50%" class="table table-striped">
+	<input type="hidden" value="${LoginInfo.id}" name="UserId">
+	<jsp:include page="/layout/hedder.jsp" />
+	<div class="box17">
+		<h1 class="box c">ユーザページ</h1>
+	</div>
+	<br>
+	<div class="c">
+		<a href="UserUpdate" class="Bbtn">更新</a> <a href="UserData"
+			class="Gbtn">詳細</a> <a href="UserDelete" class="Rbtn">削除</a>
+	</div>
+	<br>
+	<br>
+	<table class="table table-striped">
 		<tr>
-			<th>
+			<th style="width: 100px;"></th>
+			<th></th>
 			<th>購入日時</th>
-			<th>商品名</th>
 			<th>合計金額</th>
 			<th>配送方法</th>
-
+			<th style="width: 100px;"></th>
 		</tr>
-		<c:forEach var="buyhis" items="buylist">
-		<tr>
-			<td><a href="buyhistory" class="his_btn">詳細→</a></td>
-			<td class="">20XX年XX月XX日</td>
-			<td class="">あああああああああああ</td>
-			<td class="">１１１１円</td>
-			<td class="">通常配送</td>
-		</tr>
+		<c:forEach var="buyhis" items="${UserBuy}">
+			<tr>
+				<td></td>
+				<td><a href="BuyHistory?id=${buyhis.id}" class="his_btn">詳細→</a></td>
+				<td class="">${buyhis.getFormatDate()}</td>
+				<td class="">${buyhis.totalPrice}</td>
+				<td class="">${buyhis.deliveryMethodName}</td>
+				<td></td>
+			</tr>
 		</c:forEach>
 	</table>
 	<br>
-<div class="pager C">
+	<div class="pager C">
 		<ul>
 			<li><a href="1.html">&laquo; 前</a></li>
 			<li><a href="1.html">1</a></li>

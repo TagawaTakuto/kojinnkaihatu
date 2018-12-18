@@ -91,11 +91,9 @@
 				</c:if>
 				<c:if test="${Item.stock != 0}">
 					<select name="buycount">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
+						<c:forEach begin="0" end="${Item.stock - 1}" varStatus="count">
+						<option value="<c:out value="${count.count}"/>"><c:out value="${count.count}"/></option>
+						</c:forEach>
 					</select>個 <input type="submit" value="カートに追加" class="buy_btn">
 					<br>
 				</c:if>

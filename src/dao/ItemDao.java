@@ -94,7 +94,7 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item INNER JOIN hard on item.hard_id = hard.id";
+			String sql = "SELECT * FROM item INNER JOIN hard on item.hard_id = hard.id JOIN genre_detail ON item.id = genre_detail.item_id";
 
 			if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("") || !HId.isEmpty()
 					|| !GId.isEmpty()) {
@@ -358,5 +358,34 @@ public class ItemDao {
 			total += item.getPrice();
 		}
 		return total;
+	}
+
+	//在庫減少//
+	public static void StockDown(int id, int buycount) {
+		Connection conn = null;
+		try {
+			conn = DBManager.getConnection();
+
+			String sql = "UPDATE item SET stock = stock - "+ buycount + " WHERE id = " + id;
+
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.executeUpdate();
+			System.out.println(st);
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return;
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return;
+				}
+			}
+		}
+
 	}
 }

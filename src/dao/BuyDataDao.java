@@ -44,10 +44,9 @@ public class BuyDataDao {
 	}
 
 	//購入完了画面//
-	public static List<BuyDataBeans> BuyData(int Id) throws SQLException {
+	public static BuyDataBeans BuyData(int Id) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
-		List<BuyDataBeans> bdblist = new ArrayList<BuyDataBeans>();
 		try {
 			con = DBManager.getConnection();
 
@@ -63,13 +62,57 @@ public class BuyDataDao {
 			ResultSet rs = st.executeQuery();
 
 			BuyDataBeans bdb = new BuyDataBeans();
-			while(rs.next()) {
+			if(rs.next()) {
 				bdb.setTotalPrice(rs.getInt("total_price"));
 				bdb.setBuyDate(rs.getTimestamp("create_date"));
 				bdb.setDeliveryMethodId(rs.getInt("delivery_method_id"));
 				bdb.setUserId(rs.getInt("user_id"));
 				bdb.setDeliveryMethodPrice(rs.getInt("price"));
 				bdb.setDeliveryMethodName(rs.getString("name"));
+			}
+
+			System.out.println("searching BuyDataBeans by buyID has been completed");
+
+			return bdb;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	//ユーザページ時の購入履歴一覧//
+	public static List<BuyDataBeans> BuyHis(int Id) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		List<BuyDataBeans> bdblist = new ArrayList<BuyDataBeans>();
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement(
+					"SELECT * FROM buy"
+							+ " JOIN delivery_method"
+							+ " ON buy.delivery_method_id = delivery_method.id"
+							+ " WHERE buy.user_id = ?");
+			st.setInt(1, Id);
+
+			System.out.println(st);
+
+			ResultSet rs = st.executeQuery();
+
+			while(rs.next()) {
+				BuyDataBeans bdb = new BuyDataBeans();
+				bdb.setId(rs.getInt("id"));
+				bdb.setTotalPrice(rs.getInt("total_price"));
+				bdb.setBuyDate(rs.getTimestamp("create_date"));
+				bdb.setDeliveryMethodId(rs.getInt("delivery_method_id"));
+				bdb.setUserId(rs.getInt("user_id"));
+				bdb.setDeliveryMethodPrice(rs.getInt("price"));
+				bdb.setDeliveryMethodName(rs.getString("name"));
+
 				bdblist.add(bdb);
 			}
 

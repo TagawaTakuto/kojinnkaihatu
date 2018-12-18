@@ -3,7 +3,6 @@ package contllor;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,6 +16,7 @@ import beans.BuyDataBeans;
 import beans.BuyDetailDataBeans;
 import dao.BuyDataDao;
 import dao.BuyDetailDao;
+import dao.ItemDao;
 import model.Item;
 
 /**
@@ -44,22 +44,24 @@ public class BuyComplete extends HttpServlet {
 		try {
 			ArrayList<Item> BuyList = (ArrayList<Item>) session.getAttribute("BuyList");
 			BuyDataBeans bdb = (BuyDataBeans) session.getAttribute("buydata");
-			int Id = Integer.parseInt(request.getParameter("userId"));
-
 			int buyId = BuyDataDao.Buy(bdb);
 			for (Item item : BuyList) {
 				BuyDetailDataBeans bddb = new BuyDetailDataBeans();
 				bddb.setBuyId(buyId);
 				bddb.setItemId(item.getId());
+				bddb.setBuyCount(item.getBuycount());
 				BuyDetailDao.insertBuyDetail(bddb);
+				ItemDao.StockDown(item.getId(),item.getBuycount());
 			}
 
-			List<BuyDataBeans> buyresult = BuyDataDao.BuyData(buyId);
-			request.setAttribute("BuyResult", buyresult);
-
+			BuyDataBeans buyresult = BuyDataDao.BuyData(buyId);
 			ArrayList<Item> buyIDBList = BuyDetailDao.getItemDataBeansListByBuyId(buyId);
+
+			request.setAttribute("BuyResult", buyresult);
 			request.setAttribute("buyIDBList", buyIDBList);
 
+
+			session.removeAttribute("cart");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BuyComplete.jsp");
 			dispatcher.forward(request, response);
 		} catch (SQLException e) {

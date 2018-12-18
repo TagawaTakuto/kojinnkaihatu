@@ -11,6 +11,8 @@ import beans.BuyDetailDataBeans;
 import model.Item;
 
 public class BuyDetailDao {
+
+	//buy_detailへの追記//
 	public static void insertBuyDetail(BuyDetailDataBeans bdb) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
@@ -34,6 +36,7 @@ public class BuyDetailDao {
 		}
 	}
 
+	//購入情報の取得//
 	public static ArrayList<Item> getItemDataBeansListByBuyId(int buyId) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
@@ -41,10 +44,7 @@ public class BuyDetailDao {
 			con = DBManager.getConnection();
 
 			st = con.prepareStatement(
-					"SELECT item.id,"
-							+ " item.name,"
-							+ " item.price"
-							+ "item.file_name"
+					"SELECT * "
 							+ " FROM buy_detail"
 							+ " JOIN item"
 							+ " ON buy_detail.item_id = item.id"
@@ -57,11 +57,11 @@ public class BuyDetailDao {
 			ArrayList<Item> buyDetailItemList = new ArrayList<Item>();
 
 			while (rs.next()) {
-				int Id = rs.getInt("id");
-				String Name = rs.getString("name");
-				int Price = rs.getInt("price");
+				int Id = rs.getInt("item.id");
+				String Name = rs.getString("item.name");
+				int Price = rs.getInt("item.price");
 				String FileName = rs.getString("file_name");
-				String HardName = rs.getString("item.hard_name");
+				String HardName = rs.getString("hard.name");
 				int BuyCount = rs.getInt("buy_count");
 				Item idb = new Item(Id, Name, Price, FileName, HardName, BuyCount);
 				buyDetailItemList.add(idb);

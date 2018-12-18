@@ -10,10 +10,11 @@
 </head>
 <body>
 	<jsp:include page="/layout/hedder.jsp" />
-	<div class="wrapper">
+
 		<div class="box c">
 			<h1>商品更新</h1>
 		</div>
+		<div class="wrapper">
 		<form action="MasterUpdate" method="post">
 			<p class="txt">
 				商品ID:${Item.id}<br> <input type="hidden" value="${Item.id}"
