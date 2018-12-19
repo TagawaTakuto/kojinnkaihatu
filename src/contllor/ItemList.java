@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.GenreDao;
 import dao.ItemDao;
+import model.GenreSeach;
 import model.Item;
 
 /**
@@ -44,12 +46,16 @@ public class ItemList extends HttpServlet {
 			return;
 		}
 
-
 		List<Item> ItemList = new ArrayList<Item>();
 		ItemDao itemdao = new ItemDao();
 		ItemList = itemdao.ItemAll();
+		int pageMax = ItemList.size() / 8;
+		pageMax++;
+		List<GenreSeach> GL = GenreDao.GenreAll();
 
 		session.setAttribute("ItemList", ItemList);
+		session.setAttribute("pagemax", pageMax);
+		session.setAttribute("GL", GL);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemList.jsp");
 		dispatcher.forward(request, response);
 
@@ -88,9 +94,16 @@ public class ItemList extends HttpServlet {
 		ItemDao itemdao = new ItemDao();
 		ItemList = itemdao.ItemSearch(Keyword, SdateS, SdateE, HId, GId,
 				Sort);
+		List<GenreSeach> GL = GenreDao.GenreSeachToItemList(GId);
 		HttpSession session = request.getSession();
 		session.setAttribute("ItemList", ItemList);
-
+		session.setAttribute("Keyword", Keyword);
+		session.setAttribute("Sdate", SdateS);
+		session.setAttribute("EdateS", SdateE);
+		session.setAttribute("HardId", HardId);
+		session.setAttribute("GenreId", GenreId);
+		session.setAttribute("sort", Sort);
+		session.setAttribute("GL", GL);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemList.jsp");
 		dispatcher.forward(request, response);
 	}

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.GenreDao;
 import dao.ItemDao;
 import model.Item;
 
@@ -48,9 +47,7 @@ public class MasterList extends HttpServlet {
 
 		List<Item> ItemList = new ArrayList<Item>();
 		ItemDao itemdao = new ItemDao();
-		GenreDao genredao = new GenreDao();
 		ItemList = itemdao.ItemAll();
-		genredao.GenreAll();
 
 		session.setAttribute("ItemList", ItemList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterList.jsp");

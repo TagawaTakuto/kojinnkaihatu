@@ -42,12 +42,11 @@ public class MasterUpdate extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		int Id = Integer.parseInt(request.getParameter("id"));
-		ItemDao itemdao = new ItemDao();
 		GenreDao genredao = new GenreDao();
 		HardDao harddao = new HardDao();
 		List<GenreSeach> GL = new ArrayList<GenreSeach>();
 		List<HardDataBeans> HL = new ArrayList<HardDataBeans>();
-		Item item = itemdao.Data(Id);
+		Item item = ItemDao.Data(Id);
 		GL = genredao.GenreSeach(Id);
 		HL = harddao.HardAll();
 

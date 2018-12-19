@@ -40,11 +40,10 @@ public class ItemData extends HttpServlet {
 
 		int Id = Integer.parseInt(request.getParameter("id"));
 
-		ItemDao itemdao = new ItemDao();
 		GenreDao genredao = new GenreDao();
 
 		List<String> GL = genredao.Genre(Id);
-		Item itemd = itemdao.Data(Id);
+		Item itemd = ItemDao.Data(Id);
 		HttpSession session = request.getSession();
 		session.setAttribute("itemd", itemd);
 		session.setAttribute("GL", GL);
@@ -54,14 +53,4 @@ public class ItemData extends HttpServlet {
 		return;
 
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

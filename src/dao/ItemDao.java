@@ -86,6 +86,7 @@ public class ItemDao {
 			return Id;
 		}
 
+		この辺
 	//商品検索//
 	public List<Item> ItemSearch(String Keyword, String SaleDateS,
 			String SaleDateE, ArrayList<Integer> HId, ArrayList<Integer> GId, String Sort) {

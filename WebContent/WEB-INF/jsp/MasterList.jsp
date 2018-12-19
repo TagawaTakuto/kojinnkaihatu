@@ -67,7 +67,7 @@
 		</div>
 
 		<br>
-		<div class="bold c">検索結果：300件</div>
+		<div class="bold c">検索結果：${ItemList.size()}件</div>
 		<br>
 		<div class="c">
 			<input class="search_btn" type="submit" value="検索">

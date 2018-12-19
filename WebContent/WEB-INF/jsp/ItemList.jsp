@@ -15,12 +15,12 @@
 	</div>
 	<form action="ItemList" method="post">
 		<div class="c">
-			キーワード：<input type="text" name="Keyword">
+			キーワード：<input type="text" name="Keyword" value="${Keyword}">
 		</div>
 		<br> <br>
 		<div class="c">
-			発売日：<input type="date" name="Sdate"> ～ <input type="date"
-				name="Edate">
+			発売日：<input type="date" name="Sdate" value="${Sdate}"> ～ <input type="date"
+				name="Edate" value="${Edate}">
 		</div>
 		<br>
 		<div class="shadow c">
@@ -39,14 +39,12 @@
 		<div class="shadow c">
 			<br> ジャンル:
 			<div class="search_select">
-				<input id="g_ch1" type="checkbox" name="Genre" value="1" /><label
-					for="g_ch1">アクション</label> <input id="g_ch2" type="checkbox"
-					name="Genre" value="2" /><label for="g_ch2">RPG</label> <input
-					id="g_ch3" type="checkbox" name="Genre" value="3" /><label
-					for="g_ch3">格闘</label> <input id="g_ch4" type="checkbox"
-					name="Genre" value="4" /><label for="g_ch4">シミュレーション</label> <input
-					id="g_ch5" type="checkbox" name="Genre" value="5" /><label
-					for="g_ch5">シューティング</label>
+				<c:forEach var="GL" items="${GL}">
+						<input type="checkbox" name="Genre" value="${GL.genreId}"
+							<c:if test="${GL.genreId == GL.hikakuId}"> checked = "checked" </c:if>
+							id="g&${GL.genreId}" />
+						<label for="g&${GL.genreId}">${GL.name}</label>
+					</c:forEach>
 			</div>
 			<br>
 		</div>
@@ -62,7 +60,7 @@
 			</select>
 		</div>
 		<br>
-		<div class="bold c">検索結果：${page}件</div>
+		<div class="bold c">検索結果：${ItemList.size()}件</div>
 		<br>
 		<div class="c">
 			<input class="search_btn" type="submit" value="検索">
@@ -106,12 +104,9 @@
 	<div class="pager center C" style="clear: both;">
 		<ul>
 			<li><a href="1.html">&laquo; 前</a></li>
-			<li><a href="1.html">1</a></li>
-			<li><span>2</span></li>
-			<li><a href="3.html">3</a></li>
-			<li><a href="4.html">4</a></li>
-			<li><a href="5.html">5</a></li>
-			<li><a href="6.html">6</a></li>
+			<c:forEach varStatus="i" begin="0" end="${pageMax}">
+			<li><a href="1.html"><c:out value="${i.count}"/></a></li>
+			</c:forEach>
 			<li><a href="3.html">次 &raquo;</a></li>
 		</ul>
 	</div>
