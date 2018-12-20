@@ -12,12 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.HardDataBeans;
 import dao.GenreDao;
 import dao.HardDao;
 import dao.ItemDao;
-import model.GenreSeach;
 import model.Item;
+import model.Seach;
 
 /**
  * Servlet implementation class MasterUpdate
@@ -44,8 +43,8 @@ public class MasterUpdate extends HttpServlet {
 		int Id = Integer.parseInt(request.getParameter("id"));
 		GenreDao genredao = new GenreDao();
 		HardDao harddao = new HardDao();
-		List<GenreSeach> GL = new ArrayList<GenreSeach>();
-		List<HardDataBeans> HL = new ArrayList<HardDataBeans>();
+		List<Seach> GL = new ArrayList<Seach>();
+		List<Seach> HL = new ArrayList<Seach>();
 		Item item = ItemDao.Data(Id);
 		GL = genredao.GenreSeach(Id);
 		HL = harddao.HardAll();

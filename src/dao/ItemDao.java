@@ -41,7 +41,8 @@ public class ItemDao {
 				String UpdateDate = rs.getString("update_date");
 				GenreDao genredao = new GenreDao();
 				GenreName.addAll(genredao.Genre(rs.getInt("item.id")));
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate,HardId,HardName,GenreName);
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate, HardId, HardName,
+						GenreName);
 
 				ItemList.add(item);
 			}
@@ -64,38 +65,46 @@ public class ItemDao {
 	}
 
 	//ジャンル追加用引数検索//
-		public int Id() {
-			Connection con = null;
-			int Id = 0;
+	public int Id() {
+		Connection con = null;
+		int Id = 0;
 
-			String sql = "SELECT * FROM item ORDER BY create_date DESC";
-			System.out.println(sql);
+		String sql = "SELECT * FROM item ORDER BY create_date DESC";
+		System.out.println(sql);
 
-			Statement stmt;
-			try {
-				con = DBManager.getConnection();
-				stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery(sql);
-				if (rs.next()) {
-					Id = rs.getInt("id");
-				}
-			} catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
+		Statement stmt;
+		try {
+			con = DBManager.getConnection();
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				Id = rs.getInt("id");
 			}
-			return Id;
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
+		return Id;
+	}
 
-		この辺
 	//商品検索//
 	public List<Item> ItemSearch(String Keyword, String SaleDateS,
 			String SaleDateE, ArrayList<Integer> HId, ArrayList<Integer> GId, String Sort) {
 		Connection conn = null;
 		List<Item> ItemList = new ArrayList<Item>();
+		List<Integer> Comparison = new ArrayList<Integer>();
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item INNER JOIN hard on item.hard_id = hard.id JOIN genre_detail ON item.id = genre_detail.item_id";
+			String sql = "SELECT * FROM item ";
+			if (!HId.isEmpty() && !HId.contains(0)) {
+				sql += "JOIN hard ON item.hard_id = hard.id ";
+			}
+			;
+			if (!GId.isEmpty() && !GId.contains(0)) {
+				sql += "JOIN genre_detail ON item.id = genre_detail.item_id";
+			}
+			;
 
 			if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("") || !HId.isEmpty()
 					|| !GId.isEmpty()) {
@@ -119,7 +128,7 @@ public class ItemDao {
 				}
 				sql += " sale_date" + "<=" + "'" + SaleDateE + "'";
 			}
-			if (!HId.isEmpty()) {
+			if (!HId.isEmpty() && !HId.contains(0)) {
 				if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("")) {
 					sql += " AND ";
 				}
@@ -133,7 +142,7 @@ public class ItemDao {
 					sql += " hard_id" + "=" + "'" + HId.get(i) + "'";
 				}
 			}
-			if (!GId.isEmpty()) {
+			if (!GId.isEmpty() && !GId.contains(0)) {
 				if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("") || !HId.isEmpty()) {
 					sql += " AND ";
 				}
@@ -147,7 +156,7 @@ public class ItemDao {
 					sql += " genre_id" + " = " + "'" + GId.get(n) + "'";
 				}
 			}
-			sql += " ORDER BY "  + Sort ;
+			sql += " ORDER BY " + Sort;
 
 			System.out.println(sql);
 
@@ -155,22 +164,26 @@ public class ItemDao {
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				List<String> GenreName = new ArrayList<String>();
-				int Id = rs.getInt("item.id");
-				String Name = rs.getString("item.name");
-				String Detail = rs.getString("detail");
-				int Price = rs.getInt("price");
-				int Stock = rs.getInt("stock");
-				Date SaleDate = rs.getDate("sale_date");
-				String FileName = rs.getString("file_name");
-				int HardId = rs.getInt("hard.id");
-				String HardName = rs.getString("hard.name");
-				GenreDao genredao = new GenreDao();
-				GenreName.addAll(genredao.Genre(rs.getInt("item.id")));
-				String UpdateDate = rs.getString("update_date");
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName,UpdateDate,HardId,HardName,GenreName);
-
-				ItemList.add(item);
+				if (!Comparison.contains(rs.getInt("item.id"))) {
+					List<String> GenreName = new ArrayList<String>();
+					int Id = rs.getInt("item.id");
+					String Name = rs.getString("item.name");
+					String Detail = rs.getString("detail");
+					int Price = rs.getInt("price");
+					int Stock = rs.getInt("stock");
+					Date SaleDate = rs.getDate("sale_date");
+					String FileName = rs.getString("file_name");
+					int HardId = rs.getInt("hard.id");
+					String HardName = rs.getString("hard.name");
+					GenreDao genredao = new GenreDao();
+					GenreName.addAll(genredao.Genre(rs.getInt("item.id")));
+					String UpdateDate = rs.getString("update_date");
+					Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate, HardId,
+							HardName,
+							GenreName);
+					Comparison.add(Id);
+					ItemList.add(item);
+				}
 			}
 		} catch (
 
@@ -218,8 +231,6 @@ public class ItemDao {
 
 		}
 	}
-
-
 
 	//商品削除//
 	public void ItemDelete(int id) {
@@ -315,7 +326,7 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item INNER JOIN hard ON item.hard_id = hard.id WHERE item.id = " + id ;
+			String sql = "SELECT * FROM item INNER JOIN hard ON item.hard_id = hard.id WHERE item.id = " + id;
 			System.out.println(sql);
 
 			Statement stmt = conn.createStatement();
@@ -332,7 +343,7 @@ public class ItemDao {
 				String UpdateDate = rs.getString("update_date");
 				int HardId = rs.getInt("hard_id");
 				String HardName = rs.getString("hard.name");
-				item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate,HardId,HardName);
+				item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate, HardId, HardName);
 			}
 		} catch (
 
@@ -355,7 +366,7 @@ public class ItemDao {
 	//合計金額//
 	public static int getTotalPrice(ArrayList<Item> ItemList) {
 		int total = 0;
-		for(Item item:ItemList) {
+		for (Item item : ItemList) {
 			total += item.getPrice();
 		}
 		return total;
@@ -367,7 +378,7 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "UPDATE item SET stock = stock - "+ buycount + " WHERE id = " + id;
+			String sql = "UPDATE item SET stock = stock - " + buycount + " WHERE id = " + id;
 
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.executeUpdate();

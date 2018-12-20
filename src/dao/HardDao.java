@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import base.DBManager;
-import beans.HardDataBeans;
+import model.Seach;
 
 public class HardDao {
-	public List<HardDataBeans> HardAll() {
+	public static List<Seach> HardAll() {
 		Connection conn = null;
-		List<HardDataBeans> HardList = new ArrayList<HardDataBeans>();
+		List<Seach> HardList = new ArrayList<Seach>();
 		try {
 			conn = DBManager.getConnection();
 
@@ -24,7 +24,7 @@ public class HardDao {
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				HardDataBeans hard = new HardDataBeans();
+				Seach hard = new Seach();
 				hard.setId(rs.getInt("id"));
 				hard.setName(rs.getString("name"));
 
@@ -46,5 +46,37 @@ public class HardDao {
 			}
 		}
 		return HardList;
+	}
+
+	//アイテムリスト用//
+	public static List<Seach> HardSeach(ArrayList<Integer> Id) {
+		Connection con = null;
+		List<Seach> HL = new ArrayList<Seach>();
+		try {
+			con = DBManager.getConnection();
+			String sql = "SELECT * FROM hard";
+			Statement stmt;
+
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			System.out.println(sql);
+			while (rs.next()) {
+				Seach HS = new Seach();
+				for (int i : Id) {
+					if (i == rs.getInt("id")) {
+						HS.setComparisonId(i);
+					}
+					HS.setName(rs.getString("name"));
+					continue;
+				}
+				HS.setId(rs.getInt("id"));
+				HL.add(HS);
+			}
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		return HL;
+
 	}
 }

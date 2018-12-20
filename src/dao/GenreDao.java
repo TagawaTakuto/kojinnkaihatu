@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import base.DBManager;
-import model.GenreSeach;
+import model.Seach;
 
 public class GenreDao {
 	//更新用商品のジャンル参照//
-	public List<GenreSeach> GenreSeach(int Id) {
+	public List<Seach> GenreSeach(int Id) {
 		Connection con = null;
-		List<GenreSeach> GL = new ArrayList<GenreSeach>();
+		List<Seach> GL = new ArrayList<Seach>();
 		try {
 			con = DBManager.getConnection();
 			String sql = "SELECT * FROM genre LEFT JOIN genre_detail ON  genre.id = genre_detail.genre_id AND genre_detail.item_id = "
@@ -26,11 +26,11 @@ public class GenreDao {
 			ResultSet rs = stmt.executeQuery(sql);
 			System.out.println(sql);
 			while (rs.next()) {
-				GenreSeach gddb = new GenreSeach();
-				gddb.setGenreId(rs.getInt("genre_detail.genre_id"));
-				gddb.setName(rs.getString("genre.name"));
-				gddb.setHikakuId(rs.getInt("genre.id"));
-				GL.add(gddb);
+				Seach GS = new Seach();
+				GS.setId(rs.getInt("genre.id"));
+				GS.setName(rs.getString("genre.name"));
+				GS.setComparisonId(rs.getInt("genre_detail.genre_id"));
+				GL.add(GS);
 			}
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -100,9 +100,9 @@ public class GenreDao {
 	}
 
 	//TOPページアイテムリスト//
-	public static List<GenreSeach> GenreAll() {
+	public static List<Seach> GenreAll() {
 		Connection con = null;
-		List<model.GenreSeach> GL = new ArrayList<GenreSeach>();
+		List<Seach> GL = new ArrayList<Seach>();
 		try {
 			con = DBManager.getConnection();
 			String sql = "SELECT * FROM genre";
@@ -112,10 +112,10 @@ public class GenreDao {
 			ResultSet rs = stmt.executeQuery(sql);
 			System.out.println(sql);
 			while (rs.next()) {
-				model.GenreSeach gddb = new GenreSeach();
-				gddb.setGenreId(rs.getInt("id"));
-				gddb.setName(rs.getString("name"));
-				GL.add(gddb);
+				Seach GS = new Seach();
+				GS.setId(rs.getInt("id"));
+				GS.setName(rs.getString("name"));
+				GL.add(GS);
 			}
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -150,9 +150,9 @@ public class GenreDao {
 	}
 
 	//アイテムリスト用//
-	public static List<GenreSeach> GenreSeachToItemList(List<Integer> Id) {
+	public static List<Seach> GenreSeachToItemList(List<Integer> Id) {
 		Connection con = null;
-		List<GenreSeach> GL = new ArrayList<GenreSeach>();
+		List<Seach> GL = new ArrayList<Seach>();
 		try {
 			con = DBManager.getConnection();
 			String sql = "SELECT * FROM genre";
@@ -162,16 +162,16 @@ public class GenreDao {
 			ResultSet rs = stmt.executeQuery(sql);
 			System.out.println(sql);
 			while (rs.next()) {
+				Seach GS = new Seach();
 				for (int i : Id) {
-					GenreSeach gddb = new GenreSeach();
 					if (i == rs.getInt("id")) {
-						gddb.setHikakuId(i);
+						GS.setComparisonId(i);
 					}
-					gddb.setName(rs.getString("name"));
-					gddb.setGenreId(rs.getInt("id"));
-					GL.add(gddb);
-					break;
+					GS.setName(rs.getString("name"));
+					continue;
 				}
+				GS.setId(rs.getInt("id"));
+				GL.add(GS);
 			}
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック

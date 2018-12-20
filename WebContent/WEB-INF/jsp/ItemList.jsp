@@ -19,19 +19,19 @@
 		</div>
 		<br> <br>
 		<div class="c">
-			発売日：<input type="date" name="Sdate" value="${Sdate}"> ～ <input type="date"
-				name="Edate" value="${Edate}">
+			発売日：<input type="date" name="Sdate" value="${Sdate}"> ～ <input
+				type="date" name="Edate" value="${Edate}">
 		</div>
 		<br>
 		<div class="shadow c">
 			<br> ハード：
 			<div class="search_select">
-				<input id="h_ch1" type="checkbox" name="Hard" value="1" /><label
-					for="h_ch1">PC</label> <input id="h_ch2" type="checkbox"
-					name="Hard" value="2" /><label for="h_ch2">PS4</label> <input
-					id="h_ch3" type="checkbox" name="Hard" value="3" /><label
-					for="h_ch3">Swich</label> <input id="h_ch4" type="checkbox"
-					name="Hard" value="4" /><label for="h_ch4">Xbox</label>
+				<c:forEach var="HL" items="${HL}">
+					<input type="checkbox" name="Hard" value="${HL.id}"
+						<c:if test="${HL.id == HL.comparisonId}"> checked = "checked" </c:if>
+						id="h&${HL.id}" />
+					<label for="h&${HL.id}">${HL.name}</label>
+				</c:forEach>
 			</div>
 			<br>
 		</div>
@@ -40,11 +40,11 @@
 			<br> ジャンル:
 			<div class="search_select">
 				<c:forEach var="GL" items="${GL}">
-						<input type="checkbox" name="Genre" value="${GL.genreId}"
-							<c:if test="${GL.genreId == GL.hikakuId}"> checked = "checked" </c:if>
-							id="g&${GL.genreId}" />
-						<label for="g&${GL.genreId}">${GL.name}</label>
-					</c:forEach>
+					<input type="checkbox" name="Genre" value="${GL.id}"
+						<c:if test="${GL.id == GL.comparisonId}"> checked = "checked" </c:if>
+						id="g&${GL.id}" />
+					<label for="g&${GL.id}">${GL.name}</label>
+				</c:forEach>
 			</div>
 			<br>
 		</div>
@@ -71,7 +71,7 @@
 		<br> ${Mess} <br> <br>
 	</div>
 	<div class="left" style="width: 65px; height: 700px;"></div>
-	<c:forEach var="Item" items="${ItemList}">
+	<c:forEach var="Item" end="7" items="${ItemList}">
 		<form action="Easybuy?id=${Item.id}" method="post">
 			<input type="hidden" value="${Item.id}" name="id">
 			<div class="c left shadow">
@@ -90,7 +90,8 @@
 				<c:if test="${Item.stock != 0}">
 					<select name="buycount">
 						<c:forEach begin="0" end="${Item.stock - 1}" varStatus="count">
-						<option value="<c:out value="${count.count}"/>"><c:out value="${count.count}"/></option>
+							<option value="<c:out value="${count.count}"/>"><c:out
+									value="${count.count}" /></option>
 						</c:forEach>
 					</select>個 <input type="submit" value="カートに追加" class="buy_btn">
 					<br>
@@ -103,11 +104,25 @@
 	<br>
 	<div class="pager center C" style="clear: both;">
 		<ul>
-			<li><a href="1.html">&laquo; 前</a></li>
+		<c:choose>
+		<c:when test="${pageNum == 1}">
+			<li><span>&laquo; 前</span></li>
+			</c:when>
+			<c:otherwise>
+			<li><a href="ItemList?page_num=${pageNum - 1}">&laquo; 前</a></li>
+			</c:otherwise>
+			</c:choose>
 			<c:forEach varStatus="i" begin="0" end="${pageMax}">
-			<li><a href="1.html"><c:out value="${i.count}"/></a></li>
+				<li><a href="1.html"><c:out value="${i.count}" /></a></li>
 			</c:forEach>
-			<li><a href="3.html">次 &raquo;</a></li>
+			<c:choose>
+			<c:when test="${pageNum == pageMax || pageMax == 0}">
+			<li><span>次 &raquo;</span></li>
+		</c:when>
+		<c:otherwise>
+		<li><a href="ItemList?page_num=${pageNum + 1}">次 &raquo;</a></li>
+		</c:otherwise>
+		</c:choose>
 		</ul>
 	</div>
 </body>
