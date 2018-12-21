@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.GenreDao;
+import dao.HardDao;
 import dao.ItemDao;
 import model.Item;
+import model.Seach;
 
 /**
  * Servlet implementation class MasterList
@@ -45,14 +48,52 @@ public class MasterList extends HttpServlet {
 			return;
 		}
 
-		List<Item> ItemList = new ArrayList<Item>();
-		ItemDao itemdao = new ItemDao();
-		ItemList = itemdao.ItemAll();
+		int pageNum = Integer
+				.parseInt(request.getParameter("page_num") == null ? "1" : request.getParameter("page_num"));
+		int pageMax = Integer
+				.parseInt(request.getParameter("pageMax") == null ? "1" : request.getParameter("pageMax"));
+		List<Item> List = (List<Item>) session.getAttribute("ItemList");
+		List<Item> AllList = (List<Item>) session.getAttribute("AllList");
+		session.removeAttribute("pageMax");
+		List<Seach> GL = (List<Seach>) session.getAttribute("GL");
+		List<Seach> HL = (List<Seach>) session.getAttribute("HL");
 
+		if (List == null || List.isEmpty() && AllList == null || AllList.isEmpty()) {
+			List<Item> ItemList = new ArrayList<Item>();
+			ItemDao itemdao = new ItemDao();
+			ItemList = itemdao.ItemAll();
+			AllList = itemdao.ItemAll();
+			pageMax = (int) Math.ceil((double) AllList.size() / 8);
+			GL = GenreDao.GenreAll();
+			HL = HardDao.HardAll();
+			session.setAttribute("AllList", ItemList);
+			session.setAttribute("ItemList", ItemList);
+			session.setAttribute("pageMax", pageMax);
+			session.setAttribute("pageNum", pageNum);
+			session.setAttribute("GL", GL);
+			session.setAttribute("HL", HL);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterList.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+		List<Item> ItemList = new ArrayList<Item>();
+		for (int i = pageNum * 4 - 4; i <= pageNum * 4 - 1; i++) {
+			try {
+				Item item = AllList.get(i);
+				ItemList.add(item);
+			} catch (Exception e) {
+				break;
+			}
+		}
+		pageMax = (int) Math.ceil((double) AllList.size() / 4);
 		session.setAttribute("ItemList", ItemList);
+		session.setAttribute("pageMax", pageMax);
+		session.setAttribute("pageNum", pageNum);
+		session.setAttribute("GL", GL);
+		session.setAttribute("HL", HL);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterList.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 	/**
@@ -62,7 +103,8 @@ public class MasterList extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-
+		int pageNum = Integer
+				.parseInt(request.getParameter("page_num") == null ? "1" : request.getParameter("page_num"));
 		String Keyword = request.getParameter("Keyword");
 		String SdateS = request.getParameter("Sdate");
 		String SdateE = request.getParameter("Edate");
@@ -77,6 +119,8 @@ public class MasterList extends HttpServlet {
 				int I = Integer.parseInt(s);
 				HId.add(I);
 			}
+		} else {
+			HId.add(0);
 		}
 
 		if (GenreId != null) {
@@ -85,14 +129,34 @@ public class MasterList extends HttpServlet {
 				int I = Integer.parseInt(s);
 				GId.add(I);
 			}
+		} else {
+			GId.add(0);
 		}
 
 		List<Item> ItemList = new ArrayList<Item>();
 		ItemDao itemdao = new ItemDao();
 		ItemList = itemdao.ItemSearch(Keyword, SdateS, SdateE, HId, GId,
 				Sort);
+		List<Seach> GL = GenreDao.GenreSeachToItemList(GId);
+		List<Seach> HL = HardDao.HardSeach(HId);
+		int pageMax = (int) Math.ceil((double) ItemList.size() / 4);
+
 		HttpSession session = request.getSession();
+		session.setAttribute("AllList", ItemList);
 		session.setAttribute("ItemList", ItemList);
+		session.setAttribute("Keyword", Keyword);
+		session.setAttribute("Sdate", SdateS);
+		session.setAttribute("Edate", SdateE);
+		session.setAttribute("HardId", HardId);
+		session.setAttribute("GenreId", GenreId);
+		session.setAttribute("sort", Sort);
+		session.setAttribute("pageNum", pageNum);
+		session.setAttribute("pageMax", pageMax);
+		session.setAttribute("GL", GL);
+		session.setAttribute("HL", HL);
+		if (ItemList.isEmpty()) {
+			request.setAttribute("Mess", "該当する商品が存在しません。");
+		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterList.jsp");
 		dispatcher.forward(request, response);

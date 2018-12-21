@@ -20,7 +20,7 @@ public class Item {
 
 	//アイテムリスト//
 	public Item(int id, String name, String detail, int price, int stock, Date saleDate, String fileName,
-			String updateDate, int hardId, String hardName, List<String> genreName) {
+			String updateDate, String hardName, List<String> genreName) {
 		this.id = id;
 		this.name = name;
 		this.detail = detail;
@@ -29,7 +29,6 @@ public class Item {
 		this.saleDate = saleDate;
 		this.fileName = fileName;
 		this.updatedate = updateDate;
-		this.hardId = hardId;
 		this.hardName = hardName;
 		this.genreName = genreName;
 

@@ -37,7 +37,7 @@
 			<div class="shadow c">
 				<br> ハード:
 				<div class="hard_select">
-					<input type="radio" name="hard_select" name="Hard" value="1"
+					<input type="radio" name="Hard" value="1"
 						id="h_ch1" /><label for="h_ch1">PC</label> <input type="radio"
 						name="Hard" value="2" id="h_ch2" /><label for="h_ch2">PS4</label>
 					<input type="radio" name="Hard" value="3" id="h_ch3" /><label

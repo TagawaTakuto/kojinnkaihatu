@@ -15,23 +15,23 @@
 	</div>
 	<form action="MasterList" method="post">
 		<div class="c">
-			キーワード：<input type="text" name="Keyword">
+			キーワード：<input type="text" name="Keyword" value="${Keyword}">
 		</div>
 		<br> <br>
 		<div class="c">
-			発売日：<input type="date" name="Sdate"> ～ <input type="date"
-				name="Edate">
+			発売日：<input type="date" name="Sdate" value="${Sdate}"> ～ <input
+				type="date" name="Edate" value="${Edate}">
 		</div>
 		<br>
 		<div class="c shadow">
 			<br> ハード：
 			<div class="search_select">
-				<input id="h_ch1" type="checkbox" name="Hard" value="1" /><label
-					for="h_ch1">PC</label> <input id="h_ch2" type="checkbox"
-					name="Hard" value="2" /><label for="h_ch2">PS4</label> <input
-					id="h_ch3" type="checkbox" name="Hard" value="3" /><label
-					for="h_ch3">Swich</label> <input id="h_ch4" type="checkbox"
-					name="Hard" value="4" /><label for="h_ch4">Xbox</label>
+				<c:forEach var="HL" items="${HL}">
+					<input type="checkbox" name="Hard" value="${HL.id}"
+						<c:if test="${HL.id == HL.comparisonId}"> checked = "checked" </c:if>
+						id="h&${HL.id}" />
+					<label for="h&${HL.id}">${HL.name}</label>
+				</c:forEach>
 			</div>
 			<br>
 		</div>
@@ -39,35 +39,36 @@
 		<div class="c shadow">
 			<br> ジャンル:
 			<div class="search_select">
-				<input id="j_ch1" type="checkbox" name="Genre" value="1" /><label
-					for="j_ch1">アクション</label> <input id="j_ch2" type="checkbox"
-					name="Genre" value="2" /><label for="j_ch2">RPG</label> <input
-					id="j_ch3" type="checkbox" name="Genre" value="3" /><label
-					for="j_ch3">格闘</label> <input id="j_ch4" type="checkbox"
-					name="Genre" value="4" /><label for="j_ch4">シミュレーション</label> <input
-					id="j_ch5" type="checkbox" name="Genre" value="5" /><label
-					for="j_ch5">シューティング</label>
+				<c:forEach var="GL" items="${GL}">
+					<input type="checkbox" name="Genre" value="${GL.id}"
+						<c:if test="${GL.id == GL.comparisonId}"> checked = "checked" </c:if>
+						id="g&${GL.id}" />
+					<label for="g&${GL.id}">${GL.name}</label>
+				</c:forEach>
 			</div>
 			<br>
 		</div>
 		<br>
 		<div class="c">
 			並び替え： <select name="sort">
-				<option value="item.id">ID昇順</option>
-				<option value="item.id DESC">ID降順</option>
-				<option value="sale_date">発売日昇順</option>
 				<option value="sale_date DESC">発売日降順</option>
-				<option value="update_date">更新日昇順</option>
-				<option value="update_date DESC">更新日降順</option>
-				<option value="price">価格昇順</option>
+				<option value="sale_date">発売日昇順</option>
 				<option value="price DESC">価格降順</option>
-				<option value="stock">在庫昇順</option>
+				<option value="price">価格昇順</option>
 				<option value="stock DESC">在庫降順</option>
+				<option value="stock">在庫昇順</option>
+				<option value="item.id DESC">ID降順</option>
+				<option value="item.id">ID昇順</option>
+				<option value="update_date DESC">更新日降順</option>
+				<option value="update_date">更新日昇順</option>
+
+
+
 			</select>
 		</div>
 
 		<br>
-		<div class="bold c">検索結果：${ItemList.size()}件</div>
+		<div class="bold c">検索結果：${AllList.size()}件</div>
 		<br>
 		<div class="c">
 			<input class="search_btn" type="submit" value="検索">
@@ -114,20 +115,44 @@
 					onClick="location.href='MasterDelete?id=${ItemList.id}'"></td>
 			</tr>
 		</table>
+			<br>
+		<br>
+		</c:forEach>
 		<br>
 		<br>
-	</c:forEach>
-	<div class="pager C">
-		<ul>
-			<li><a href="1.html">&laquo; 前</a></li>
-			<li><a href="1.html">1</a></li>
-			<li><span>2</span></li>
-			<li><a href="3.html">3</a></li>
-			<li><a href="4.html">4</a></li>
-			<li><a href="5.html">5</a></li>
-			<li><a href="6.html">6</a></li>
-			<li><a href="3.html">次 &raquo;</a></li>
-		</ul>
-	</div>
+	<c:if test="${!ItemList.isEmpty()}">
+		<div class="pager center C" style="clear: both;">
+			<ul>
+				<c:choose>
+					<c:when test="${pageNum == 1}">
+						<li><span>&laquo; 前</span></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="MasterList?page_num=${pageNum - 1}">&laquo; 前</a></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach varStatus="i" begin="0"
+					end="${pageMax == 0 ? pageMax : pageMax - 1}">
+					<c:choose>
+						<c:when test="${pageNum != i.count}">
+							<li><a href="MasterList?page_num=${i.count}"><c:out
+										value="${i.count}" /></a></li>
+						</c:when>
+						<c:otherwise>
+							<li><span><c:out value="${i.count}" /></span></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${pageNum == pageMax || pageMax == 0}">
+						<li><span>次 &raquo;</span></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="MasterList?page_num=${pageNum + 1}">次 &raquo;</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
+	</c:if>
 </body>
 </html>

@@ -51,16 +51,16 @@
 		<br>
 		<div class="c">
 			並び替え： <select name="sort">
-				<option value="sale_date">発売日昇順</option>
 				<option value="sale_date DESC">発売日降順</option>
-				<option value="price">価格昇順</option>
+				<option value="sale_date">発売日昇順</option>
 				<option value="price DESC">価格降順</option>
+				<option value="price">価格昇順</option>
 				<option value="stock">在庫昇順</option>
 				<option value="stock DESC">在庫降順</option>
 			</select>
 		</div>
 		<br>
-		<div class="bold c">検索結果：${ItemList.size()}件</div>
+		<div class="bold c">検索結果：${AllList.size()}件</div>
 		<br>
 		<div class="c">
 			<input class="search_btn" type="submit" value="検索">
@@ -102,28 +102,39 @@
 	</c:forEach>
 	<br>
 	<br>
-	<div class="pager center C" style="clear: both;">
-		<ul>
-		<c:choose>
-		<c:when test="${pageNum == 1}">
-			<li><span>&laquo; 前</span></li>
-			</c:when>
-			<c:otherwise>
-			<li><a href="ItemList?page_num=${pageNum - 1}">&laquo; 前</a></li>
-			</c:otherwise>
-			</c:choose>
-			<c:forEach varStatus="i" begin="0" end="${pageMax}">
-				<li><a href="1.html"><c:out value="${i.count}" /></a></li>
-			</c:forEach>
-			<c:choose>
-			<c:when test="${pageNum == pageMax || pageMax == 0}">
-			<li><span>次 &raquo;</span></li>
-		</c:when>
-		<c:otherwise>
-		<li><a href="ItemList?page_num=${pageNum + 1}">次 &raquo;</a></li>
-		</c:otherwise>
-		</c:choose>
-		</ul>
-	</div>
+	<c:if test="${!ItemList.isEmpty()}">
+		<div class="pager center C" style="clear: both;">
+			<ul>
+				<c:choose>
+					<c:when test="${pageNum == 1}">
+						<li><span>&laquo; 前</span></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="ItemList?page_num=${pageNum - 1}">&laquo; 前</a></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach varStatus="i" begin="0"
+					end="${pageMax == 0 ? pageMax : pageMax - 1}">
+					<c:choose>
+						<c:when test="${pageNum != i.count}">
+							<li><a href="ItemList?page_num=${i.count}"><c:out
+										value="${i.count}" /></a></li>
+						</c:when>
+						<c:otherwise>
+							<li><span><c:out value="${i.count}" /></span></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${pageNum == pageMax || pageMax == 0}">
+						<li><span>次 &raquo;</span></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="ItemList?page_num=${pageNum + 1}">次 &raquo;</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
+	</c:if>
 </body>
 </html>

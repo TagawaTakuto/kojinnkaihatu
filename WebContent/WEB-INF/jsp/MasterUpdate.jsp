@@ -44,7 +44,7 @@
 			<div class="shadow c">
 				<br> ハード：
 				<div class="hard_select">
-					<c:forEach var="hard" items="${HL}">
+					<c:forEach var="hard" items="${ItemHL}">
 						<input type="radio" name="Hard" value="${hard.id}"
 							<c:if test="${Item.hardId == hard.id}"> checked = "checked" </c:if>
 							id="h&${hard.id}" />
@@ -57,11 +57,11 @@
 			<div class=" shadow c">
 				<br> ジャンル:
 				<div class="search_select">
-					<c:forEach var="GL" items="${GL}">
-						<input type="checkbox" name="Genre" value="${GL.Id}"
-							<c:if test="${GL.Id == GL.ComparisonId}"> checked = "checked" </c:if>
-							id="g&${GL.Id}" />
-						<label for="g&${GL.Id}">${GL.name}</label>
+					<c:forEach var="GL" items="${ItemGL}">
+						<input type="checkbox" name="Genre" value="${GL.id}"
+							<c:if test="${GL.id == GL.comparisonId}"> checked = "checked" </c:if>
+							id="g&${GL.id}" />
+						<label for="g&${GL.id}">${GL.name}</label>
 					</c:forEach>
 				</div>
 				<br>

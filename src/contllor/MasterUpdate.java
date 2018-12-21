@@ -51,8 +51,8 @@ public class MasterUpdate extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		session.setAttribute("Item", item);
-		session.setAttribute("GL", GL);
-		session.setAttribute("HL", HL);
+		session.setAttribute("ItemGL", GL);
+		session.setAttribute("ItemHL", HL);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterUpdate.jsp");
 		dispatcher.forward(request, response);
 	}

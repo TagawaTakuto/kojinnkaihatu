@@ -21,7 +21,7 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item INNER JOIN hard ON item.hard_id = hard.id";
+			String sql = "SELECT * FROM item INNER JOIN hard ON item.hard_id = hard.id ORDER BY sale_date DESC";
 			System.out.println(sql);
 
 			Statement stmt = conn.createStatement();
@@ -36,12 +36,11 @@ public class ItemDao {
 				int Stock = rs.getInt("stock");
 				Date SaleDate = rs.getDate("sale_date");
 				String FileName = rs.getString("file_name");
-				int HardId = rs.getInt("hard_id");
 				String HardName = rs.getString("hard.name");
 				String UpdateDate = rs.getString("update_date");
 				GenreDao genredao = new GenreDao();
 				GenreName.addAll(genredao.Genre(rs.getInt("item.id")));
-				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate, HardId, HardName,
+				Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate, HardName,
 						GenreName);
 
 				ItemList.add(item);
@@ -96,18 +95,14 @@ public class ItemDao {
 		try {
 			conn = DBManager.getConnection();
 
-			String sql = "SELECT * FROM item ";
-			if (!HId.isEmpty() && !HId.contains(0)) {
-				sql += "JOIN hard ON item.hard_id = hard.id ";
-			}
-			;
-			if (!GId.isEmpty() && !GId.contains(0)) {
+			String sql = "SELECT * FROM item JOIN hard ON item.hard_id = hard.id ";
+
+			if (!GId.contains(0)) {
 				sql += "JOIN genre_detail ON item.id = genre_detail.item_id";
 			}
-			;
 
-			if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("") || !HId.isEmpty()
-					|| !GId.isEmpty()) {
+			if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("") || !HId.contains(0)
+					|| !GId.contains(0)) {
 				sql += " WHERE";
 			}
 
@@ -128,34 +123,38 @@ public class ItemDao {
 				}
 				sql += " sale_date" + "<=" + "'" + SaleDateE + "'";
 			}
-			if (!HId.isEmpty() && !HId.contains(0)) {
-				if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("")) {
+
+			if (Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("")) {
+				if (Keyword.equals("") && !SaleDateS.equals("") || !SaleDateE.equals("")) {
 					sql += " AND ";
 				}
-				for (int i = 0; HId.size() > i; i++) {
-					switch (i) {
-					case 0:
-						break;
-					default:
-						sql += " OR ";
+				if (!HId.contains(0)) {
+					for (int i = 0; HId.size() > i; i++) {
+						switch (i) {
+						case 0:
+							break;
+						default:
+							sql += " OR ";
+						}
+						sql += " hard_id" + "=" + "'" + HId.get(i) + "'";
 					}
-					sql += " hard_id" + "=" + "'" + HId.get(i) + "'";
 				}
 			}
-			if (!GId.isEmpty() && !GId.contains(0)) {
-				if (!Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("") || !HId.isEmpty()) {
-					sql += " AND ";
-				}
-				for (int n = 0; GId.size() > n; n++) {
-					switch (n) {
-					case 0:
-						break;
-					default:
-						sql += " OR ";
+			if (Keyword.equals("") && !SaleDateS.equals("") || !SaleDateE.equals("")) {
+				sql += " AND ";
+				if (!GId.contains(0)) {
+					for (int n = 0; GId.size() > n; n++) {
+						switch (n) {
+						case 0:
+							break;
+						default:
+							sql += " OR ";
+						}
+						sql += " genre_id" + " = " + "'" + GId.get(n) + "'";
 					}
-					sql += " genre_id" + " = " + "'" + GId.get(n) + "'";
 				}
 			}
+
 			sql += " ORDER BY " + Sort;
 
 			System.out.println(sql);
@@ -173,13 +172,11 @@ public class ItemDao {
 					int Stock = rs.getInt("stock");
 					Date SaleDate = rs.getDate("sale_date");
 					String FileName = rs.getString("file_name");
-					int HardId = rs.getInt("hard.id");
 					String HardName = rs.getString("hard.name");
 					GenreDao genredao = new GenreDao();
 					GenreName.addAll(genredao.Genre(rs.getInt("item.id")));
 					String UpdateDate = rs.getString("update_date");
-					Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate, HardId,
-							HardName,
+					Item item = new Item(Id, Name, Detail, Price, Stock, SaleDate, FileName, UpdateDate, HardName,
 							GenreName);
 					Comparison.add(Id);
 					ItemList.add(item);
