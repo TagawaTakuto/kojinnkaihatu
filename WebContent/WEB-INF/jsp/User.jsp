@@ -28,7 +28,7 @@
 			<th>配送方法</th>
 			<th style="width: 100px;"></th>
 		</tr>
-		<c:forEach var="buyhis" items="${UserBuy}">
+		<c:forEach var="buyhis" items="${UserBuy}" end="3">
 			<tr>
 				<td></td>
 				<td><a href="BuyHistory?id=${buyhis.id}" class="his_btn">詳細→</a></td>
@@ -40,17 +40,39 @@
 		</c:forEach>
 	</table>
 	<br>
-	<div class="pager C">
-		<ul>
-			<li><a href="1.html">&laquo; 前</a></li>
-			<li><a href="1.html">1</a></li>
-			<li><span>2</span></li>
-			<li><a href="3.html">3</a></li>
-			<li><a href="4.html">4</a></li>
-			<li><a href="5.html">5</a></li>
-			<li><a href="6.html">6</a></li>
-			<li><a href="3.html">次 &raquo;</a></li>
-		</ul>
-	</div>
+	<c:if test="${!UserBuy.isEmpty()}">
+		<div class="pager center C" style="clear: both;">
+			<ul>
+				<c:choose>
+					<c:when test="${pageNum == 1}">
+						<li><span>&laquo; 前</span></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="User?page_num=${pageNum - 1}">&laquo; 前</a></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach varStatus="i" begin="0"
+					end="${pageMax == 0 ? pageMax : pageMax - 1}">
+					<c:choose>
+						<c:when test="${pageNum != i.count}">
+							<li><a href="User?page_num=${i.count}"><c:out
+										value="${i.count}" /></a></li>
+						</c:when>
+						<c:otherwise>
+							<li><span><c:out value="${i.count}" /></span></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${pageNum == pageMax || pageMax == 0}">
+						<li><span>次 &raquo;</span></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="User?page_num=${pageNum + 1}">次 &raquo;</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
+	</c:if>
 </body>
 </html>

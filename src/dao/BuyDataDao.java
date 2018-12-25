@@ -96,7 +96,8 @@ public class BuyDataDao {
 					"SELECT * FROM buy"
 							+ " JOIN delivery_method"
 							+ " ON buy.delivery_method_id = delivery_method.id"
-							+ " WHERE buy.user_id = ?");
+							+ " WHERE buy.user_id = ?"
+							+ " ORDER BY buy.id DESC");
 			st.setInt(1, Id);
 
 			System.out.println(st);

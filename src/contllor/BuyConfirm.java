@@ -43,7 +43,7 @@ public class BuyConfirm extends HttpServlet {
 
 		if (session.getAttribute("LoginInfo") == null) {
 			String Mess = "購入にはログインする必要があります。";
-			session.setAttribute("errMsg", Mess);
+			request.setAttribute("errMsg", Mess);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
 			dispatcher.forward(request, response);
 			return;

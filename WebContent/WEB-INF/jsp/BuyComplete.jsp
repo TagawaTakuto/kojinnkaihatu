@@ -14,7 +14,7 @@
 	<div class="c">購入が完了しました</div>
 	<br>
 	<div class="c">
-		<input class="back_btn" type="button" value="引き続き買い物する" onClick="location.href='ItemList'">
+		<input class="back_btn" type="button" value="引き続き買い物する" onClick="location.href='TOP'">
 		　　　<input class="buy_btn" type="button" value="ユーザ情報へ" onClick="location.href='User'">
 	</div>
 	<br>

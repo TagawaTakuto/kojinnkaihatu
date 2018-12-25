@@ -12,16 +12,16 @@
 	<table class="tab c">
 		<form action="UserList" method="post">
 			<div class="c">
-				ログインID<input type="text" name="loginId">
+				ログインID<input type="text" name="loginId" value="${loginId}">
 			</div>
 			<br>
 			<div class="c">
-				ユーザ名<input type="text" name="userName">
+				ユーザ名<input type="text" name="userName" value="${userName}">
 			</div>
 			<br>
 			<div class="c">
-				生年月日<input type="Date" name="birthDateS">～<input type="Date"
-					name="birthDateE">
+				生年月日<input type="Date" name="birthDateS" value="${birthDateS}">～<input type="Date"
+					name="birthDateE" value="${birthDateE}">
 			</div>
 			<br>
 			<div class="c">
@@ -36,7 +36,7 @@
 			<th>生年月日</th>
 			<th></th>
 		</tr>
-		<c:forEach var="user" items="${UserList}">
+		<c:forEach var="user" items="${UserList}" end="3">
 			<br>
 			<tr class="c">
 				<td>${user.id}</td>
@@ -53,17 +53,39 @@
 		</c:forEach>
 	</table>
 	<br>
-	<div class="pager C">
-		<ul>
-			<li><a href="1.html">&laquo; 前</a></li>
-			<li><a href="1.html">1</a></li>
-			<li><span>2</span></li>
-			<li><a href="3.html">3</a></li>
-			<li><a href="4.html">4</a></li>
-			<li><a href="5.html">5</a></li>
-			<li><a href="6.html">6</a></li>
-			<li><a href="3.html">次 &raquo;</a></li>
-		</ul>
-	</div>
+	<c:if test="${!UserList.isEmpty()}">
+		<div class="pager center C" style="clear: both;">
+			<ul>
+				<c:choose>
+					<c:when test="${pageNum == 1}">
+						<li><span>&laquo; 前</span></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="UserList?page_num=${pageNum - 1}">&laquo; 前</a></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach varStatus="i" begin="0"
+					end="${pageMax == 0 ? pageMax : pageMax - 1}">
+					<c:choose>
+						<c:when test="${pageNum != i.count}">
+							<li><a href="UserList?page_num=${i.count}"><c:out
+										value="${i.count}" /></a></li>
+						</c:when>
+						<c:otherwise>
+							<li><span><c:out value="${i.count}" /></span></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${pageNum == pageMax || pageMax == 0}">
+						<li><span>次 &raquo;</span></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="UserList?page_num=${pageNum + 1}">次 &raquo;</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
+	</c:if>
 </body>
 </html>

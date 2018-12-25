@@ -2,6 +2,7 @@ package contllor;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -45,11 +46,40 @@ public class User extends HttpServlet {
 				response.sendRedirect("Login");
 				return;
 			}
-
+			int pageNum = Integer
+					.parseInt(request.getParameter("page_num") == null ? "1" : request.getParameter("page_num"));
+			int pageMax = Integer
+					.parseInt(request.getParameter("pageMax") == null ? "1" : request.getParameter("pageMax"));
 			int id = (int) session.getAttribute("userId");
-			List<BuyDataBeans> BuyList = (List<BuyDataBeans>) BuyDataDao.BuyHis(id);
-			request.setAttribute("UserBuy", BuyList);
+			List<BuyDataBeans> List = (List<BuyDataBeans>) session.getAttribute("UserBuy");
+			List<BuyDataBeans> AllList = (List<BuyDataBeans>) session.getAttribute("AllBuy");
 
+			if (List == null || List.isEmpty() && AllList == null || AllList.isEmpty()) {
+
+				AllList = (List<BuyDataBeans>) BuyDataDao.BuyHis(id);
+				pageMax = (int) Math.ceil((double) AllList.size() / 4);
+
+
+				session.setAttribute("AllBuy", AllList);
+				session.setAttribute("UserBuy", AllList);
+				session.setAttribute("pageMax", pageMax);
+				session.setAttribute("pageNum", pageNum);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/User.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
+
+			List<BuyDataBeans> BuyList = new ArrayList<BuyDataBeans>();
+			for (int i = pageNum * 4 - 4; i <= pageNum * 4 - 1; i++) {
+				try {
+					BuyDataBeans buy = AllList.get(i);
+					BuyList.add(buy);
+				} catch (Exception e) {
+					break;
+				}
+			}
+			request.setAttribute("UserBuy", BuyList);
+			session.setAttribute("pageNum", pageNum);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/User.jsp");
 			dispatcher.forward(request, response);
 		} catch (SQLException e) {

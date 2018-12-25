@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.UserDataBeans;
 import dao.GenreDao;
 import dao.HardDao;
 import dao.ItemDao;
@@ -41,10 +42,13 @@ public class MasterList extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
+		UserDataBeans login = (UserDataBeans) session.getAttribute("LoginInfo");
+		if (!login.getLoginId().equals("admin")) {
 
-		if (session == null) {
+			request.setAttribute("errMsg", "不正なログインです。");
 
-			response.sendRedirect("Login");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+			dispatcher.forward(request, response);
 			return;
 		}
 
@@ -105,6 +109,7 @@ public class MasterList extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		int pageNum = Integer
 				.parseInt(request.getParameter("page_num") == null ? "1" : request.getParameter("page_num"));
+		int pageMax = 0;
 		String Keyword = request.getParameter("Keyword");
 		String SdateS = request.getParameter("Sdate");
 		String SdateE = request.getParameter("Edate");
@@ -139,8 +144,9 @@ public class MasterList extends HttpServlet {
 				Sort);
 		List<Seach> GL = GenreDao.GenreSeachToItemList(GId);
 		List<Seach> HL = HardDao.HardSeach(HId);
-		int pageMax = (int) Math.ceil((double) ItemList.size() / 4);
-
+		if (ItemList != null) {
+			pageMax = (int) Math.ceil((double) ItemList.size() / 4);
+		}
 		HttpSession session = request.getSession();
 		session.setAttribute("AllList", ItemList);
 		session.setAttribute("ItemList", ItemList);

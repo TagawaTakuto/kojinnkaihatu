@@ -60,8 +60,7 @@ public class ItemList extends HttpServlet {
 			List<Item> ItemList = new ArrayList<Item>();
 			ItemDao itemdao = new ItemDao();
 			ItemList = itemdao.ItemAll();
-			AllList = itemdao.ItemAll();
-			pageMax = (int) Math.ceil((double) AllList.size() / 8);
+			pageMax = (int) Math.ceil((double) ItemList.size() / 8);
 			GL = GenreDao.GenreAll();
 			HL = HardDao.HardAll();
 			session.setAttribute("AllList", ItemList);
@@ -97,12 +96,14 @@ public class ItemList extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("null")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		int pageNum = Integer
 				.parseInt(request.getParameter("page_num") == null ? "1" : request.getParameter("page_num"));
+		int pageMax = 0;
 		String Keyword = request.getParameter("Keyword");
 		String SdateS = request.getParameter("Sdate");
 		String SdateE = request.getParameter("Edate");
@@ -133,9 +134,11 @@ public class ItemList extends HttpServlet {
 		ItemDao itemdao = new ItemDao();
 		ItemList = itemdao.ItemSearch(Keyword, SdateS, SdateE, HId, GId,
 				Sort);
+		if (ItemList != null || !ItemList.isEmpty()) {
+			pageMax = (int) Math.ceil((double) ItemList.size() / 8);
+		}
 		List<Seach> GL = GenreDao.GenreSeachToItemList(GId);
 		List<Seach> HL = HardDao.HardSeach(HId);
-		int pageMax = (int) Math.ceil((double) ItemList.size() / 8);
 		HttpSession session = request.getSession();
 		session.setAttribute("AllList", ItemList);
 		session.setAttribute("ItemList", ItemList);
@@ -149,7 +152,7 @@ public class ItemList extends HttpServlet {
 		session.setAttribute("pageMax", pageMax);
 		session.setAttribute("GL", GL);
 		session.setAttribute("HL", HL);
-		if (ItemList.isEmpty()){
+		if (ItemList.isEmpty()) {
 			request.setAttribute("Mess", "該当する商品が存在しません。");
 		}
 

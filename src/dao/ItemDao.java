@@ -124,10 +124,10 @@ public class ItemDao {
 				sql += " sale_date" + "<=" + "'" + SaleDateE + "'";
 			}
 
+			if (Keyword.equals("") && !SaleDateS.equals("") || !SaleDateE.equals("")) {
+				sql += " AND ";
+			}
 			if (Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("")) {
-				if (Keyword.equals("") && !SaleDateS.equals("") || !SaleDateE.equals("")) {
-					sql += " AND ";
-				}
 				if (!HId.contains(0)) {
 					for (int i = 0; HId.size() > i; i++) {
 						switch (i) {
@@ -140,8 +140,10 @@ public class ItemDao {
 					}
 				}
 			}
-			if (Keyword.equals("") && !SaleDateS.equals("") || !SaleDateE.equals("")) {
+			if (Keyword.equals("") && !HId.contains(0) && !GId.contains(0) || !SaleDateS.equals("") || !SaleDateE.equals("")) {
 				sql += " AND ";
+			}
+			if (Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("")) {
 				if (!GId.contains(0)) {
 					for (int n = 0; GId.size() > n; n++) {
 						switch (n) {
@@ -364,7 +366,7 @@ public class ItemDao {
 	public static int getTotalPrice(ArrayList<Item> ItemList) {
 		int total = 0;
 		for (Item item : ItemList) {
-			total += item.getPrice();
+			total += item.getPrice() * item.getBuycount();
 		}
 		return total;
 	}

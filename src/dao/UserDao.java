@@ -1,5 +1,9 @@
 package dao;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -8,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.DatatypeConverter;
 
 import base.DBManager;
 import beans.UserDataBeans;
@@ -25,7 +31,7 @@ public class UserDao {
 					"INSERT INTO user(login_id,user_name,password,birth_date,create_date,update_date) VALUES(?,?,?,?, now(),now());");
 			st.setString(1, loginId);
 			st.setString(2, Name);
-			st.setString(3, Password);
+			st.setString(3, Hashpass(Password));
 			st.setString(4, Birthdate);
 			st.executeUpdate();
 
@@ -50,7 +56,7 @@ public class UserDao {
 			String sql = "SELECT * FROM user WHERE login_id = ? and password = ? ;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, login_id);
-			pStmt.setString(2, password);
+			pStmt.setString(2, Hashpass(password));
 			ResultSet rs = pStmt.executeQuery();
 
 			if (!rs.next()) {
@@ -159,7 +165,7 @@ public class UserDao {
 			}
 
 			if (!Password.equals("")) {
-				sql += " ,password" + "=" + "'" + Password + "'";
+				sql += " ,password" + "=" + "'" + Hashpass(Password) + "'";
 			}
 
 			sql += "WHERE user_id" + "=" + UserId;
@@ -305,7 +311,7 @@ public class UserDao {
 			}
 
 			//ユーザリスト//
-			public List<User>findAll(){
+			public static List<User>findAll(){
 				Connection conn = null;
 				List<User> UserList = new ArrayList<User>();
 				try {
@@ -341,5 +347,21 @@ public class UserDao {
 					}
 				}
 				return UserList;
+			}
+			//パスワード暗号//
+			public static String Hashpass(String hashpass) {
+				String source = hashpass;
+				 Charset charset = StandardCharsets.UTF_8;
+				 String algorithm = "MD5";
+				 byte[] bytes;
+				String result = null;
+				try {
+					bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
+					 result  = DatatypeConverter.printHexBinary(bytes);
+					 System.out.println(result);
+				} catch (NoSuchAlgorithmException e1) {
+					e1.printStackTrace();
+				}
+				return result;
 			}
 }

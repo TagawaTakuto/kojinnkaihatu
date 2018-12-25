@@ -12,7 +12,7 @@
 	<br>
 	<table class="table table-striped c">
 		<tr>
-			<th>購入日時:${BuyHisDeli.buyDate}</th>
+			<th>購入日時:${BuyHisDeli.getFormatDate()}</th>
 			<th>配送方法:${BuyHisDeli.deliveryMethodName}</th>
 		</tr>
 	</table>
@@ -49,7 +49,7 @@
 	<br>
 	<br>
 	<div class="c">
-		<a href="User" class="his_btn">←戻る</a>
+		<a href="javascript:void(0);" class="his_btn" onClick="history.go(-1)">←戻る</a>
 	</div>
 </body>
 </html>
