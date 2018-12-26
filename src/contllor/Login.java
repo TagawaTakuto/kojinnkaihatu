@@ -37,17 +37,21 @@ public class Login extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
+		try {
+			if (session.getAttribute("LoginInfo") != null) {
 
-		if (session.getAttribute("LoginInfo") != null) {
+				response.sendRedirect("ItemList");
+				return;
 
-			response.sendRedirect("ItemList");
+			}
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
 			return;
-
 		}
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
-		dispatcher.forward(request, response);
-
 	}
 
 	/**
@@ -57,26 +61,31 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		try {
+			String loginId = request.getParameter("LoginId");
+			String password = request.getParameter("password");
 
-		String loginId = request.getParameter("LoginId");
-		String password = request.getParameter("password");
+			UserDao userdao = new UserDao();
 
-		UserDao userdao = new UserDao();
+			UserDataBeans user = userdao.UserData(loginId, password);
+			int userId = user.getId();
 
-		UserDataBeans user = userdao.UserData(loginId, password);
-		int userId = user.getId();
+			if (user == null) {
+				request.setAttribute("errMsg", "ログインIDまたはパスワードが異なります");
 
-		if (user == null) {
-			request.setAttribute("errMsg", "ログインIDまたはパスワードが異なります");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
+			HttpSession session = request.getSession();
+			session.setAttribute("LoginInfo", user);
+			session.setAttribute("userId", userId);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+			response.sendRedirect("ItemList");
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
-		HttpSession session = request.getSession();
-		session.setAttribute("LoginInfo", user);
-		session.setAttribute("userId", userId);
-
-		response.sendRedirect("ItemList");
 	}
 }

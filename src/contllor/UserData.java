@@ -32,18 +32,22 @@ public class UserData extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-
 		HttpSession session = request.getSession();
+		try {
+			if (session.getAttribute("LoginInfo") == null) {
 
-		if (session.getAttribute("LoginInfo") == null) {
+				request.setAttribute("errMsg", "ログインセッションが切れました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+				dispatcher.forward(request, response);
+				return;
 
-			request.setAttribute("errMsg", "ログインセッションが切れました。");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserData.jsp");
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
 			dispatcher.forward(request, response);
 			return;
-
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserData.jsp");
-			dispatcher.forward(request, response);
-		}
+	}
 }

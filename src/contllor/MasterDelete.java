@@ -20,44 +20,57 @@ import model.Item;
 public class MasterDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MasterDelete() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public MasterDelete() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		try {
+			int Id = Integer.parseInt(request.getParameter("id"));
+			ItemDao itemdao = new ItemDao();
 
-		int Id = Integer.parseInt(request.getParameter("id"));
-		ItemDao itemdao = new ItemDao();
+			Item item = itemdao.Data(Id);
 
-		Item item = itemdao.Data(Id);
+			HttpSession session = request.getSession();
+			session.setAttribute("Item", item);
 
-		HttpSession session = request.getSession();
-		session.setAttribute("Item", item);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterDelete.jsp");
-		dispatcher.forward(request, response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterDelete.jsp");
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int Id = Integer.parseInt(request.getParameter("id"));
-		ItemDao itemdao = new ItemDao();
+		try {
+			int Id = Integer.parseInt(request.getParameter("id"));
+			ItemDao itemdao = new ItemDao();
 
-		itemdao.ItemDelete(Id);
+			itemdao.ItemDelete(Id);
 
-		response.sendRedirect("MasterList");
+			response.sendRedirect("MasterList");
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 	}
 
 }

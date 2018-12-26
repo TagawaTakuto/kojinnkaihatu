@@ -1,7 +1,6 @@
 package contllor;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,55 +20,60 @@ import dao.UserDao;
 public class MUserDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MUserDelete() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public MUserDelete() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-
-		int Id = Integer.parseInt(request.getParameter("id"));
-
-		UserDao userdao = new UserDao();
 		try {
+			int Id = Integer.parseInt(request.getParameter("id"));
+
+			UserDao userdao = new UserDao();
 			UserDataBeans userd = userdao.getUserData(Id);
 			HttpSession session = request.getSession();
 			session.setAttribute("userd", userd);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MUserDelete.jsp");
 			dispatcher.forward(request, response);
-			return;
 
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
 
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		try {
+			String Id = request.getParameter("id");
 
+			UserDao userdao = new UserDao();
+			userdao.UserDelete(Id);
 
-		String Id = request.getParameter("id");
+			response.sendRedirect("UserList");
 
-		UserDao userdao = new UserDao();
-		userdao.UserDelete(Id);
-
-		response.sendRedirect("UserList");
-
-
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 	}
 
 }

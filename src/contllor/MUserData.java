@@ -1,7 +1,6 @@
 package contllor;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,23 +35,21 @@ public class MUserData extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-
-		int Id = Integer.parseInt(request.getParameter("id"));
-
-		UserDao userdao = new UserDao();
 		try {
+			int Id = Integer.parseInt(request.getParameter("id"));
+
+			UserDao userdao = new UserDao();
+
 			UserDataBeans userd = userdao.getUserData(Id);
 			HttpSession session = request.getSession();
 			session.setAttribute("userd", userd);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MUserData.jsp");
 			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
 			return;
-
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
 		}
-
 	}
 }

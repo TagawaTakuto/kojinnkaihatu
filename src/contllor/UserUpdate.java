@@ -56,26 +56,32 @@ public class UserUpdate extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		String UserId = request.getParameter("userId");
-		String loginId = request.getParameter("LoginId");
-		String Password = request.getParameter("Password");
-		String Kpass = request.getParameter("Kpassword");
-		String Name = request.getParameter("Name");
+		try {
+			String UserId = request.getParameter("userId");
+			String loginId = request.getParameter("LoginId");
+			String Password = request.getParameter("Password");
+			String Kpass = request.getParameter("Kpassword");
+			String Name = request.getParameter("Name");
 
-		UserDao userDao = new UserDao();
+			UserDao userDao = new UserDao();
 
-		if (!Kpass.equals(Password)) {
-			request.setAttribute("errMsg", "入力された内容が正しくありません。");
+			if (!Kpass.equals(Password)) {
+				request.setAttribute("errMsg", "入力された内容が正しくありません。");
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserUpdate.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserUpdate.jsp");
+				dispatcher.forward(request, response);
+				return;
+
+			} else
+
+				userDao.UserUpdate(UserId, loginId, Name, Password);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/User.jsp");
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
 			dispatcher.forward(request, response);
 			return;
-
-		} else
-
-			userDao.UserUpdate(UserId, loginId, Name, Password);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/User.jsp");
-		dispatcher.forward(request, response);
+		}
 	}
 
 }

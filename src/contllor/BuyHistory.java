@@ -1,7 +1,6 @@
 package contllor;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -47,9 +46,10 @@ public class BuyHistory extends HttpServlet {
 			request.setAttribute("BuyHisDeli", bdb);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BuyHistory.jsp");
 			dispatcher.forward(request, response);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
 	}
 }

@@ -37,20 +37,25 @@ public class ItemData extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		try {
+			int Id = Integer.parseInt(request.getParameter("id"));
 
-		int Id = Integer.parseInt(request.getParameter("id"));
+			GenreDao genredao = new GenreDao();
 
-		GenreDao genredao = new GenreDao();
+			List<String> GL = genredao.Genre(Id);
+			Item itemd = ItemDao.Data(Id);
+			HttpSession session = request.getSession();
+			session.setAttribute("itemd", itemd);
+			session.setAttribute("GL", GL);
 
-		List<String> GL = genredao.Genre(Id);
-		Item itemd = ItemDao.Data(Id);
-		HttpSession session = request.getSession();
-		session.setAttribute("itemd", itemd);
-		session.setAttribute("GL", GL);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemData.jsp");
+			dispatcher.forward(request, response);
+			return;
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemData.jsp");
-		dispatcher.forward(request, response);
-		return;
-
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 	}
 }

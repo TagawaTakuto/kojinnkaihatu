@@ -46,35 +46,41 @@ public class MasterCreate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		String Title = request.getParameter("title");
-		String Detail = request.getParameter("setumei");
-		int Price = Integer.parseInt(request.getParameter("price"));
-		int Stock = Integer.parseInt(request.getParameter("zaiko"));
-		String saleDate = request.getParameter("saleDate");
-		String fileName = request.getParameter("fileName");
-		int Hard = Integer.parseInt(request.getParameter("Hard"));
-		String[] Genre = request.getParameterValues("Genre");
-		ArrayList<Integer> G = new ArrayList<Integer>();
-		if (Genre != null) {
-			for (int i = 0; i < Genre.length; i++) {
-				String s = Genre[i];
-				int I = Integer.parseInt(s);
-				G.add(I);
-			}
-		}
-		ItemDao itemdao = new ItemDao();
-		GenreDao genredao = new GenreDao();
 		try {
-			itemdao.Create(Title, Detail, Price, Stock, saleDate, fileName, Hard);
-			int Id = itemdao.Id();
-			genredao.GenreCreate(Id, G);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		response.sendRedirect("MasterList");
-		return;
+			request.setCharacterEncoding("UTF-8");
+			String Title = request.getParameter("title");
+			String Detail = request.getParameter("setumei");
+			int Price = Integer.parseInt(request.getParameter("price"));
+			int Stock = Integer.parseInt(request.getParameter("zaiko"));
+			String saleDate = request.getParameter("saleDate");
+			String fileName = request.getParameter("fileName");
+			int Hard = Integer.parseInt(request.getParameter("Hard"));
+			String[] Genre = request.getParameterValues("Genre");
+			ArrayList<Integer> G = new ArrayList<Integer>();
+			if (Genre != null) {
+				for (int i = 0; i < Genre.length; i++) {
+					String s = Genre[i];
+					int I = Integer.parseInt(s);
+					G.add(I);
+				}
+			}
+			ItemDao itemdao = new ItemDao();
+			GenreDao genredao = new GenreDao();
+			try {
+				itemdao.Create(Title, Detail, Price, Stock, saleDate, fileName, Hard);
+				int Id = itemdao.Id();
+				genredao.GenreCreate(Id, G);
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+			response.sendRedirect("MasterList");
+			return;
 
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 	}
 }

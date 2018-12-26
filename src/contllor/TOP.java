@@ -32,6 +32,8 @@ public class TOP extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.removeAttribute("ItemList");
 		session.removeAttribute("AllList");
+		session.removeAttribute("Keyword");
+
 
 		response.sendRedirect("ItemList");
 	}

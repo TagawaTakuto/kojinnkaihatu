@@ -34,19 +34,24 @@ public class UserDelete extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		try {
+			HttpSession session = request.getSession();
 
-		HttpSession session = request.getSession();
+			if (session.getAttribute("LoginInfo") == null) {
 
-		if (session.getAttribute("LoginInfo") == null) {
+				request.setAttribute("errMsg", "ログインセッションが切れました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+				dispatcher.forward(request, response);
+				return;
 
-			request.setAttribute("errMsg", "ログインセッションが切れました。");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserDelete.jsp");
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
 			dispatcher.forward(request, response);
 			return;
-
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserDelete.jsp");
-		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -56,14 +61,17 @@ public class UserDelete extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		try {
+			String UserId = request.getParameter("UserId");
 
+			UserDao userdao = new UserDao();
+			userdao.UserDelete(UserId);
 
-		String UserId = request.getParameter("UserId");
-
-		UserDao userdao = new UserDao();
-		userdao.UserDelete(UserId);
-
-		response.sendRedirect("Logout");
+			response.sendRedirect("Logout");
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 	}
-
 }

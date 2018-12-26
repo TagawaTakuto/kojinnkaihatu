@@ -40,21 +40,27 @@ public class MasterUpdate extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		int Id = Integer.parseInt(request.getParameter("id"));
-		GenreDao genredao = new GenreDao();
-		HardDao harddao = new HardDao();
-		List<Seach> GL = new ArrayList<Seach>();
-		List<Seach> HL = new ArrayList<Seach>();
-		Item item = ItemDao.Data(Id);
-		GL = genredao.GenreSeach(Id);
-		HL = harddao.HardAll();
+		try {
+			int Id = Integer.parseInt(request.getParameter("id"));
+			GenreDao genredao = new GenreDao();
+			HardDao harddao = new HardDao();
+			List<Seach> GL = new ArrayList<Seach>();
+			List<Seach> HL = new ArrayList<Seach>();
+			Item item = ItemDao.Data(Id);
+			GL = genredao.GenreSeach(Id);
+			HL = harddao.HardAll();
 
-		HttpSession session = request.getSession();
-		session.setAttribute("Item", item);
-		session.setAttribute("ItemGL", GL);
-		session.setAttribute("ItemHL", HL);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterUpdate.jsp");
-		dispatcher.forward(request, response);
+			HttpSession session = request.getSession();
+			session.setAttribute("Item", item);
+			session.setAttribute("ItemGL", GL);
+			session.setAttribute("ItemHL", HL);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/MasterUpdate.jsp");
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 	}
 
 	/**
@@ -64,32 +70,38 @@ public class MasterUpdate extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		int Id = Integer.parseInt(request.getParameter("id"));
-		String Name = request.getParameter("title");
-		String fileName = request.getParameter("fileName");
-		String Detail = request.getParameter("setumei");
-		String saleDate = request.getParameter("saleDate");
-		int Price = Integer.parseInt(request.getParameter("price"));
-		int Stock = Integer.parseInt(request.getParameter("zaiko"));
-		int Hard = Integer.parseInt(request.getParameter("Hard"));
+		try {
+			int Id = Integer.parseInt(request.getParameter("id"));
+			String Name = request.getParameter("title");
+			String fileName = request.getParameter("fileName");
+			String Detail = request.getParameter("setumei");
+			String saleDate = request.getParameter("saleDate");
+			int Price = Integer.parseInt(request.getParameter("price"));
+			int Stock = Integer.parseInt(request.getParameter("zaiko"));
+			int Hard = Integer.parseInt(request.getParameter("Hard"));
 
-		String[] GenreId = request.getParameterValues("Genre");
-		ArrayList<Integer> GId = new ArrayList<Integer>();
-		if (GenreId != null) {
-			for (int i = 0; i < GenreId.length; i++) {
-				String s = GenreId[i];
-				int I = Integer.parseInt(s);
-				GId.add(I);
+			String[] GenreId = request.getParameterValues("Genre");
+			ArrayList<Integer> GId = new ArrayList<Integer>();
+			if (GenreId != null) {
+				for (int i = 0; i < GenreId.length; i++) {
+					String s = GenreId[i];
+					int I = Integer.parseInt(s);
+					GId.add(I);
+				}
 			}
+			ItemDao itemdao = new ItemDao();
+			GenreDao genredao = new GenreDao();
+			itemdao.ItemUpdate(Id, Name, fileName, Detail, saleDate, Price, Stock, Hard);
+			genredao.GenreDelete(Id);
+			genredao.GenreCreate(Id, GId);
+
+			response.sendRedirect("MasterList");
+
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
-		ItemDao itemdao = new ItemDao();
-		GenreDao genredao = new GenreDao();
-		itemdao.ItemUpdate(Id, Name, fileName, Detail, saleDate, Price, Stock, Hard);
-		genredao.GenreDelete(Id);
-		genredao.GenreCreate(Id, GId);
-
-		response.sendRedirect("MasterList");
-
 	}
 
 }

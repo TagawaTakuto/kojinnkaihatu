@@ -1,7 +1,6 @@
 package contllor;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +58,6 @@ public class User extends HttpServlet {
 				AllList = (List<BuyDataBeans>) BuyDataDao.BuyHis(id);
 				pageMax = (int) Math.ceil((double) AllList.size() / 4);
 
-
 				session.setAttribute("AllBuy", AllList);
 				session.setAttribute("UserBuy", AllList);
 				session.setAttribute("pageMax", pageMax);
@@ -82,19 +80,10 @@ public class User extends HttpServlet {
 			session.setAttribute("pageNum", pageNum);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/User.jsp");
 			dispatcher.forward(request, response);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
-	}
-
 }

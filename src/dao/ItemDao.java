@@ -124,36 +124,38 @@ public class ItemDao {
 				sql += " sale_date" + "<=" + "'" + SaleDateE + "'";
 			}
 
-			if (Keyword.equals("") && !SaleDateS.equals("") || !SaleDateE.equals("")) {
+			if (!Keyword.equals("") && !HId.contains(0) ||
+					!SaleDateS.equals("") && !HId.contains(0)
+					|| !SaleDateE.equals("") && !HId.contains(0)) {
 				sql += " AND ";
 			}
-			if (Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("")) {
-				if (!HId.contains(0)) {
-					for (int i = 0; HId.size() > i; i++) {
-						switch (i) {
-						case 0:
-							break;
-						default:
-							sql += " OR ";
-						}
-						sql += " hard_id" + "=" + "'" + HId.get(i) + "'";
+			if (!HId.contains(0)) {
+				for (int i = 0; HId.size() > i; i++) {
+					switch (i) {
+					case 0:
+						break;
+					default:
+						sql += " OR ";
 					}
+					sql += " hard_id" + "=" + "'" + HId.get(i) + "'";
 				}
 			}
-			if (Keyword.equals("") && !HId.contains(0) && !GId.contains(0) || !SaleDateS.equals("") || !SaleDateE.equals("")) {
+
+			if (!Keyword.equals("") && !GId.contains(0) ||
+					!HId.contains(0) && !GId.contains(0) ||
+					!SaleDateS.equals("") && !GId.contains(0) ||
+					!SaleDateE.equals("") && !GId.contains(0)) {
 				sql += " AND ";
 			}
-			if (Keyword.equals("") || !SaleDateS.equals("") || !SaleDateE.equals("")) {
-				if (!GId.contains(0)) {
-					for (int n = 0; GId.size() > n; n++) {
-						switch (n) {
-						case 0:
-							break;
-						default:
-							sql += " OR ";
-						}
-						sql += " genre_id" + " = " + "'" + GId.get(n) + "'";
+			if (!GId.contains(0)) {
+				for (int n = 0; GId.size() > n; n++) {
+					switch (n) {
+					case 0:
+						break;
+					default:
+						sql += " OR ";
 					}
+					sql += " genre_id" + " = " + "'" + GId.get(n) + "'";
 				}
 			}
 

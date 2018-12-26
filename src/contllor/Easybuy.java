@@ -36,37 +36,41 @@ public class Easybuy extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		try {
+			ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
+			int id = Integer.parseInt(request.getParameter("id"));
+			int count = Integer.parseInt(request.getParameter("buycount"));
+			Item item = ItemDao.Data(id);
+			item.setBuycount(count);
 
-		ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
-		int id = Integer.parseInt(request.getParameter("id"));
-		int count = Integer.parseInt(request.getParameter("buycount"));
-		Item item = ItemDao.Data(id);
-		item.setBuycount(count);
-
-		if (cart == null) {
-			cart = new ArrayList<Item>();
-		}
-
-		// カートの中の商品に同一のものがあれば、購入数を加算
-
-		boolean uniqueFlg = true;
-
-		for (Item itm : cart) {
-			if(itm.getId() == id) {
-				itm.setBuycount(itm.getBuycount() + count);
-				uniqueFlg = false;
+			if (cart == null) {
+				cart = new ArrayList<Item>();
 			}
+
+			// カートの中の商品に同一のものがあれば、購入数を加算
+
+			boolean uniqueFlg = true;
+
+			for (Item itm : cart) {
+				if (itm.getId() == id) {
+					itm.setBuycount(itm.getBuycount() + count);
+					uniqueFlg = false;
+				}
+			}
+
+			if (uniqueFlg) {
+				cart.add(item);
+			}
+
+			session.setAttribute("cart", cart);
+			request.setAttribute("Mess", "カートに商品を追加しました。");
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemList.jsp");
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
-
-		if(uniqueFlg) {
-			cart.add(item);
-		}
-
-		session.setAttribute("cart", cart);
-		request.setAttribute("Mess", "カートに商品を追加しました。");
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemList.jsp");
-		dispatcher.forward(request, response);
 	}
-
 }

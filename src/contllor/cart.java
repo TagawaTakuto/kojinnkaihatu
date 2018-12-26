@@ -36,29 +36,32 @@ public class Cart extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-
 		HttpSession session = request.getSession();
+		try {
+			ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
 
-		ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
+			if (cart == null) {
+				cart = new ArrayList<Item>();
+				session.setAttribute("cart", cart);
+			}
 
-		if (cart == null) {
-			cart = new ArrayList<Item>();
-			session.setAttribute("cart", cart);
-		}
+			String cartActionMessage = "";
+			//カートに商品が入っていないなら
+			if (cart.size() == 0) {
+				cartActionMessage = "カートに商品がありません";
 
-		String cartActionMessage = "";
-		//カートに商品が入っていないなら
-		if (cart.size() == 0) {
-			cartActionMessage = "カートに商品がありません";
-
-			request.setAttribute("CartMsg", cartActionMessage);
+				request.setAttribute("CartMsg", cartActionMessage);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");
-		dispatcher.forward(request, response);
-
 	}
 
 	/**
@@ -69,23 +72,27 @@ public class Cart extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
+		try {
+			int id = Integer.parseInt(request.getParameter("id"));
+			int count = Integer.parseInt(request.getParameter("buycount"));
 
-		int id = Integer.parseInt(request.getParameter("id"));
-		int count = Integer.parseInt(request.getParameter("buycount"));
+			Item item = ItemDao.Data(id);
+			item.setBuycount(count);
+			request.setAttribute("item", item);
 
-		Item item = ItemDao.Data(id);
-		item.setBuycount(count);
-		request.setAttribute("item", item);
+			ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
 
-		ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
+			if (cart == null) {
+				cart = new ArrayList<Item>();
+			}
+			cart.add(item);
 
-		if (cart == null) {
-			cart = new ArrayList<Item>();
+			session.setAttribute("cart", cart);
+			response.sendRedirect("Cart");
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
-		cart.add(item);
-
-		session.setAttribute("cart", cart);
-		response.sendRedirect("Cart");
 	}
-
 }

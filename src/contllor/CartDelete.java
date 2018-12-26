@@ -35,26 +35,31 @@ public class CartDelete extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		try {
+			String[] DelList = request.getParameterValues("del_list");
+			ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
 
-		String[] DelList = request.getParameterValues("del_list");
-		ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
-
-		String cartActionMessage = "";
-		if (DelList != null) {
-			for (String DelId : DelList) {
-				for (Item CartItem : cart) {
-					if (CartItem.getId() == Integer.parseInt(DelId)) {
-						cart.remove(CartItem);
-						break;
+			String cartActionMessage = "";
+			if (DelList != null) {
+				for (String DelId : DelList) {
+					for (Item CartItem : cart) {
+						if (CartItem.getId() == Integer.parseInt(DelId)) {
+							cart.remove(CartItem);
+							break;
+						}
 					}
 				}
+				cartActionMessage = "カートから商品を削除しました。";
+			} else {
+				cartActionMessage = "削除する商品を選択してください。";
 			}
-			cartActionMessage = "カートから商品を削除しました。";
-		} else {
-			cartActionMessage = "削除する商品を選択してください。";
+			request.setAttribute("Mess", cartActionMessage);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ERROR.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
-		request.setAttribute("Mess", cartActionMessage);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");
-		dispatcher.forward(request, response);
 	}
 }

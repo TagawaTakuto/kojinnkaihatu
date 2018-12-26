@@ -1,7 +1,6 @@
 package contllor;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -51,7 +50,7 @@ public class BuyComplete extends HttpServlet {
 				bddb.setItemId(item.getId());
 				bddb.setBuyCount(item.getBuycount());
 				BuyDetailDao.insertBuyDetail(bddb);
-				ItemDao.StockDown(item.getId(),item.getBuycount());
+				ItemDao.StockDown(item.getId(), item.getBuycount());
 			}
 
 			BuyDataBeans buyresult = BuyDataDao.BuyData(buyId);
@@ -60,13 +59,13 @@ public class BuyComplete extends HttpServlet {
 			request.setAttribute("BuyResult", buyresult);
 			request.setAttribute("buyIDBList", buyIDBList);
 
-
 			session.removeAttribute("cart");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BuyComplete.jsp");
 			dispatcher.forward(request, response);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BuyComplete.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
 
 	}
